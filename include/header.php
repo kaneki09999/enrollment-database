@@ -104,7 +104,7 @@
         <div class="container">
             <h1 class="logo">Enrollment System</h1>
             <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="course.php">Courses</a></li>
                 <li><a href="enroll.php">Enroll Now!</a></li>
                 <li><a href="about.php">About</a></li>
