@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 02:27 AM
+-- Generation Time: May 31, 2024 at 03:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -123,6 +123,30 @@ INSERT INTO `courses` (`id`, `program`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `section_tbl`
+--
+
+CREATE TABLE `section_tbl` (
+  `id` int(11) NOT NULL,
+  `year_lvl` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `section_tbl`
+--
+
+INSERT INTO `section_tbl` (`id`, `year_lvl`, `section`) VALUES
+(1, '1', 'A'),
+(2, '1', 'B'),
+(3, '1', 'C'),
+(4, '2', 'A'),
+(5, '2', 'B'),
+(6, '2', 'C');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `students`
 --
 
@@ -200,21 +224,32 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 
 -- --------------------------------------------------------
 
---
+
 -- Table structure for table `subjects_by_course`
---
+
 
 CREATE TABLE `subjects_by_course` (
   `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
   `subject_code` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `unit` int(11) NOT NULL,
   `day` varchar(255) NOT NULL,
   `time` varchar(255) NOT NULL,
-  `section` varchar(255) NOT NULL,
   `professor` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subjects_by_course`
+--
+
+INSERT INTO `subjects_by_course` (`id`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
+(1, 'CSS 101', 'Introduction to Computing', 3, 'Monday', '7:00 AM - 10:00 AM', ''),
+(2, 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
+(4, 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
+(5, 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
+(6, 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
+(7, 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
+(8, 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', '');
 
 -- --------------------------------------------------------
 
@@ -251,6 +286,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `section_tbl`
+--
+ALTER TABLE `section_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
@@ -279,10 +320,16 @@ ALTER TABLE `year_level`
 --
 
 --
+-- AUTO_INCREMENT for table `section_tbl`
+--
+ALTER TABLE `section_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `year_level`

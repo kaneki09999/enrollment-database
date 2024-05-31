@@ -84,13 +84,13 @@ include "include/header.php";
         <!-- Course Boxes -->
         <div class="row">
             <div class="col-md-6">
-                <div class="course-box" data-toggle="modal" data-target="#infoSysModal" style="background: linear-gradient(243deg, rgba(3,172,0,0.9164040616246498) 36%, rgba(77,232,63,1) 57%); border: 1px solid black;">
+                <div class="course-box" data-toggle="modal" data-target="#infoSysModal">
                     <img src="../enrollment-database/Course Logo/IS.png" alt="Information System">
                     <h2>Bachelor of Science in Information System</h2>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="course-box" data-toggle="modal" data-target="#infoTechModal" style="background: linear-gradient(243deg, rgba(2,0,36,1) 0%, rgba(65,65,185,0.8743872549019608) 18%, rgba(0,212,255,1) 100%); border: 1px solid black;">
+                <div class="course-box" data-toggle="modal" data-target="#infoTechModal">
                     <img src="../enrollment-database/Course Logo/IT.png" alt="Information Technology">
                     <h2>Bachelor of Science in Information Technology</h2>
                 </div>
@@ -98,13 +98,13 @@ include "include/header.php";
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="course-box" data-toggle="modal" data-target="#compSciModal" style="background: linear-gradient(243deg, rgba(0,0,0,0.7511379551820728) 16%, rgba(254,234,0,0.7875525210084033) 40%); border: 1px solid black;">
+                <div class="course-box" data-toggle="modal" data-target="#compSciModal">
                     <img src="../enrollment-database/Course Logo/CS.png" alt="Computer Science">
                     <h2>Bachelor of Science in Computer Science</h2>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="course-box" data-toggle="modal" data-target="#entertainModal" style="background: linear-gradient(243deg, rgba(85,0,142,0.8631827731092436) 20%, rgba(159,159,159,0.7483368347338936) 46%, rgba(158,60,219,0.8323704481792717) 59%); border: 1px solid black;">
+                <div class="course-box" data-toggle="modal" data-target="#entertainModal">
                     <img src="../enrollment-database/Course Logo/EMC.png" alt="Entertainment and Multimedia Computing">
                     <h2>Bachelor of Science in Entertainment and Multimedia Computing</h2>
                 </div>
