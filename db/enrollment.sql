@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 03:35 AM
+-- Generation Time: May 31, 2024 at 08:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` INT, IN `p_program_id` INT, IN `p_year_level` INT, IN `p_firstname` VARCHAR(255), IN `p_middlename` VARCHAR(255), IN `p_lastname` VARCHAR(255), IN `p_birthdate` DATE, IN `p_gender` VARCHAR(255), IN `p_address` TEXT, IN `p_birthplace` VARCHAR(255), IN `p_contact` BIGINT, IN `p_documents` TEXT, IN `p_status` VARCHAR(255), IN `p_registration_date` DATE)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` INT, IN `p_program_id` INT, IN `p_year_level` INT, IN `p_firstname` VARCHAR(255), IN `p_middlename` VARCHAR(255), IN `p_lastname` VARCHAR(255), IN `p_birthdate` DATE, IN `p_gender` VARCHAR(255), IN `p_address` TEXT, IN `p_birthplace` VARCHAR(255), IN `p_contact` BIGINT, IN `p_documents` TEXT, IN `p_status` VARCHAR(255), IN `p_registration_date` VARCHAR(255))   BEGIN
     INSERT INTO students (
         student_id, 
         program_id, 
@@ -123,6 +123,25 @@ INSERT INTO `courses` (`id`, `program`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `enrolled_subject`
+--
+
+CREATE TABLE `enrolled_subject` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `subject_code` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `day` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `professor` varchar(255) NOT NULL,
+  `register_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `section_tbl`
 --
 
@@ -164,7 +183,7 @@ CREATE TABLE `students` (
   `contact` bigint(20) NOT NULL,
   `documents` text NOT NULL,
   `status` varchar(255) NOT NULL,
-  `registration_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `registration_date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -172,9 +191,14 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
-(20241969, 1, 3, 'Christian', 'Pat', 'Bernal', '2003-12-21', 'Male', 'Bagong Silang Kanan', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', 'Pending', '2024-05-29 16:00:00'),
-(20242583, 2, 2, 'Ajhay', 'Ramos', 'Arendayen', '2024-05-31', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Aj Resume.pdf;', '', '2024-05-27 16:00:00'),
-(20246887, 1, 2, 'Melvin', 'M.', 'Custodio', '2024-04-30', 'Male', '925 ilang ilang st. bo. concepcion tala', '22', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '2024-05-29 02:28:36', '0000-00-00 00:00:00');
+(20241529, 2, 1, 'SDasa', 'SAsASAs', 'SsASAA', '2002-02-12', 'Male', 'SDAD', 'ASDASDASDASDSAD', 0, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', 'Pending', '2024-05-31 08:07:48'),
+(20241969, 1, 3, 'Christian Dave', 'P.', 'Bernal', '2003-12-21', 'Male', 'Bagong Silang Kanan', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', ''),
+(20242583, 2, 2, 'Ajhay', 'R.', 'Arendayen', '2024-05-31', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Aj Resume.pdf;', '', ''),
+(20244359, 2, 2, 'asdasdsa', 'dsadsadsa', 'dasdasds', '2332-02-13', 'Male', 'wddwqdd', 'sadsadsad', 0, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', 'Pending', ''),
+(20245407, 1, 1, 'Melvin', 'M.', 'Custodio', '2024-06-08', 'Female', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '2024-05-31 07:55:03', ''),
+(20246530, 3, 4, 'Ricky James', '', 'Molina', '2024-05-14', 'Male', 'Ph12, BLK20 LOT2', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', ''),
+(20246887, 1, 2, 'Melvin', 'M.', 'Custodio', '2024-04-30', 'Male', '925 ilang ilang st. bo. concepcion tala', 'Tala Hospital', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', ''),
+(20247103, 4, 4, 'Ricky James', '', 'Molina', '2024-05-29', 'Male', 'Ph12, BLK20 LOT2', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', '');
 
 -- --------------------------------------------------------
 
@@ -197,7 +221,7 @@ CREATE TABLE `student_information` (
 ,`year_level` varchar(255)
 ,`email` varchar(255)
 ,`username` varchar(255)
-,`registration_date` timestamp
+,`registration_date` varchar(255)
 );
 
 -- --------------------------------------------------------
@@ -218,17 +242,23 @@ CREATE TABLE `student_login` (
 --
 
 INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALUES
+(20241529, 'bernal@gmail.com', 'admin', '$2y$10$5wA.Q4wTS.l5D.SjUz23LeCeElWQ.HgRwtrSIod.LlzYeR/zZbIH6'),
 (20241969, 'bernal@gmail.com', 'dave', '$2y$10$mX7PRV0jEaPGaUS2XmQPF.OwS2LZxxoHWYZUcTZQIvu81KLDX6G/a'),
 (20242583, 'asdsadasdsadn@gmail.com', 'ajhay123', '$2y$10$BYSSbBCSCTUtNK7O3INYWeU9LxjbsJOEPVHxaJGBRps2i8FMPy7Fa'),
-(20246887, 'cstd09@gmail.com', 'melvin', '$2y$10$ZbFALp.j0M5rWXVTBDx5uOlElcfoINNzhN2SKy.6pvN4vNWHsbDte');
+(20244359, 'rickyjames@gmail.com', 'admin', '$2y$10$rAGxqOYfejsk604/qQk02eQRmBm3FzqvcAocfHDsKe2qRWQ.JlU8G'),
+(20245407, 'cstd09@gmail.com', 'admin', '$2y$10$xBCJoonn4fxFFeKXSk0/au9NKUDwT3svLcBIuyP2HAXQjHlSzC.DW'),
+(20246530, 'rickyjames@gmail.com', 'admin', '$2y$10$7rpKCAv5XFBKmK2bzhhuXO/juV6vyZfMvGL5is0H.CcE25bG0rmEm'),
+(20246887, 'cstd09@gmail.com', 'melvin', '$2y$10$ZbFALp.j0M5rWXVTBDx5uOlElcfoINNzhN2SKy.6pvN4vNWHsbDte'),
+(20247103, 'rickyjames@gmail.com', 'ricky', '$2y$10$gPdmxqQICJmEmyiFOmRX3uvQB2EL7JVrC6oLYLj6.vGR3MMkoYPmy');
 
 -- --------------------------------------------------------
 
-
+--
 -- Table structure for table `subjects_by_course`
-
+--
 
 CREATE TABLE `subjects_by_course` (
+  `year_lvl` int(11) NOT NULL,
   `id` int(11) NOT NULL,
   `subject_code` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -242,14 +272,14 @@ CREATE TABLE `subjects_by_course` (
 -- Dumping data for table `subjects_by_course`
 --
 
-INSERT INTO `subjects_by_course` (`id`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
-(1, 'CSS 101', 'Introduction to Computing', 3, 'Monday', '7:00 AM - 10:00 AM', ''),
-(2, 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
-(4, 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
-(5, 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
-(6, 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
-(7, 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
-(8, 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', '');
+INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
+(1, 1, 'CSS 101', 'Introduction to Computing', 3, 'Monday', '7:00 AM - 10:00 AM', ''),
+(1, 2, 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
+(1, 4, 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
+(1, 5, 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
+(1, 6, 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
+(1, 7, 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
+(1, 8, 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', '');
 
 -- --------------------------------------------------------
 
@@ -286,6 +316,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `enrolled_subject`
+--
+ALTER TABLE `enrolled_subject`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `section_tbl`
 --
 ALTER TABLE `section_tbl`
@@ -318,6 +354,12 @@ ALTER TABLE `year_level`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `enrolled_subject`
+--
+ALTER TABLE `enrolled_subject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `section_tbl`

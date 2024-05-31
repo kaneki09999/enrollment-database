@@ -197,7 +197,7 @@ include "include/header.php";
             </div>
         </div>
     </div>
-
+<!-- wasdas -->
     <!-- Bachelor of Science Entertainment and Multimedia Computing Modal -->
     <div class="modal fade" id="entertainModal" tabindex="-1" role="dialog" aria-labelledby="entertainModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
