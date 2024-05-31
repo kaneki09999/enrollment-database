@@ -159,7 +159,7 @@ include "include/header.php";
                     <li>Programmer</li>
                     <li>Computer Business Entrepreneur</li>
                     <li>Database Administrator/Designer</li>
-                    <li>Systems Analystr</li>
+                    <li>Systems Analyst</li>
                     <li>Technical Support</li>
                     <li>Information Systems Auditor</li>
                     <li>Computer Instructor</li>
