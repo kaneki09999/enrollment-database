@@ -85,13 +85,13 @@ include "include/header.php";
         <div class="row">
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#infoSysModal">
-                    <img src="../enrollment-database/Course Logo/IS.png" alt="Information System">
+                    <img src="Course Logo/IS.png" alt="Information System">
                     <h2>Bachelor of Science in Information System</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#infoTechModal">
-                    <img src="../enrollment-database/Course Logo/IT.png" alt="Information Technology">
+                    <img src="Course Logo/IT.png" alt="Information Technology">
                     <h2>Bachelor of Science in Information Technology</h2>
                 </div>
             </div>
@@ -99,13 +99,13 @@ include "include/header.php";
         <div class="row">
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#compSciModal">
-                    <img src="../enrollment-database/Course Logo/CS.png" alt="Computer Science">
+                    <img src="Course Logo/CS.png" alt="Computer Science">
                     <h2>Bachelor of Science in Computer Science</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#entertainModal">
-                    <img src="../enrollment-database/Course Logo/EMC.png" alt="Entertainment and Multimedia Computing">
+                    <img src="Course Logo/EMC.png" alt="Entertainment and Multimedia Computing">
                     <h2>Bachelor of Science in Entertainment and Multimedia Computing</h2>
                 </div>
             </div>
