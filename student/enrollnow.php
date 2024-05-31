@@ -95,7 +95,7 @@
             </div>
             <div class="row no-print">
                 <div class="col-12">
-                    <a href="enroll.php" class="btn btn-success float-right"><i class="fa fa-check"></i> Enroll</a>
+                    <a href="#" class="btn btn-success float-right"><i class="fa fa-check"></i> Enroll</a>
                 </div>
             </div>
         </section>

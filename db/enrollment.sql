@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 01:48 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: May 31, 2024 at 02:27 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` INT, IN `p_program_id` INT, IN `p_year_level` INT, IN `p_firstname` VARCHAR(255), IN `p_middlename` VARCHAR(255), IN `p_lastname` VARCHAR(255), IN `p_birthdate` DATE, IN `p_gender` VARCHAR(255), IN `p_address` TEXT, IN `p_birthplace` VARCHAR(255), IN `p_contact` BIGINT, IN `p_documents` TEXT, IN `p_registration_date` DATE)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` INT, IN `p_program_id` INT, IN `p_year_level` INT, IN `p_firstname` VARCHAR(255), IN `p_middlename` VARCHAR(255), IN `p_lastname` VARCHAR(255), IN `p_birthdate` DATE, IN `p_gender` VARCHAR(255), IN `p_address` TEXT, IN `p_birthplace` VARCHAR(255), IN `p_contact` BIGINT, IN `p_documents` TEXT, IN `p_status` VARCHAR(255), IN `p_registration_date` DATE)   BEGIN
     INSERT INTO students (
         student_id, 
         program_id, 
@@ -39,6 +39,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` I
         birthplace, 
         contact, 
         documents, 
+        status,
         registration_date
     ) VALUES (
         p_student_id, 
@@ -53,6 +54,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` I
         p_birthplace, 
         p_contact, 
         p_documents, 
+        p_status,
         p_registration_date
     );
 END$$
@@ -137,6 +139,7 @@ CREATE TABLE `students` (
   `birthplace` varchar(255) NOT NULL,
   `contact` bigint(20) NOT NULL,
   `documents` text NOT NULL,
+  `status` varchar(255) NOT NULL,
   `registration_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -144,8 +147,10 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `registration_date`) VALUES
-(20242583, 2, 2, 'Ajhay', 'Ramos', 'Arendayen', '2024-05-31', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Aj Resume.pdf;', '2024-05-27 16:00:00');
+INSERT INTO `students` (`student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
+(20241969, 1, 3, 'Christian', 'Pat', 'Bernal', '2003-12-21', 'Male', 'Bagong Silang Kanan', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', 'Pending', '2024-05-29 16:00:00'),
+(20242583, 2, 2, 'Ajhay', 'Ramos', 'Arendayen', '2024-05-31', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Aj Resume.pdf;', '', '2024-05-27 16:00:00'),
+(20246887, 1, 2, 'Melvin', 'M.', 'Custodio', '2024-04-30', 'Male', '925 ilang ilang st. bo. concepcion tala', '22', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '2024-05-29 02:28:36', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -189,7 +194,27 @@ CREATE TABLE `student_login` (
 --
 
 INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALUES
-(20242583, 'asdsadasdsadn@gmail.com', 'ajhay123', '$2y$10$BYSSbBCSCTUtNK7O3INYWeU9LxjbsJOEPVHxaJGBRps2i8FMPy7Fa');
+(20241969, 'bernal@gmail.com', 'dave', '$2y$10$mX7PRV0jEaPGaUS2XmQPF.OwS2LZxxoHWYZUcTZQIvu81KLDX6G/a'),
+(20242583, 'asdsadasdsadn@gmail.com', 'ajhay123', '$2y$10$BYSSbBCSCTUtNK7O3INYWeU9LxjbsJOEPVHxaJGBRps2i8FMPy7Fa'),
+(20246887, 'cstd09@gmail.com', 'melvin', '$2y$10$ZbFALp.j0M5rWXVTBDx5uOlElcfoINNzhN2SKy.6pvN4vNWHsbDte');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects_by_course`
+--
+
+CREATE TABLE `subjects_by_course` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `subject_code` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `unit` int(11) NOT NULL,
+  `day` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL,
+  `professor` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -219,7 +244,7 @@ INSERT INTO `year_level` (`id`, `year_level`) VALUES
 --
 DROP TABLE IF EXISTS `student_information`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_information`  AS SELECT `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `students`.`middlename` AS `middlename`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_information`  AS SELECT `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `students`.`middlename` AS `middlename`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -238,6 +263,12 @@ ALTER TABLE `student_login`
   ADD PRIMARY KEY (`student_id`);
 
 --
+-- Indexes for table `subjects_by_course`
+--
+ALTER TABLE `subjects_by_course`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `year_level`
 --
 ALTER TABLE `year_level`
@@ -246,6 +277,12 @@ ALTER TABLE `year_level`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `subjects_by_course`
+--
+ALTER TABLE `subjects_by_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `year_level`
