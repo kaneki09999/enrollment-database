@@ -18,7 +18,7 @@
 <div class="sidebar">
 <h2>Admin Dashboard</h2>
     <ul>
-        <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="home.php"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="new-enrollees.php"><i class="fas fa-user-plus"></i> New Enrollees</a></li>
         <li><a href="subject.php"><i class="fas fa-book"></i> Subject</a></li>
         <li><a href="courses.php"><i class="fas fa-graduation-cap"></i> Courses</a></li>
