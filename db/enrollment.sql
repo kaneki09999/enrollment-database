@@ -224,9 +224,9 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 
 -- --------------------------------------------------------
 
---
+
 -- Table structure for table `subjects_by_course`
---
+
 
 CREATE TABLE `subjects_by_course` (
   `id` int(11) NOT NULL,
