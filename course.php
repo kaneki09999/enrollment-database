@@ -35,14 +35,31 @@ include "include/header.php";
         }
         
         .course-box {
-            border: 2px solid #ccc;
-            padding: 20px;
+            position: relative;
+            text-align: center;
+            color: white;
             margin-bottom: 20px;
-            height: 150px; /* Set a fixed height to maintain uniformity */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .course-box img {
+            width: 25%;
+            height: auto;
+            opacity: 0.8;
+            float: left;
         }
 
         .course-box h2 {
-            margin-top: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         /* Style for the heading "Courses Offered" */
@@ -50,33 +67,46 @@ include "include/header.php";
             text-align: center;
             color: #e77d33; /* Change the color as needed */
         }
+
+        .justified-text {
+            text-align: justify;
+        }
+
+
+
+
     </style>
     <br>
     <!-- Centered and styled heading for "Courses Offered" -->
-    <h2 class="course-heading">Courses Offered</h2>
-    <!-- Course Boxes -->
     <div class="container">
+        <h2 class="course-heading">Courses Offered</h2>
+        <br>
+        <!-- Course Boxes -->
         <div class="row">
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#infoSysModal">
-                    <h2>Bachelor of Science Information System</h2>
+                    <img src="../enrollment-database/Course Logo/IS.png" alt="Information System">
+                    <h2>Bachelor of Science in Information System</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#infoTechModal">
-                    <h2>Bachelor of Science Information Technology</h2>
+                    <img src="../enrollment-database/Course Logo/IT.png" alt="Information Technology">
+                    <h2>Bachelor of Science in Information Technology</h2>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#compSciModal">
-                    <h2>Bachelor of Science Computer Science</h2>
+                    <img src="../enrollment-database/Course Logo/CS.png" alt="Computer Science">
+                    <h2>Bachelor of Science in Computer Science</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#entertainModal">
-                    <h2>Bachelor of Science Entertainment and Multimedia Computing</h2>
+                    <img src="../enrollment-database/Course Logo/EMC.png" alt="Entertainment and Multimedia Computing">
+                    <h2>Bachelor of Science in Entertainment and Multimedia Computing</h2>
                 </div>
             </div>
         </div>
@@ -95,13 +125,13 @@ include "include/header.php";
                 </div>
                 <div class="modal-body">
                     <!-- Add course details here -->
-                    <p>This 4-year program is a hybrid course combining the fundamentals of Computing Science with the basics of business courses like management, accounting, finance and other officemanagement essentials. Students are being honed to designing, developing systems and managing information system setups like transaction processing system, automation system,and other enterprise-based systems.</p>               
+                    <p class="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;This 4-year program is a hybrid course combining the fundamentals of Computing Science with the basics of business courses like management, accounting, finance and other officemanagement essentials. Students are being honed to designing, developing systems and managing information system setups like transaction processing system, automation system,and other enterprise-based systems.</p>               
                     <h3 style="color: #e77d33;">Possible Career</h3>
                     <ul>
                     <li>Programmer</li>
                     <li>Computer Business Entrepreneur</li>
                     <li>Database Administrator/Designer</li>
-                    <li>Systems Analystr</li>
+                    <li>Systems Analyst</li>
                     <li>Technical Support</li>
                     <li>Information Systems Auditor</li>
                     <li>Computer Instructor</li>
@@ -123,7 +153,7 @@ include "include/header.php";
                 </div>
                 <div class="modal-body">
                     <!-- Add course details here -->
-                    <p>This 4-year program is a hybrid course combining the fundamentals of Computing Science with the basics of business courses like management, accounting, finance and other officemanagement essentials. Students are being honed to designing, developing systems and managing information system setups like transaction processing system, automation system,and other enterprise-based systems.</p>
+                    <p class="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;This 4-year program is a hybrid course combining the fundamentals of Computing Science with the basics of business courses like management, accounting, finance and other officemanagement essentials. Students are being honed to designing, developing systems and managing information system setups like transaction processing system, automation system,and other enterprise-based systems.</p>
                     <h3 style="color: #e77d33;">Possible Career</h3>
                     <ul>
                     <li>Programmer</li>
@@ -151,7 +181,7 @@ include "include/header.php";
                 </div>
                 <div class="modal-body">
                     <!-- Add course details here -->
-                    <p>The Bachelor of Science in Computer Science combines a core of Computer Science subjects with substantial depth in other required minor subjects. This will ensuresthat students have the required tools to remain updated as technologies and trendschange. The program is design mainly to maintaining the technical knowledge of the students starting from first year up to the last semester of the year of their stay.The curriculum is packed with all the basic and advanced programming skills and necessary supporting computing science fundamentals.</p>                
+                    <p class="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Bachelor of Science in Computer Science combines a core of Computer Science subjects with substantial depth in other required minor subjects. This will ensuresthat students have the required tools to remain updated as technologies and trendschange. The program is design mainly to maintaining the technical knowledge of the students starting from first year up to the last semester of the year of their stay.The curriculum is packed with all the basic and advanced programming skills and necessary supporting computing science fundamentals.</p>                
                     <h3 style="color: #e77d33;">Possible Career</h3>
                     <ul>
                     <li>Programmer/application developer</li>
@@ -181,8 +211,8 @@ include "include/header.php";
                 </div>
                 <div class="modal-body">
                     <!-- Add course details here -->
-                    <p>The field of Entertainment and Multimedia Computing is the study and use of concepts, principles, and techniques of computing in the design and development of multimedia products and solutions. It includes various applications such as science, entertainment, education, simulations, and advertising.</p>
-                    <p>The program enables the students to be knowledgeable of the whole pipeline of Game Development and Digital Animation projects. The students will acquire the independence and creative competencies to articulate project design and requirements of new projects, not necessarily based on standard templates.</p>
+                    <p class="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;The field of Entertainment and Multimedia Computing is the study and use of concepts, principles, and techniques of computing in the design and development of multimedia products and solutions. It includes various applications such as science, entertainment, education, simulations, and advertising.</p>
+                    <p class="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;The program enables the students to be knowledgeable of the whole pipeline of Game Development and Digital Animation projects. The students will acquire the independence and creative competencies to articulate project design and requirements of new projects, not necessarily based on standard templates.</p>
                     <h3 style="color: #e77d33;">Possible Career</h3>
                     <p>Specialized in Game Development</p>
                     <ul>

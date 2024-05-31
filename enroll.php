@@ -80,8 +80,6 @@ if ($registration_success) {
 
 
 
-
-
 <div class="container">
     <form class="registration-form" action="" method="POST" enctype="multipart/form-data">
         <h2 class="text-center" style="color: #e77d33;">Student Registration</h2>
