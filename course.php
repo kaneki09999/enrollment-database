@@ -111,7 +111,7 @@ include "include/header.php";
             </div>
         </div>
     </div>
-
+<!-- Modals for Course Details -->
     <!-- Modals for Course Details -->
     <!-- Bachelor of Science Information System Modal -->
     <div class="modal fade" id="infoSysModal" tabindex="-1" role="dialog" aria-labelledby="infoSysModalLabel" aria-hidden="true">
