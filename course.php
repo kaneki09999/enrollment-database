@@ -4,9 +4,9 @@ include "include/header.php";
 
     <style>
         .top-bar {
-            background-color: #529f37; /* Change to your desired color */
-            color: #fff; /* Text color */
-            padding: 10px 0; /* Adjust padding as needed */
+            background-color: #529f37; 
+            color: #fff; 
+            padding: 10px 0; 
         }
 
         .contact-info {
@@ -14,13 +14,12 @@ include "include/header.php";
             text-align: center;
         }
 
-        /* Add thicker and colored line below navbar */
         .navbar:after {
             content: '';
             display: block;
             width: 100%;
-            border-bottom: 5px solid #e77d33; /* Change the color and thickness as needed */
-            margin-top: 15px; /* Adjust spacing as needed */
+            border-bottom: 5px solid #e77d33;
+            margin-top: 15px;
         }
 
         /* Footer styles */
@@ -65,7 +64,7 @@ include "include/header.php";
         /* Style for the heading "Courses Offered" */
         .course-heading {
             text-align: center;
-            color: #e77d33; /* Change the color as needed */
+            color: #e77d33; 
         }
 
         .justified-text {
@@ -85,13 +84,13 @@ include "include/header.php";
         <div class="row">
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#infoSysModal" style="background: linear-gradient(243deg, rgba(3,172,0,0.9164040616246498) 36%, rgba(77,232,63,1) 57%); border: 1px solid black;">
-                    <img src="../enrollment-database/Course Logo/IS.png" alt="Information System">
+                    <img src="Course Logo/IS.png" alt="Information System">
                     <h2>Bachelor of Science in Information System</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#infoTechModal" style="background: linear-gradient(243deg, rgba(2,0,36,1) 0%, rgba(65,65,185,0.8743872549019608) 18%, rgba(0,212,255,1) 100%); border: 1px solid black;">
-                    <img src="../enrollment-database/Course Logo/IT.png" alt="Information Technology">
+                    <img src="Course Logo/IT.png" alt="Information Technology">
                     <h2>Bachelor of Science in Information Technology</h2>
                 </div>
             </div>
@@ -99,13 +98,13 @@ include "include/header.php";
         <div class="row">
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#compSciModal" style="background: linear-gradient(243deg, rgba(0,0,0,0.7511379551820728) 16%, rgba(254,234,0,0.6755077030812324) 40%); border: 1px solid black;">
-                    <img src="../enrollment-database/Course Logo/CS.png" alt="Computer Science">
+                    <img src="Course Logo/CS.png" alt="Computer Science">
                     <h2>Bachelor of Science in Computer Science</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="course-box" data-toggle="modal" data-target="#entertainModal" style="background: linear-gradient(243deg, rgba(85,0,142,0.8631827731092436) 20%, rgba(159,159,159,0.7483368347338936) 46%, rgba(158,60,219,0.8323704481792717) 59%); border: 1px solid black;">
-                    <img src="../enrollment-database/Course Logo/EMC.png" alt="Entertainment and Multimedia Computing">
+                    <img src="Course Logo/EMC.png" alt="Entertainment and Multimedia Computing">
                     <h2>Bachelor of Science in Entertainment and Multimedia Computing</h2>
                 </div>
             </div>
