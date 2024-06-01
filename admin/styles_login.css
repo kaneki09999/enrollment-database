@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #e77d33;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .wrapper {
+    width: 420px;
+    background: #fff; /* Set background color to #e77d33 */
+    color: #000;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add some shadow for better visibility */
+  }
+  
+  .wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #000; /* Ensure the heading color is white */
+  }
+  
+  .wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.7); /* Change border color to semi-transparent white */
+    border-radius: 40px;
+    font-size: 16px;
+    color: #000; /* Change text color to white */
+    padding: 20px 45px 20px 20px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .input-box input::placeholder {
+    color: #000; /* Change placeholder color to white */
+  }
+  
+  .input-box i {
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    transform: translate(-50%);
+    font-size: 20px;
+    color: #000; /* Ensure icons are also visible */
+  }
+  
+  .wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #529f37; /* Change button background color to white */
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff; /* Button text color to match the background */
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .wrapper .btn:hover {
+    background-color: #e77d33; /* Button hover background color to match the background */
+    color: #fff;
+  }
+  
+  .wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+    color: #fff; /* Ensure text color is white */
+  }
+  
+  .register-link p a {
+    color: #fff; /* Link color */
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .register-link p a:hover {
+    text-decoration: underline;
+  }
+  

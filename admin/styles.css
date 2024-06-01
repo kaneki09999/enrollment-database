@@ -24,10 +24,34 @@ body {
 
 .enrollment-text {
     text-align: left;
+    margin-left: -105px;
+}
+
+.logout-btn {
+    background-color: #e77d33; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    padding: 3px 10px;
+    cursor: pointer;
+    border-radius: 9px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Add transition for hover effect */
+    margin-right: -95px;
+}
+
+.logout-btn i {
+    margin-right: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #d66d28; /* Darker shade for hover effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
 }
 
 .sidebar {
-    width: 250px;
+    width: 230px;
     height: calc(100vh - 40px); /* Adjusted height to account for the topbar */
     background-color: white;
     color: black;
@@ -63,11 +87,6 @@ body {
 
 .sidebar ul li a:hover {
     background-color: #e77d33;
-}
-
-.statistics-box {
-    margin-left: 270px; /* Adjust based on sidebar width */
-    padding: 20px;
 }
 
 .box-info {
@@ -110,4 +129,53 @@ body {
 
 .breadcrumb li a.active {
     color: #000;
+}
+
+.statistics-box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 200px; /* Adjust based on sidebar width */
+    margin-right: 150px;
+    text-align: center;
+}
+
+.box-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.box-item {
+    flex-basis: calc(50% - 20px);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.box-item i {
+    font-size: 40px;
+    color: #529f37; /* Adjust color as needed */
+}
+
+.text {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.text h3 {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.text p {
+    font-size: 16px;
+    color: #666;
 }

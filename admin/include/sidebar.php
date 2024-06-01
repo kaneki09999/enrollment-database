@@ -13,10 +13,11 @@
         <p class="contact-info">
             <span class="enrollment-text">Enrollment System</span>
         </p>
+        <button class="logout-btn" onclick="location.href='logout.php'"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 </div>
 <div class="sidebar">
-<h2>Admin Dashboard</h2>
+    <h2>Admin</h2>
     <ul>
         <li><a href="home.php"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="new-enrollees.php"><i class="fas fa-user-plus"></i> New Enrollees</a></li>
@@ -28,3 +29,4 @@
         <li><a href="set-semester.php"><i class="fas fa-cogs"></i> Set Semester</a></li>
     </ul>
 </div>
+

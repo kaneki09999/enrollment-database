@@ -5,10 +5,12 @@
       <thead class="thead-dark">
         <tr>
           <th>#</th>
-          <th>Subject</th>
+          <th>Subject Code</th>
           <th>Description</th>
           <th>Unit</th>
-          <th>Average</th>
+          <th>Midterm</th>
+          <th>Final</th>
+          <th>Final Grade</th>
           <th>Remarks</th>
           <th>Year Level</th>
           <th>Semester</th>
@@ -17,9 +19,11 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td>Mathematics</td>
-          <td>Calculus and Algebra</td>
-          <td>4</td>
+          <td>CS101</td>
+          <td>Introduction to Programming</td>
+          <td>3</td>
+          <td>1.00</td>
+          <td>1.00</td>
           <td>1.00</td>
           <td>Passed</td>
           <td>Third Year</td>
@@ -27,9 +31,11 @@
         </tr>
         <tr>
           <td>2</td>
-          <td>Physics</td>
-          <td>Mechanics</td>
+          <td>CS102</td>
+          <td>Data Structures</td>
           <td>3</td>
+          <td>1.00</td>
+          <td>1.00</td>
           <td>1.00</td>
           <td>Passed</td>
           <td>Third Year</td>
@@ -37,9 +43,11 @@
         </tr>
         <tr>
           <td>3</td>
-          <td>Chemistry</td>
-          <td>Organic Chemistry</td>
-          <td>4</td>
+          <td>CS103</td>
+          <td>Database Systems</td>
+          <td>3</td>
+          <td>1.00</td>
+          <td>1.00</td>
           <td>1.00</td>
           <td>Passed</td>
           <td>Third Year</td>
@@ -47,9 +55,11 @@
         </tr>
         <tr>
           <td>4</td>
-          <td>English</td>
-          <td>Literature</td>
-          <td>2</td>
+          <td>CS104</td>
+          <td>Computer Networks</td>
+          <td>3</td>
+          <td>1.00</td>
+          <td>1.00</td>
           <td>1.00</td>
           <td>Passed</td>
           <td>Third Year</td>
@@ -57,9 +67,11 @@
         </tr>
         <tr>
           <td>5</td>
-          <td>History</td>
-          <td>World History</td>
+          <td>CS105</td>
+          <td>Software Engineering</td>
           <td>3</td>
+          <td>1.00</td>
+          <td>1.00</td>
           <td>1.00</td>
           <td>Passed</td>
           <td>Third Year</td>

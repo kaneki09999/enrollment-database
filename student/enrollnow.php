@@ -42,45 +42,45 @@
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Id</th>
-                                <th>Subject</th>
+                                <th>#</th>
+                                <th>Subject Code</th>
                                 <th>Description</th>
                                 <th>Unit</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>101</td>
+                                <td>1</td>
                                 <td>CS101</td>
                                 <td>Introduction to Programming</td>
                                 <td>3</td>
                             </tr>
                             <tr>
-                                <td>102</td>
+                                <td>2</td>
                                 <td>CS102</td>
                                 <td>Data Structures</td>
                                 <td>3</td>
                             </tr>
                             <tr>
-                                <td>103</td>
+                                <td>3</td>
                                 <td>CS103</td>
                                 <td>Database Systems</td>
                                 <td>3</td>
                             </tr>
                             <tr>
-                                <td>104</td>
+                                <td>4</td>
                                 <td>CS104</td>
                                 <td>Computer Networks</td>
                                 <td>3</td>
                             </tr>
                             <tr>
-                                <td>105</td>
+                                <td>5</td>
                                 <td>CS105</td>
                                 <td>Software Engineering</td>
                                 <td>3</td>
                             </tr>
                             <tr>
-                                <td>106</td>
+                                <td>6</td>
                                 <td>CS106</td>
                                 <td>Operating Systems</td>
                                 <td>3</td>
