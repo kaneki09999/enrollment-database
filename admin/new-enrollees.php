@@ -89,6 +89,8 @@
                             <th>Contact No.</th>
                             <th>Course</th>
                             <th>Action</th>
+                            <!-- PAG CLICK NG CONFIRM MAY LALABAS NA MODAL NA MAGIINPUT NG SUBJECTS OR DROP-DOWN THEN PIPILI NG YEAR LEVEL MUNA AND THEN
+                                PAG NAKAPILI NA SAKA LALABAS YUNG MGA SUBJECTS NA BASE SA KUNG ANO YEAR LEVEL TO -->
                         </tr>
                     </thead>
                     <tbody>

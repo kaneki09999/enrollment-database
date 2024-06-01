@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 08:08 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 01, 2024 at 02:57 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -74,8 +74,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudentLogin` (IN `p_student_
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectAllStudents` ()   BEGIN
-    SELECT * FROM students;
-END$$
+    SELECT students.firstname, students.middlename, students.lastname, courses.program, year_level.year_level, 
+    students.birthdate, students.gender, students.address, students.birthplace, students.contact FROM students
+    JOIN courses ON students.program_id = courses.id
+    JOIN year_level ON students.year_id = year_level.id;
+    
+    END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `student_login_proc` (IN `p_username` VARCHAR(255))   BEGIN
     DECLARE v_student_id INT;
@@ -170,6 +174,7 @@ INSERT INTO `section_tbl` (`id`, `year_lvl`, `section`) VALUES
 --
 
 CREATE TABLE `students` (
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `program_id` int(11) NOT NULL,
   `year_id` int(11) NOT NULL,
@@ -190,15 +195,8 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
-(20241529, 2, 1, 'SDasa', 'SAsASAs', 'SsASAA', '2002-02-12', 'Male', 'SDAD', 'ASDASDASDASDSAD', 0, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', 'Pending', '2024-05-31 08:07:48'),
-(20241969, 1, 3, 'Christian Dave', 'P.', 'Bernal', '2003-12-21', 'Male', 'Bagong Silang Kanan', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', ''),
-(20242583, 2, 2, 'Ajhay', 'R.', 'Arendayen', '2024-05-31', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Aj Resume.pdf;', '', ''),
-(20244359, 2, 2, 'asdasdsa', 'dsadsadsa', 'dasdasds', '2332-02-13', 'Male', 'wddwqdd', 'sadsadsad', 0, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', 'Pending', ''),
-(20245407, 1, 1, 'Melvin', 'M.', 'Custodio', '2024-06-08', 'Female', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '2024-05-31 07:55:03', ''),
-(20246530, 3, 4, 'Ricky James', '', 'Molina', '2024-05-14', 'Male', 'Ph12, BLK20 LOT2', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', ''),
-(20246887, 1, 2, 'Melvin', 'M.', 'Custodio', '2024-04-30', 'Male', '925 ilang ilang st. bo. concepcion tala', 'Tala Hospital', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', ''),
-(20247103, 4, 4, 'Ricky James', '', 'Molina', '2024-05-29', 'Male', 'Ph12, BLK20 LOT2', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-CRM-LONGQUIZ.pdf;', '', '');
+INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
+(9, 20247845, 2, 1, 'Ajhay', '', 'Arendayen', '2024-06-21', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-01 14:27:20');
 
 -- --------------------------------------------------------
 
@@ -242,14 +240,7 @@ CREATE TABLE `student_login` (
 --
 
 INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALUES
-(20241529, 'bernal@gmail.com', 'admin', '$2y$10$5wA.Q4wTS.l5D.SjUz23LeCeElWQ.HgRwtrSIod.LlzYeR/zZbIH6'),
-(20241969, 'bernal@gmail.com', 'dave', '$2y$10$mX7PRV0jEaPGaUS2XmQPF.OwS2LZxxoHWYZUcTZQIvu81KLDX6G/a'),
-(20242583, 'asdsadasdsadn@gmail.com', 'ajhay123', '$2y$10$BYSSbBCSCTUtNK7O3INYWeU9LxjbsJOEPVHxaJGBRps2i8FMPy7Fa'),
-(20244359, 'rickyjames@gmail.com', 'admin', '$2y$10$rAGxqOYfejsk604/qQk02eQRmBm3FzqvcAocfHDsKe2qRWQ.JlU8G'),
-(20245407, 'cstd09@gmail.com', 'admin', '$2y$10$xBCJoonn4fxFFeKXSk0/au9NKUDwT3svLcBIuyP2HAXQjHlSzC.DW'),
-(20246530, 'rickyjames@gmail.com', 'admin', '$2y$10$7rpKCAv5XFBKmK2bzhhuXO/juV6vyZfMvGL5is0H.CcE25bG0rmEm'),
-(20246887, 'cstd09@gmail.com', 'melvin', '$2y$10$ZbFALp.j0M5rWXVTBDx5uOlElcfoINNzhN2SKy.6pvN4vNWHsbDte'),
-(20247103, 'rickyjames@gmail.com', 'ricky', '$2y$10$gPdmxqQICJmEmyiFOmRX3uvQB2EL7JVrC6oLYLj6.vGR3MMkoYPmy');
+(20247845, 'ajhayarendayen@gmail.com', 'ajhay', '$2y$10$GvYvK/N34IgtI0N0R7QZMOXjWN5ijA7iAJ2eUB9jK6aXUiVFWg6BC');
 
 -- --------------------------------------------------------
 
@@ -284,6 +275,19 @@ INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `subject_code`, `description
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbladmin`
+--
+
+CREATE TABLE `tbladmin` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `year_level`
 --
 
@@ -309,7 +313,7 @@ INSERT INTO `year_level` (`id`, `year_level`) VALUES
 --
 DROP TABLE IF EXISTS `student_information`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_information`  AS SELECT `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `students`.`middlename` AS `middlename`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_information`  AS SELECT `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `students`.`middlename` AS `middlename`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`))  ;
 
 --
 -- Indexes for dumped tables
@@ -331,7 +335,8 @@ ALTER TABLE `section_tbl`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`student_id`);
+  ADD PRIMARY KEY (`student_id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `student_login`
@@ -343,6 +348,12 @@ ALTER TABLE `student_login`
 -- Indexes for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbladmin`
+--
+ALTER TABLE `tbladmin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -368,10 +379,22 @@ ALTER TABLE `section_tbl`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `students`
+--
+ALTER TABLE `students`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbladmin`
+--
+ALTER TABLE `tbladmin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `year_level`

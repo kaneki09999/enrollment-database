@@ -85,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login_password = isset($_POST['login_password']) ? $_POST['login_password'] : null;
 
     if ($login_username && $login_password) {
-        // Ensure $conn is already defined and connected to your database
         $stmt = $conn->prepare("CALL student_login_proc(?)");
         $stmt->bind_param("s", $login_username);
 
@@ -104,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             icon: 'success',
                             title: 'Login Successful!',
                             text: 'You will be redirected shortly...',
-                            timer: 2000,
+                            timer: 1200,
                             showConfirmButton: false
                         }).then(() => {
                             window.location.href = 'student/index.php';

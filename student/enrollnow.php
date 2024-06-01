@@ -24,7 +24,7 @@
                     
                 </div>
                 <div class="col-sm-4 invoice-col">
-                    <b>Course/Year:</b> BS Information System / 3rd Year<br>
+                    <b>Course/Year:</b> <?php echo $result['program']; ?> / <?php echo $result['year_level']; ?><br>
                     <b>Semester:</b> First Semester<br>
                     <b>Academic Year:</b> 2024-2025
                 </div>
@@ -37,6 +37,8 @@
                     </h3>
                 </div>
             </div>
+            <!-- NOTE: HINDI MUNA DAPAT LALABAS YUNG MGA SUBJECTS.. AANTAYIN MUNA DAPAT YUNG ADMIN NA ICONFIRM YUNG STUDENTS AFTER THAT 
+                       MAGSESELECT NG SUBJECTS YUNG ADMIN BASE SA KUNG ANONG YEAR ITO  -->
             <div class="row">
                 <div class="col-12 table-responsive">
                     <table class="table">
