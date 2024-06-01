@@ -1,7 +1,7 @@
 <?php include "include/header.php" ?>
     <br>
     <div class="content-wrapper container mt-3">
-        <!-- Student Information Section -->
+        <!-- Student Section -->
         <section class="invoice">
             <div class="row">
                 <div class="col-12">
