@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2024 at 11:42 AM
+-- Generation Time: Jun 02, 2024 at 01:24 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -183,6 +183,7 @@ CREATE TABLE `students` (
   `student_id` int(11) NOT NULL,
   `program_id` int(11) NOT NULL,
   `year_id` int(11) NOT NULL,
+  `section` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `middlename` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -200,9 +201,9 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
-(9, 20247845, 2, 1, 'Ajhay', '', 'Arendayen', '2024-06-21', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-01 14:27:20'),
-(10, 20248681, 1, 1, 'Dave', '', 'Bernal', '2021-03-02', 'Male', 'TAGA WALANG USA', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-02 09:21:29');
+INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `section`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
+(9, 20247845, 2, 1, '', 'Ajhay', '', 'Arendayen', '2024-06-21', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-01 14:27:20'),
+(10, 20248681, 1, 1, '', 'Dave', '', 'Bernal', '2021-03-02', 'Male', 'TAGA WALANG USA', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-02 09:21:29');
 
 -- --------------------------------------------------------
 
