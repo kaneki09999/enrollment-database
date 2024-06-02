@@ -104,38 +104,13 @@
                                   <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Subjects</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
                                       <form>
-                                      <div class="col-md-4">
-                                        <!-- DROPDOWN DAPAT -->
-                                                <label for="updateFirstName" class="form-label"><strong>Year Level</strong></label>
-                                                <input type="text" name="first_name" class="form-control" id="updateFirstName" aria-describedby="firstNameHelp" value="">
-                                            </div>
-
-                                            <!-- ONCE NA NAKAPILI NA YUNG ADMIN NG YEAR LALABAS YUNG BAWAT SUBJECT KADA YEAR LEVEL 
-                                        
-                                                ang pwede lang mapalitan yung time and professor-->
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="updateFirstName" class="form-label"><strong>First Name</strong></label>
-                                                <input type="text" name="first_name" class="form-control" id="updateFirstName" aria-describedby="firstNameHelp" value="">
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <label for="updateMiddleName" class="form-label"><strong>Middle Name</strong></label>
-                                                <input type="text" name="middle_name" class="form-control" id="updateLastName" aria-describedby="middleNameHelp" value="">
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <label for="updateLastName" class="form-label"><strong>Last Name</strong></label>
-                                                <input type="text" name="last_name" class="form-control" id="updateLastName" aria-describedby="lastNameHelp" value="">
-                                            </div>
-
-                                        </div>
-
+                                        <!-- LALAGYAN NG DROPDOWN NA SECTION NA ILALAGAY YUNG STUDENTS AT MAG AUPDATE SA MISMONG STUDENT TABLE DEPENDE SA KUNG
+                                             ANO YUNG YEAR LEVEL NYA -->
 
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
