@@ -52,44 +52,44 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>CS101</td>
-                                <td>Introduction to Programming</td>
-                                <td>3</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>CS102</td>
-                                <td>Data Structures</td>
-                                <td>3</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                             <tr>
-                                <td>3</td>
-                                <td>CS103</td>
-                                <td>Database Systems</td>
-                                <td>3</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>CS104</td>
-                                <td>Computer Networks</td>
-                                <td>3</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                             <tr>
-                                <td>5</td>
-                                <td>CS105</td>
-                                <td>Software Engineering</td>
-                                <td>3</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                             <tr>
-                                <td>6</td>
-                                <td>CS106</td>
-                                <td>Operating Systems</td>
-                                <td>3</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                             <tr>
                                 <td colspan="3" align="right"><b>Total Units</b></td>
-                                <td><b>18</b></td>
+                                <td><b>---</b></td>
                             </tr>
                         </tbody>
                     </table>

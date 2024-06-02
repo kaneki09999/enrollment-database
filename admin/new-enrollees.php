@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enrollment Admin</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         body {
             padding-top: 56px; /* Adjust based on your top bar's height */
@@ -50,162 +48,137 @@
     <?php include "include/sidebar.php"; ?>
 
     <main>
-        <div class="container">
-            <ul class="breadcrumb">
-                <li class="nav-item">
-                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <i class='fas fa-chevron-right'></i>
-                </li>
-                <li class="nav-item active">
-                    <a href="#">New Enrollees</a>
-                </li>
-            </ul>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+        
 
-            <!-- Table Header with Search Bar -->
-            <div class="table-header">
-                <div></div> <!-- Placeholder for breadcrumb spacing -->
-                <div class="search-bar">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="searchButton">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover mt-3">
-                    <thead class="thead-dark">
-                        <tr>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">New Enrollees</h3>
+              </div>
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
                             <th>Student ID</th>
                             <th>Name</th>
                             <th>Gender</th>
                             <th>Address</th>
                             <th>Contact No.</th>
                             <th>Course</th>
+                            <th>Year Level</th>
+                            <th>Status</th>
                             <th>Action</th>
-                            <!-- PAG CLICK NG CONFIRM MAY LALABAS NA MODAL NA MAGIINPUT NG SUBJECTS OR DROP-DOWN THEN PIPILI NG YEAR LEVEL MUNA AND THEN
-                                PAG NAKAPILI NA SAKA LALABAS YUNG MGA SUBJECTS NA BASE SA KUNG ANO YEAR LEVEL TO -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>123456</td>
-                            <td>John Doe</td>
-                            <td>Male</td>
-                            <td>123 Main St, Anytown, USA</td>
-                            <td>(555) 123-4567</td>
-                            <td>Computer Science</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td>654321</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St, Anytown, USA</td>
-                            <td>(555) 765-4321</td>
-                            <td>Business Administration</td>
-                            <td><button class="btn btn-success btn-sm">Confirm <i class="fa fa-info-circle fw-fa"></i></button></td>
-                        </tr>
+                  </tr>
+                  </thead>
+                  
+                  <tbody>
+                        <?php
+                        $sql = "CALL SelectAllStudents()";
+                        $result = $conn->query($sql);
+
+                        if ($result && $result->num_rows > 0) {
+                            while ($details = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                <td><?php echo $details['student_id']; ?></td>
+                                <td><?php echo $details['firstname']; ?> <?php echo $details['lastname']; ?></td>
+                                <td><?php echo $details['gender']; ?></td>
+                                <td><?php echo $details['address']; ?></td>
+                                <td><?php echo $details['contact']; ?></td>
+                                <td><?php echo $details['program']; ?></td>
+                                <td><?php echo $details['year_level']; ?></td>
+                                <td><?php echo $details['status']; ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['id']; ?>">
+                                        Confirm
+                                    </button>
+                                </td>
+                                </tr>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="MODAL_ID_<?php $details['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                      <form>
+                                      <div class="col-md-4">
+                                        <!-- DROPDOWN DAPAT -->
+                                                <label for="updateFirstName" class="form-label"><strong>Year Level</strong></label>
+                                                <input type="text" name="first_name" class="form-control" id="updateFirstName" aria-describedby="firstNameHelp" value="">
+                                            </div>
+
+                                            <!-- ONCE NA NAKAPILI NA YUNG ADMIN NG YEAR LALABAS YUNG BAWAT SUBJECT KADA YEAR LEVEL -->
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="updateFirstName" class="form-label"><strong>First Name</strong></label>
+                                                <input type="text" name="first_name" class="form-control" id="updateFirstName" aria-describedby="firstNameHelp" value="">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label for="updateMiddleName" class="form-label"><strong>Middle Name</strong></label>
+                                                <input type="text" name="middle_name" class="form-control" id="updateLastName" aria-describedby="middleNameHelp" value="">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label for="updateLastName" class="form-label"><strong>Last Name</strong></label>
+                                                <input type="text" name="last_name" class="form-control" id="updateLastName" aria-describedby="lastNameHelp" value="">
+                                            </div>
+
+                                        </div>
+
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-success">Save changes</button>
+                                      </div>
+                                  </form>
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='10'>No records found</td></tr>";
+                        }
+                        ?>
                     </tbody>
+
+
+
+                  <tfoot>
+                    <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Contact No.</th>
+                            <th>Course</th>
+                            <th>Year Level</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                    </tr>
+                  </tfoot>
                 </table>
-                 <!-- Pagination -->
-                 <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </section>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php include "include/footer-extention.php"; ?>
+
 </body>
 </html>
