@@ -115,7 +115,9 @@
                                                 <input type="text" name="first_name" class="form-control" id="updateFirstName" aria-describedby="firstNameHelp" value="">
                                             </div>
 
-                                            <!-- ONCE NA NAKAPILI NA YUNG ADMIN NG YEAR LALABAS YUNG BAWAT SUBJECT KADA YEAR LEVEL -->
+                                            <!-- ONCE NA NAKAPILI NA YUNG ADMIN NG YEAR LALABAS YUNG BAWAT SUBJECT KADA YEAR LEVEL 
+                                        
+                                                ang pwede lang mapalitan yung time and professor-->
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="updateFirstName" class="form-label"><strong>First Name</strong></label>
