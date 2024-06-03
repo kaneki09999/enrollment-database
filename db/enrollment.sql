@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2024 at 01:24 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jun 03, 2024 at 08:58 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,6 +25,15 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddSubjectByCourse` (IN `p_year_lvl` INT, IN `p_program` VARCHAR(255), IN `p_subject_code` VARCHAR(50), IN `p_description` TEXT, IN `p_unit` INT, IN `p_day` VARCHAR(50), IN `p_time` VARCHAR(50), IN `p_professor` VARCHAR(255))   BEGIN
+    INSERT INTO subjects_by_course (year_lvl, program, subject_code, description, unit, day, time, professor)
+    VALUES (p_year_lvl, p_program, p_subject_code, p_description, p_unit, p_day, p_time, p_professor);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCourses` ()   BEGIN
+    SELECT id, program FROM courses;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` INT, IN `p_program_id` INT, IN `p_year_level` INT, IN `p_firstname` VARCHAR(255), IN `p_middlename` VARCHAR(255), IN `p_lastname` VARCHAR(255), IN `p_birthdate` DATE, IN `p_gender` VARCHAR(255), IN `p_address` TEXT, IN `p_birthplace` VARCHAR(255), IN `p_contact` BIGINT, IN `p_documents` TEXT, IN `p_status` VARCHAR(255), IN `p_registration_date` VARCHAR(255))   BEGIN
     INSERT INTO students (
         student_id, 
@@ -104,6 +113,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `student_login_proc` (IN `p_username
         -- Return failure status
         SELECT 'Login Failed' AS status;
     END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subject_by_course` (IN `p_year_lvl` INT, IN `p_program` VARCHAR(255), IN `p_subject_code` VARCHAR(255), IN `p_description` VARCHAR(255), IN `p_unit` INT, IN `p_day` VARCHAR(255), IN `p_time` VARCHAR(255), IN `p_professor` VARCHAR(255), IN `p_id` INT)   BEGIN
+    UPDATE subjects_by_course SET 
+        year_lvl = p_year_lvl, 
+        program = p_program, 
+        subject_code = p_subject_code, 
+        description = p_description, 
+        unit = p_unit, 
+        day = p_day, 
+        time = p_time, 
+        professor = p_professor
+    WHERE id = p_id;
 END$$
 
 DELIMITER ;
@@ -202,6 +224,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `section`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
+(11, 20243174, 1, 1, '', 'Ajhay', '', 'Arendayen', '2000-01-13', 'Male', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/CUSTODIO-ACT#4.pdf;', 'Pending', '2024-06-03 03:44:32'),
 (9, 20247845, 2, 1, '', 'Ajhay', '', 'Arendayen', '2024-06-21', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-01 14:27:20'),
 (10, 20248681, 1, 1, '', 'Dave', '', 'Bernal', '2021-03-02', 'Male', 'TAGA WALANG USA', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-02 09:21:29');
 
@@ -259,6 +282,7 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 CREATE TABLE `subjects_by_course` (
   `year_lvl` int(11) NOT NULL,
   `id` int(11) NOT NULL,
+  `program` varchar(255) NOT NULL,
   `subject_code` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `unit` int(11) NOT NULL,
@@ -271,14 +295,33 @@ CREATE TABLE `subjects_by_course` (
 -- Dumping data for table `subjects_by_course`
 --
 
-INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
-(1, 1, 'CSS 101', 'Introduction to Computing', 3, 'Monday', '7:00 AM - 10:00 AM', ''),
-(1, 2, 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
-(1, 4, 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
-(1, 5, 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
-(1, 6, 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
-(1, 7, 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
-(1, 8, 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', '');
+INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `program`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
+(1, 1, '1', 'CSS 101', 'Introduction to Computing', 3, 'Tuesday', '7:00 AM - 10:00 AM', 'Prof. Bernal'),
+(1, 2, '1', 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
+(1, 4, '1', 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
+(1, 5, '1', 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
+(1, 6, '1', 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
+(1, 7, '1', 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
+(1, 8, '1', 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', ''),
+(1, 14, '4', 'CCS 1102', 'English', 3, 'Friday', '1:00 PM - 4:00 PM', 'Prof. Ajhay');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `subjects_program`
+-- (See below for the actual view)
+--
+CREATE TABLE `subjects_program` (
+`subject_id` int(11)
+,`program` varchar(255)
+,`year_level` varchar(255)
+,`subject_code` varchar(255)
+,`description` varchar(255)
+,`unit` int(11)
+,`day` varchar(255)
+,`time` varchar(255)
+,`professor` varchar(255)
+);
 
 -- --------------------------------------------------------
 
@@ -321,7 +364,16 @@ INSERT INTO `year_level` (`id`, `year_level`) VALUES
 --
 DROP TABLE IF EXISTS `student_information`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_information`  AS SELECT `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `students`.`middlename` AS `middlename`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_information`  AS SELECT `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `students`.`middlename` AS `middlename`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `subjects_program`
+--
+DROP TABLE IF EXISTS `subjects_program`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subjects_program`  AS SELECT `subjects_by_course`.`id` AS `subject_id`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `subjects_by_course`.`subject_code` AS `subject_code`, `subjects_by_course`.`description` AS `description`, `subjects_by_course`.`unit` AS `unit`, `subjects_by_course`.`day` AS `day`, `subjects_by_course`.`time` AS `time`, `subjects_by_course`.`professor` AS `professor` FROM ((`subjects_by_course` join `courses` on(`subjects_by_course`.`program` = `courses`.`id`)) join `year_level` on(`subjects_by_course`.`year_lvl` = `year_level`.`id`)) ORDER BY `subjects_by_course`.`id` ASC ;
 
 --
 -- Indexes for dumped tables
@@ -390,13 +442,13 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbladmin`

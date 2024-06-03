@@ -101,7 +101,7 @@
                                 
                                 <!-- Modal -->
                                 <div class="modal fade" id="MODAL_ID_<?php $details['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
+                                  <div class="modal-dialog  ">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Subjects</h1>
@@ -111,7 +111,42 @@
                                       <form>
                                         <!-- LALAGYAN NG DROPDOWN NA SECTION NA ILALAGAY YUNG STUDENTS AT MAG AUPDATE SA MISMONG STUDENT TABLE DEPENDE SA KUNG
                                              ANO YUNG YEAR LEVEL NYA -->
+                                      <div class="form-group">
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                        <label for="yearDropdown">Year:</label>
+                                          <select class="form-control" id="yearDropdown">
+                                            <option value="1">1st Year</option>
+                                            <option value="2">2nd Year</option>
+                                            <option value="3">3rd Year</option>
+                                            <option value="4">4th Year</option>
+                                          </select>
+                                          </div>
 
+                                          <div class="col-md-6">
+                                        <label for="section">Section:</label>
+                                          <select class="form-control" id="section">
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                          </select>
+                                          </div>
+                                        </div>
+
+                                        <script>
+                                          $(document).ready(function() {
+                                              $('#yearDropdown').on('change', function() {
+                                                const selectedYear = $(this).val();
+                                                console.log("Selected year:", selectedYear);
+                                              });
+                                            });
+                                        </script>
+
+
+
+                                        
+
+                                      </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-success">Save changes</button>
@@ -155,7 +190,7 @@
     </section>
     </main>
 
-<?php include "include/footer-extention.php"; ?>
+<?php include "include/footer-extention.php"; ?>  
 
 </body>
 </html>
