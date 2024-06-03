@@ -10,6 +10,9 @@ include "include/header.php";
     <title>Image Animation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body{
+            overflow-x: hidden;
+        }
         .image-container {
             float: left;
             margin: 10px;
@@ -66,19 +69,30 @@ include "include/header.php";
         h3 {
             text-align: center;
             color: #529f37;
-            font-weight: bold; /* Makes the text bold */
-            font-size: 50px; /* Large size for the text */
+            font-weight: bold;
+            font-size: 50px;
             opacity: 0;
             transform: translateY(100px);
             transition: opacity 0.5s, transform 0.5s;
         }
 
         h4 {
-            color: #FF6400;
+            font-weight: bold;  
+            font-size: 30px; 
+            color: #529f37;
             text-align: center;
             opacity: 0;
             transform: translateY(100px);
             transition: opacity 0.5s, transform 0.5s;
+        }
+
+        h5{
+            font-weight: bold;  
+            font-size: 30px; 
+            color: #529f37;
+            float: left;
+            margin-left: 60px;
+
         }
 
         .float-left-shadow {
@@ -121,7 +135,7 @@ include "include/header.php";
             float: right;
             margin-right: 30px;
             opacity: 0;
-            transform: translateX(100px); /* Change from translateY to translateX */
+            transform: translateX(100px);
             transition: opacity 0.5s, transform 0.5s;
         }
 
@@ -149,12 +163,66 @@ include "include/header.php";
             text-align: justify;
         }
 
+        .custom-hr {
+        height: 15px;
+        border: none;
+        background-color: #FF6400;
+        }
+
         /* Footer styles */
         footer {
             background-color: #529f37;
             color: #fff;
             padding: 20px 0;
             text-align: center;
+        }
+
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 36px;
+            }
+
+            h4 {
+                font-size: 24px;
+            }
+
+            h5 {
+                font-size: 20px;
+                margin-left: 30px;
+            }
+
+            .carousel-item {
+                height: 300px;
+            }
+
+            .description-container {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            .image-container {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h3 {
+                font-size: 28px;
+            }
+
+            h4 {
+                font-size: 20px;
+            }
+
+            h5 {
+                font-size: 18px;
+                margin-left: 20px;
+            }
+
+            .carousel-item {
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -205,14 +273,17 @@ include "include/header.php";
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-<hr style="size: 50px; border-color: #FF6400">
+<hr class="custom-hr" style="size: 50px; border-color: #FF6400">
 <h3>School Activities</h3>
-<hr style="size: 50px; border-color: #FF6400">
+<hr class="custom-hr" style="size: 50px; border-color: #FF6400">
 
 <br><br>
+<hr style="width: 35%; background-color: black;">
 <h4>Computer Studies Fair</h4>
+<hr style="width: 35%; background-color: black;">
 <br><br>
-
+<h5>Sports</h5>
+<br>
 <div class="gallery">
     <img src="./Course Logo/iamge.jpg" alt="Image 1">
     <img src="./Course Logo/image 2.jpg" alt="Image 2">
@@ -222,10 +293,32 @@ include "include/header.php";
     <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
 
-<br><br>
-<h4>Computer Studies Exhibits</h4>
-<br>
 
+<br><br>
+<h5>Student Skills</h5>
+<br>
+<div class="gallery">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
+</div>
+
+
+
+
+
+
+<br><br>
+<hr style="width: 35%; background-color: black;">
+<h4>Computer Studies Exhibits</h4>
+<hr style="width: 35%; background-color: black;">
+<br>
+<h5>Capstone Thesis</h5>
+
+<br>
 <div class="gallery">
     <img src="./Course Logo/iamge.jpg" alt="Image 1">
     <img src="./Course Logo/image 2.jpg" alt="Image 2">
