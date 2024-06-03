@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2024 at 05:44 AM
+-- Generation Time: Jun 03, 2024 at 08:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -113,6 +113,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `student_login_proc` (IN `p_username
         -- Return failure status
         SELECT 'Login Failed' AS status;
     END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_subject_by_course` (IN `p_year_lvl` INT, IN `p_program` VARCHAR(255), IN `p_subject_code` VARCHAR(255), IN `p_description` VARCHAR(255), IN `p_unit` INT, IN `p_day` VARCHAR(255), IN `p_time` VARCHAR(255), IN `p_professor` VARCHAR(255), IN `p_id` INT)   BEGIN
+    UPDATE subjects_by_course SET 
+        year_lvl = p_year_lvl, 
+        program = p_program, 
+        subject_code = p_subject_code, 
+        description = p_description, 
+        unit = p_unit, 
+        day = p_day, 
+        time = p_time, 
+        professor = p_professor
+    WHERE id = p_id;
 END$$
 
 DELIMITER ;
@@ -283,14 +296,14 @@ CREATE TABLE `subjects_by_course` (
 --
 
 INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `program`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
-(1, 1, '1', 'CSS 101', 'Introduction to Computing', 3, 'Monday', '7:00 AM - 10:00 AM', ''),
+(1, 1, '1', 'CSS 101', 'Introduction to Computing', 3, 'Tuesday', '7:00 AM - 10:00 AM', 'Prof. Bernal'),
 (1, 2, '1', 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
 (1, 4, '1', 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
 (1, 5, '1', 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
 (1, 6, '1', 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
 (1, 7, '1', 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
 (1, 8, '1', 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', ''),
-(1, 13, '1', 'CCS 1101', 'English', 3, 'Wednesday', '7:00 AM', 'Prof. Ajhay');
+(1, 14, '4', 'CCS 1102', 'English', 3, 'Friday', '1:00 PM - 4:00 PM', 'Prof. Ajhay');
 
 -- --------------------------------------------------------
 
@@ -435,7 +448,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbladmin`

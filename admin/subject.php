@@ -88,6 +88,7 @@
                                                 echo '<div class="col-md-9">';
                                                 echo '<label for="program" class="col-form-label">Program:</label>';
                                                 echo '<select class="form-control" id="program" name="program">';
+                                                echo '<option value="" disabled selected>Select Program</option>';
                                                 while ($row = $result->fetch_assoc()) {
                                                     echo '<option value="' . $row["id"] . '">' . $row["program"] . '</option>';
                                                 }
@@ -133,8 +134,17 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="time" class="col-form-label">Time:</label>
-                                            <input type="text" class="form-control" name="time" id="time">
+                                            <!-- DROP DOWN -->
+                                            <div class="mb-3">
+                                                <label for="time" class="col-form-label">Time:</label>
+                                                <select class="form-control" id="time" name="time">
+                                                    <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
+                                                    <option value="10:00 AM - 1:00 PM">10:00 AM - 1:00 PM</option>
+                                                    <option value="1:00 PM - 4:00 PM">1:00 PM - 4:00 PM</option>
+                                                    <option value="4:00 PM - 7:00 PM">4:00 PM - 7:00 PM</option>
+                                                    <option value="7:00 PM - 10:00 PM">7:00 PM - 10:00 PM</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -179,14 +189,14 @@
                   </thead>
                   
                   <tbody>
-                        <?php
-                        $sql = "SELECT * FROM subjects_program";
-                        $result = $conn->query($sql);
+                  <?php
+                    $sql = "SELECT * FROM subjects_program";
+                    $result = $conn->query($sql);
 
-                        if ($result && $result->num_rows > 0) {
-                            while ($details = $result->fetch_assoc()) {
-                                ?>
-                                <tr>
+                    if ($result && $result->num_rows > 0) {
+                        while ($details = $result->fetch_assoc()) {
+                    ?>
+                            <tr>
                                 <td><?php echo $details['subject_code']; ?></td>
                                 <td><?php echo $details['description']; ?></td>
                                 <td><?php echo $details['unit']; ?></td>
@@ -196,63 +206,129 @@
                                 <td><?php echo $details['time']; ?></td>
                                 <td><?php echo $details['professor']; ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['subject_id']; ?>">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php echo $details['subject_id']; ?>">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
 
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_<?php $details['subject_id']; ?>">
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_<?php echo $details['subject_id']; ?>">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                 </td>
-                                </tr>
+                            </tr>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="update_<?php $details['subject_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- UPDATE MODAL -->
+                            <div class="modal fade" id="update_<?php echo $details['subject_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                                
-                                <!-- VIEW MODAL -->
-                                <div class="modal fade" id="MODAL_ID_<?php $details['subject_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog  ">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Subjects</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                      <form>
-                                        
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-success">Save changes</button>
-                                      </div>
-                                  </form>
-                                      </div>
-                                      
-                                    </div>
-                                  </div>
-                                </div>
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="function/update_schedule.php" method="POST">
+                                            <input type="text" class="form-control" name="subject_id" id="subject_id" value="<?php echo $details['subject_id']; ?>">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <label for="yearLevel" class="col-form-label">Year Level:</label>
+                                                            <select class="form-control" id="yearLevel" name="yearLevel">
+                                                                <option value="1" <?php if ($details['year_level'] == '1') echo 'selected="selected"'; ?>>1st Year</option>
+                                                                <option value="2" <?php if ($details['year_level'] == '2') echo 'selected="selected"'; ?>>2nd Year</option>
+                                                                <option value="3" <?php if ($details['year_level'] == '3') echo 'selected="selected"'; ?>>3rd Year</option>
+                                                                <option value="4" <?php if ($details['year_level'] == '4') echo 'selected="selected"'; ?>>4th Year</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <label for="program" class="col-form-label">Program:</label>
+                                                            <select class="form-control" id="program" name="program">
+                                                                <option value="1" <?php if ($details['program'] == 'Bachelor of Science Information System') echo 'selected="selected"'; ?>>Bachelor of Science Information System</option>
+                                                                <option value="2" <?php if ($details['program'] == 'Bachelor of Science Information Technology') echo 'selected="selected"'; ?>>Bachelor of Science Information Technology</option>
+                                                                <option value="3" <?php if ($details['program'] == 'Bachelor of Science Computer Science') echo 'selected="selected"'; ?>>Bachelor of Science Computer Science</option>
+                                                                <option value="4" <?php if ($details['program'] == 'Bachelor of Science Entertainment and Multimedia Computing') echo 'selected="selected"'; ?>>Bachelor of Science Entertainment and Multimedia Computing</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="subjectcode" class="col-form-label">Subject Code:</label>
+                                                        <input type="text" class="form-control" name="subjectcode" id="subjectcode" value="<?php echo $details['subject_code']; ?>">
+                                                    </div>
 
-                                <?php
-                            }
-                        } else {
-                            echo "<tr><td colspan='10'>No records found</td></tr>";
+                                                    <div class="mb-3">
+                                                        <label for="description" class="col-form-label">Description:</label>
+                                                        <input type="text" class="form-control" name="description" id="description" value="<?php echo $details['description']; ?>">
+                                                    </div>
+                                                    <div class="row"> 
+                                                        <div class="col-md-5">
+                                                            <label for="unit" class="col-form-label">Unit:</label>
+                                                            <input type="text" class="form-control" name="unit" id="unit" value="<?php echo $details['unit']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">  
+                                                        <div class="col-md-6">
+                                                            <label for="day" class="col-form-label">Day:</label>
+                                                            <select class="form-control" id="day" name="day">
+                                                                <option value="Monday" <?php if ($details['day'] == 'Monday') echo 'selected="selected"'; ?>>Monday</option>
+                                                                <option value="Tuesday" <?php if ($details['day'] == 'Tuesday') echo 'selected="selected"'; ?>>Tuesday</option>
+                                                                <option value="Wednesday" <?php if ($details['day'] == 'Wednesday') echo 'selected="selected"'; ?>>Wednesday</option>
+                                                                <option value="Thursday" <?php if ($details['day'] == 'Thursday') echo 'selected="selected"'; ?>>Thursday</option>
+                                                                <option value="Friday" <?php if ($details['day'] == 'Friday') echo 'selected="selected"'; ?>>Friday</option>
+                                                                <option value="Saturday" <?php if ($details['day'] == 'Saturday') echo 'selected="selected"'; ?>>Saturday</option>
+                                                                <option value="Sunday" <?php if ($details['day'] == 'Sunday') echo 'selected="selected"'; ?>>Sunday</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                                <label for="time" class="col-form-label">Time:</label>
+                                                                <select class="form-control" id="time" name="time">
+                                                                <option value="7:00 AM - 10:00 AM" <?php if ($details['time'] == '7:00 AM - 10:00 AM') echo 'selected="selected"'; ?>>7:00 AM - 10:00 AM</option>
+                                                                <option value="10:00 AM - 1:00 PM" <?php if ($details['time'] == '10:00 AM - 1:00 PM') echo 'selected="selected"'; ?>>10:00 AM - 1:00 PM</option>
+                                                                <option value="1:00 PM - 4:00 PM" <?php if ($details['time'] == '1:00 PM - 4:00 PM') echo 'selected="selected"'; ?>>1:00 PM - 4:00 PM</option>
+                                                                <option value="4:00 PM - 7:00 PM" <?php if ($details['time'] == '4:00 PM - 7:00 PM') echo 'selected="selected"'; ?>>4:00 PM - 7:00 PM</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="professor" class="col-form-label">Professor:</label>
+                                                        <input type="text" class="form-control" name="professor" id="professor" value="<?php echo $details['professor']; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- VIEW MODAL -->
+                            <div class="modal fade" id="MODAL_ID_<?php echo $details['subject_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Subjects</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <!-- Add content here -->
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-success">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <?php
                         }
-                        ?>
+                    } else {
+                        echo "<tr><td colspan='10'>No records found</td></tr>";
+                    }
+                    ?>
+
                     </tbody>
 
 
