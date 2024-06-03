@@ -10,12 +10,16 @@ include "include/header.php";
     <title>Image Animation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body {
+            overflow-x: hidden;
+        }
+
         .image-container {
             float: left;
             margin: 10px;
             margin-left: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-            width: 50%;
+            width: 45%;
             border: 2px solid black;
             border-radius: 12px;
             overflow: hidden;
@@ -28,7 +32,7 @@ include "include/header.php";
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px; /* Adjust the radius as needed */
+            border-radius: 10px;
         }
 
         .image-wrapper img {
@@ -46,12 +50,12 @@ include "include/header.php";
             transform: scale(0.8);
             transition: opacity 0.7s, transform 0.7s;
         }
+
         .gallery img {
             width: 100%;
             height: auto;
             max-width: 400px;
             max-height: 300px;
-            margin-bottom: 20px;
             margin: 7px;
             border: 1px solid black;
             border-radius: 5px;
@@ -61,30 +65,30 @@ include "include/header.php";
             transform: scale(1.1);
             transition: transform 0.3s ease-in-out;
         }
-        
 
-        h3 {
+        h3, h4 {
             text-align: center;
             color: #529f37;
             font-weight: bold;
-            font-size: 50px;
-            opacity: 0;
-            transform: translateX(100px);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-
-        h4 {
-            color: #FF6400;
-            text-align: center;
             opacity: 0;
             transform: translateY(100px);
             transition: opacity 0.5s, transform 0.5s;
         }
 
-        .float-left-shadow {
-            display: block;
-            max-width: 100%;
-            height: auto;
+        h3 {
+            font-size: 50px;
+        }
+
+        h4 {
+            font-size: 30px;
+        }
+
+        h5 {
+            font-weight: bold;
+            font-size: 30px;
+            color: #529f37;
+            margin-left: 60px;
+            margin-top: 20px;
         }
 
         .carousel-item {
@@ -93,17 +97,16 @@ include "include/header.php";
 
         .top-bar {
             background-color: #529f37;
-            color: #fff; 
-            padding: 10px 0; 
+            color: #fff;
+            padding: 10px 0;
         }
 
-        /* Add thicker and colored line below navbar */
         .navbar:after {
             content: '';
             display: block;
             width: 100%;
-            border-bottom: 5px solid #e77d33; 
-            margin-top: 15px; 
+            border-bottom: 5px solid #e77d33;
+            margin-top: 15px;
         }
 
         .contact-info {
@@ -149,17 +152,66 @@ include "include/header.php";
             text-align: justify;
         }
 
-        /* Footer styles */
+        .custom-hr {
+            height: 15px;
+            border: none;
+            background-color: #FF6400;
+        }
+
         footer {
             background-color: #529f37;
             color: #fff;
             padding: 20px 0;
             text-align: center;
+            clear: both;
+        }
+
+        @media (max-width: 1100px) {
+            h3 {
+                font-size: 36px;
+            }
+
+            h4 {
+                font-size: 24px;
+            }
+
+            h5 {
+                font-size: 20px;
+                margin-left: 30px;
+            }
+
+            .carousel-item {
+                height: 300px;
+            }
+
+            .description-container, .image-container {
+                width: 80%;
+                margin: 20px auto;
+                float: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h3 {
+                font-size: 28px;
+            }
+
+            h4 {
+                font-size: 20px;
+            }
+
+            h5 {
+                font-size: 18px;
+                margin-left: 20px;
+            }
+
+            .carousel-item {
+                height: 200px;
+            }
         }
     </style>
 </head>
 <body>
-
 
 <!-- Carousel -->
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -193,26 +245,26 @@ include "include/header.php";
     </div>
 </div>
 
-<br><br>
-
 <div class="description-container">
     <h2>Campus History</h2>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
     </p>
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div style="clear: both;"></div>
 
-<hr style="size: 50px; border-color: #FF6400">
+<br><br>
+
+<hr class="custom-hr">
 <h3>School Activities</h3>
-<hr style="size: 50px; border-color: #FF6400">
+<hr class="custom-hr">
 
-<br><br>
+<hr style="width: 35%; background-color: black;">
 <h4>Computer Studies Fair</h4>
-<br><br>
-
+<hr style="width: 35%; background-color: black;">
+<h5>Sports</h5>
 <div class="gallery">
     <img src="../Course Logo/iamge.jpg" alt="Image 1">
     <img src="../Course Logo/image 2.jpg" alt="Image 2">
@@ -222,10 +274,20 @@ include "include/header.php";
     <img src="../Course Logo/image3.jpg" alt="Image 3">
 </div>
 
-<br><br>
-<h4>Computer Studies Exhibits</h4>
-<br>
+<h5>Student Skills</h5>
+<div class="gallery">
+    <img src="../Course Logo/iamge.jpg" alt="Image 1">
+    <img src="../Course Logo/image 2.jpg" alt="Image 2">
+    <img src="../Course Logo/image3.jpg" alt="Image 3">
+    <img src="../Course Logo/iamge.jpg" alt="Image 1">
+    <img src="../Course Logo/image 2.jpg" alt="Image 2">
+    <img src="../Course Logo/image3.jpg" alt="Image 3">
+</div>
 
+<hr style="width: 35%; background-color: black;">
+<h4>Computer Studies Exhibits</h4>
+<hr style="width: 35%; background-color: black;">
+<h5>Capstone Thesis</h5>
 <div class="gallery">
     <img src="../Course Logo/iamge.jpg" alt="Image 1">
     <img src="../Course Logo/image 2.jpg" alt="Image 2">
@@ -271,37 +333,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(element);
     });
 });
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const options = {
-        threshold: 0.1
-    };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('gallery')) {
-                    entry.target.classList.add('gallery-visible');
-                } else {
-                    entry.target.classList.add('visible');
-                }
-            } else {
-                if (entry.target.classList.contains('gallery')) {
-                    entry.target.classList.remove('gallery-visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            }
-        });
-    }, options);
-
-    const elements = document.querySelectorAll('.description-container, .image-container, h3, h4, .gallery');
-    elements.forEach(element => {
-        observer.observe(element);
-    });
-});
-
 </script>
 
 <!-- Add Bootstrap JS -->
