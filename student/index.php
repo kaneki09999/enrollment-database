@@ -217,13 +217,13 @@ include "include/header.php";
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../pic.jpg" class="d-block w-100" alt="...">
+            <img src="pic.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="../pic2.jpg" class="d-block w-100" alt="...">
+            <img src="pic2.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="../pic3.jpg" class="d-block w-100" alt="...">
+            <img src="pic3.jpg" class="d-block w-100" alt="...">
         </div>
     </div>
     <!-- Next and previous buttons -->
@@ -241,7 +241,7 @@ include "include/header.php";
 <!-- Image container -->
 <div class="image-container">
     <div class="image-wrapper">
-        <img src="../Course Logo/campus.jpg" alt="Descriptive Alt Text" class="float-left-shadow">
+        <img src="./Course Logo/campus.jpg" alt="Descriptive Alt Text" class="float-left-shadow">
     </div>
 </div>
 
@@ -255,8 +255,6 @@ include "include/header.php";
 
 <div style="clear: both;"></div>
 
-<br><br>
-
 <hr class="custom-hr">
 <h3>School Activities</h3>
 <hr class="custom-hr">
@@ -266,22 +264,22 @@ include "include/header.php";
 <hr style="width: 35%; background-color: black;">
 <h5>Sports</h5>
 <div class="gallery">
-    <img src="../Course Logo/iamge.jpg" alt="Image 1">
-    <img src="../Course Logo/image 2.jpg" alt="Image 2">
-    <img src="../Course Logo/image3.jpg" alt="Image 3">
-    <img src="../Course Logo/iamge.jpg" alt="Image 1">
-    <img src="../Course Logo/image 2.jpg" alt="Image 2">
-    <img src="../Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
 
 <h5>Student Skills</h5>
 <div class="gallery">
-    <img src="../Course Logo/iamge.jpg" alt="Image 1">
-    <img src="../Course Logo/image 2.jpg" alt="Image 2">
-    <img src="../Course Logo/image3.jpg" alt="Image 3">
-    <img src="../Course Logo/iamge.jpg" alt="Image 1">
-    <img src="../Course Logo/image 2.jpg" alt="Image 2">
-    <img src="../Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
 
 <hr style="width: 35%; background-color: black;">
@@ -289,12 +287,12 @@ include "include/header.php";
 <hr style="width: 35%; background-color: black;">
 <h5>Capstone Thesis</h5>
 <div class="gallery">
-    <img src="../Course Logo/iamge.jpg" alt="Image 1">
-    <img src="../Course Logo/image 2.jpg" alt="Image 2">
-    <img src="../Course Logo/image3.jpg" alt="Image 3">
-    <img src="../Course Logo/iamge.jpg" alt="Image 1">
-    <img src="../Course Logo/image 2.jpg" alt="Image 2">
-    <img src="../Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
+    <img src="./Course Logo/iamge.jpg" alt="Image 1">
+    <img src="./Course Logo/image 2.jpg" alt="Image 2">
+    <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
 
 <!-- Footer -->
