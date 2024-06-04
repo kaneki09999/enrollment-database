@@ -51,28 +51,40 @@
 
     <main>
     <section class="content">
+    <ul class="breadcrumb">
+                <li class="nav-item">
+                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <i class='fas fa-chevron-right'></i>
+                </li>
+                <li class="nav-item active">
+                    <a href="#">List of Schedules</a>
+                </li>
+            </ul>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12"> 
    
 
-<!-- DAGDAG NG ROOM NUMBER AND GAGAWIN TONG SCHEDULE -->
+<!-- DAGDAG NG ROOM NUMBER AND SECTION -->
             <!-- ADD MODAL here -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Subject</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Schedule</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                            
-                            <form action="function/add_subject.php" method="POST">
+                            <form action="function/add_schedule.php" method="POST">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="yearLevel" class="col-form-label">Year Level:</label>
-                                            <select class="form-control" id="yearLevel" name="yearLevel">
+                                            <select class="form-control" id="yearLevel" name="yearLevel" required>
+                                                <option value="" disabled selected>Year Level</option>
                                                 <option value="1">1st Year</option>
                                                 <option value="2">2nd Year</option>
                                                 <option value="3">3rd Year</option>
@@ -86,7 +98,7 @@
                                             if ($result->num_rows > 0) {
                                                 echo '<div class="col-md-9">';
                                                 echo '<label for="program" class="col-form-label">Program:</label>';
-                                                echo '<select class="form-control" id="program" name="program">';
+                                                echo '<select class="form-control" id="program" name="program" required>';
                                                 echo '<option value="" disabled selected>Select Program</option>';
                                                 while ($row = $result->fetch_assoc()) {
                                                     echo '<option value="' . $row["id"] . '">' . $row["program"] . '</option>';
@@ -106,23 +118,75 @@
                                         }
                                         ?>
                                     </div>
+                    
                                     <div class="mb-3">
-                                        <label for="subjectcode" class="col-form-label">Subject Code:</label>
-                                        <input type="text" class="form-control" name="subjectcode" id="subjectcode">
-                                    </div>
+                                    <label for="subjectcode" class="col-form-label">Subject Code:</label>
+                                    <select class="form-control" name="subjectcode" id="subjectcode" required>
+                                        <option value="" disabled selected>Select Subject Code</option>
+                                    </select>
+                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="description" class="col-form-label">Description:</label>
-                                        <input type="text" class="form-control" name="description" id="description">
+                                <div class="mb-3">
+                                    <label for="description" class="col-form-label">Description:</label>
+                                    <select class="form-control" name="description" id="description">
+                                        <option value="" disabled selected>Select Description</option>
+                                    </select>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="unit" class="col-form-label">Unit:</label>
+                                        <select class="form-control" name="unit" id="unit" required>
+                                            <option value="" disabled selected>Select Unit</option>
+                                        </select>
                                     </div>
+                                  
+                                </div>
+                                
+
+                                <script>
+                                    $(document).ready(function() {
+                                        $.getJSON('function/fetch-subject-code.php', function(data) {
+                                            var subjectCodeDropdown = $('#subjectcode');
+                                            var descriptionDropdown = $('#description');
+                                            var unitDropdown = $('#unit');
+
+                                            var subjects = {};
+
+                                            $.each(data, function(index, subject) {
+                                                subjects[subject.subject_code] = { 
+                                                    description: subject.description,
+                                                    units: subject.units
+                                                };
+                                                subjectCodeDropdown.append(
+                                                    $('<option>', { value: subject.subject_code, text: subject.subject_code })
+                                                );
+                                            });
+
+                                            subjectCodeDropdown.change(function() {
+                                                var selectedSubjectCode = $(this).val();
+                                                var selectedSubject = subjects[selectedSubjectCode];
+
+                                                // Update the description dropdown
+                                                descriptionDropdown.empty();
+                                                descriptionDropdown.append(
+                                                    $('<option>', { value: selectedSubject.description, text: selectedSubject.description })
+                                                );
+
+                                                // Update the unit dropdown
+                                                unitDropdown.empty();
+                                                unitDropdown.append(
+                                                    $('<option>', { value: selectedSubject.units, text: selectedSubject.units })
+                                                );
+                                            });
+                                        });
+                                    });
+                                </script>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="unit" class="col-form-label">Unit:</label>
-                                            <input type="text" class="form-control" name="unit" id="unit">
-                                        </div>
-                                        <div class="col-md-4">
+                                    <div class="col-md-6">
                                             <label for="day" class="col-form-label">Day:</label>
-                                            <select class="form-control" id="day" name="day">
+                                            <select class="form-control" id="day" name="day" required>
+                                                <option value="" disabled selected>Select Day</option>
                                                 <option value="Monday">Monday</option>
                                                 <option value="Tuesday">Tuesday</option>
                                                 <option value="Wednesday">Wednesday</option>
@@ -132,28 +196,30 @@
                                                 <option value="Sunday">Sunday</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <!-- DROP DOWN -->
                                             <div class="mb-3">
                                                 <label for="time" class="col-form-label">Time:</label>
-                                                <select class="form-control" id="time" name="time">
+                                                <select class="form-control" id="time" name="time" required>
+                                                    <option value="" disabled selected>Select Time</option>
                                                     <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
                                                     <option value="10:00 AM - 1:00 PM">10:00 AM - 1:00 PM</option>
                                                     <option value="1:00 PM - 4:00 PM">1:00 PM - 4:00 PM</option>
                                                     <option value="4:00 PM - 7:00 PM">4:00 PM - 7:00 PM</option>
-                                                    <option value="7:00 PM - 10:00 PM">7:00 PM - 10:00 PM</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
+                                       
+                                    </div>
                                     <div class="mb-3">
                                         <label for="professor" class="col-form-label">Professor:</label>
-                                        <input type="text" class="form-control" name="professor" id="professor">
+                                        <input type="text" class="form-control" name="professor" id="professor" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-primary">Add Schedule</button>
                                 </div>
                             </form>
                         </div>
@@ -166,7 +232,7 @@
 
             <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">Subjects</h3>
+                <h3 class="card-title">Schedule</h3>
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Add
                 </button>
@@ -221,7 +287,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form action="function/update_schedule.php" method="POST">
-                                            <input type="text" class="form-control" name="subject_id" id="subject_id" value="<?php echo $details['subject_id']; ?>">
+                                            <input type="hidden" class="form-control" name="subject_id" id="subject_id" value="<?php echo $details['subject_id']; ?>">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-md-3">

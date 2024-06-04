@@ -49,6 +49,17 @@
 
     <main>
     <section class="content">
+    <ul class="breadcrumb">
+                <li class="nav-item">
+                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <i class='fas fa-chevron-right'></i>
+                </li>
+                <li class="nav-item active">
+                    <a href="#">List of Enrollees</a>
+                </li>
+            </ul>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -190,7 +201,7 @@
     </section>
     </main>
 
-<?php include "include/footer-extention.php"; ?>  
+<?php include "include/footer-extension.php"; ?>  
 
 </body>
 </html>
