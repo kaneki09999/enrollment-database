@@ -272,7 +272,40 @@ include "include/header.php";
             }
         }
 
-        
+
+    .containercsd {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh; 
+    }
+
+    .center-image {
+        max-width: 100%;
+        height: auto;
+        margin-right: 20px; 
+        margin-left: 65px;
+    }
+
+    .description-container {
+    /* Add styling for the description container */
+}
+
+.animated {
+    animation-name: slideFromLeft;
+    animation-duration: 1s; /* Adjust duration as needed */
+}
+
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
     </style>
 </head>
 <body>
@@ -330,9 +363,12 @@ include "include/header.php";
 <h3>School Activities</h3>
 <hr class="custom-hr">
 
+
+<br>
 <hr style="width: 35%; background-color: black;">
 <h4>Computer Studies Fair</h4>
 <hr style="width: 35%; background-color: black;">
+<br>
 <h5>Sports</h5>
 <div class="gallery">
     <img src="./Course Logo/iamge.jpg" alt="Image 1">
@@ -359,6 +395,8 @@ include "include/header.php";
 <hr style="width: 35%; background-color: black;">
 <h4>Computer Studies Exhibits</h4>
 <hr style="width: 35%; background-color: black;">
+
+<br>
 <h5>Capstone Thesis</h5>
 <div class="gallery">
     <img src="./Course Logo/iamge.jpg" alt="Image 1">
@@ -376,7 +414,7 @@ include "include/header.php";
 <h3>School Facilities</h3>
 <hr class="custom-hr">
 
-
+<br>    
 <h5>Classrooms</h5>
 <div class="gallery2">
     <img src="./Course Logo/school1.jpg" alt="Image 1">
@@ -386,6 +424,22 @@ include "include/header.php";
     <!-- Add more images as needed -->
 </div>
 
+
+
+
+
+<h5>About Computer Studies Department</h5>
+<div class="containercsd">
+
+        <img src="./Course Logo/csd.png" alt="Department Image" class="center-image animated">
+   
+    <div class="description-container">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.</p>
+        <!-- Add more content here as needed -->
+    </div>
+</div>
 
 
 
@@ -405,6 +459,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                if (entry.target.classList.contains('gallery')) {
+                    entry.target.classList.add('gallery-visible');
+                } else {
+                    entry.target.classList.add('visible');
+                }
+            } else {
+                if (entry.target.classList.contains('gallery')) {
+                    entry.target.classList.remove('gallery-visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            }
+        });
+    }, options);
+
+    const elements = document.querySelectorAll('.description-container, .image-container, h3, h4, .gallery');
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const options = {
+        threshold: 0.1
+    };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.intersectionRatio > 0) {
                 if (entry.target.classList.contains('gallery')) {
                     entry.target.classList.add('gallery-visible');
                 } else {
