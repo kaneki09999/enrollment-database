@@ -11,6 +11,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+.nav-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #000;
+  border-radius: 5px;
+  padding: 8px 16px;
+  transition: background-color 0.6s ease;
+}
+
+.nav-links li a:hover {
+  background-color: #FF6400;
+  color: #fff;
+}
         
         .top-bar {
             background-color: #529f37; /* Change to your desired color */
@@ -102,15 +119,15 @@
         </div>
     </div>
 
-    <nav class="navbar">
-        <div class="container">
-            <h1 class="logo">Enrollment System</h1>
-            <ul class="nav-links">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="course.php">Courses</a></li>
-                <li><a href="enroll.php">Enroll Now!</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php">Log in</a></li>
-            </ul>
-        </div>
-    </nav>
+   <nav class="navbar">
+  <div class="container">
+    <h1 class="logo">Enrollment System</h1>
+    <ul class="nav-links">
+      <li><a href="index.php">Home</a></li>
+      <li><a href="course.php">Courses</a></li>
+      <li><a href="enroll.php">Enroll Now!</a></li>
+      <li><a href="contact.php">Contact</a></li>
+      <li><a href="login.php">Log in</a></li>
+    </ul>
+  </div>
+</nav>
