@@ -10,14 +10,18 @@ include "include/header.php";
     <title>Image Animation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
+       body {
+            background-color: white;
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
             overflow-x: hidden;
-        }
+            }
 
         .image-container {
             float: left;
             margin: 10px;
-            margin-left: 15px;
+            margin-left: 40px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
             width: 45%;
             border: 2px solid black;
@@ -158,6 +162,42 @@ include "include/header.php";
             background-color: #FF6400;
         }
 
+        .gallery2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px;
+        flex-wrap: wrap;
+        opacity: 1;
+        transform: scale(0.8);
+        transition: opacity 0.7s, transform 0.7s;
+        padding: 10px;
+    }
+
+    .gallery2 img {
+        width: 100%;
+        height: 100%;
+        max-width: 600px;
+        max-height: 400px;
+        margin: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+ 
+    .gallery2 img:hover {
+        transform: scale(1.1);
+        transition: transform 0.5s ease-in-out;
+    }
+
+
+    @media (max-width: 576px) {
+        .gallery2 img {
+            width: 80%; 
+        }
+    }
+
         footer {
             background-color: #529f37;
             color: #fff;
@@ -165,6 +205,28 @@ include "include/header.php";
             text-align: center;
             clear: both;
         }
+
+      
+         .carousel {
+            width: 100%;
+            height: 500px;
+        }
+        .carousel-inner {
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 30px;
+            height: 30px;
+        }
+
 
         @media (max-width: 1100px) {
             h3 {
@@ -209,6 +271,8 @@ include "include/header.php";
                 height: 200px;
             }
         }
+
+        
     </style>
 </head>
 <body>
@@ -217,15 +281,16 @@ include "include/header.php";
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="pic.jpg" class="d-block w-100" alt="...">
+            <img src="./Course Logo/school.jpg" class="d-block w-100" alt="First slide">
         </div>
         <div class="carousel-item">
-            <img src="pic2.jpg" class="d-block w-100" alt="...">
+            <img src="./Course Logo/school1.jpg" class="d-block w-100" alt="Second slide">
         </div>
         <div class="carousel-item">
-            <img src="pic3.jpg" class="d-block w-100" alt="...">
+            <img src="./Course Logo/school2.jpg" class="d-block w-100" alt="Third slide">
         </div>
     </div>
+</div>
     <!-- Next and previous buttons -->
     <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -247,7 +312,12 @@ include "include/header.php";
 
 <div class="description-container">
     <h2>Campus History</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
+    </p>
+    <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec feugiat magna. Sed vestibulum ligula eget velit eleifend luctus.
     </p>
@@ -255,6 +325,7 @@ include "include/header.php";
 
 <div style="clear: both;"></div>
 
+<br><br><br><br>
 <hr class="custom-hr">
 <h3>School Activities</h3>
 <hr class="custom-hr">
@@ -272,6 +343,8 @@ include "include/header.php";
     <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
 
+<br><br>
+
 <h5>Student Skills</h5>
 <div class="gallery">
     <img src="./Course Logo/iamge.jpg" alt="Image 1">
@@ -282,6 +355,7 @@ include "include/header.php";
     <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
 
+<br><br>
 <hr style="width: 35%; background-color: black;">
 <h4>Computer Studies Exhibits</h4>
 <hr style="width: 35%; background-color: black;">
@@ -294,6 +368,26 @@ include "include/header.php";
     <img src="./Course Logo/image 2.jpg" alt="Image 2">
     <img src="./Course Logo/image3.jpg" alt="Image 3">
 </div>
+
+
+
+<br><br><br><br>
+<hr class="custom-hr">
+<h3>School Facilities</h3>
+<hr class="custom-hr">
+
+
+<h5>Classrooms</h5>
+<div class="gallery2">
+    <img src="./Course Logo/school1.jpg" alt="Image 1">
+    <img src="./Course Logo/school2.jpg" alt="Image 2">
+    <img src="./Course Logo/school1.jpg" alt="Image 1">
+    <img src="./Course Logo/school2.jpg" alt="Image 2">
+    <!-- Add more images as needed -->
+</div>
+
+
+
 
 <!-- Footer -->
 <footer>

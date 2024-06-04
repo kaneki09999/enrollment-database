@@ -41,6 +41,27 @@ include "include/header.php";
             border: 1px solid #ccc;
             border-radius: 5px;
             overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+        }
+        .course-box:hover {
+            background: linear-gradient(243deg, rgba(0, 0, 0, 0.2) 0%, rgba(150, 150, 150, 0.2) 100%);
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .course-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+            transition: left 0.5s;
+        }
+
+        .course-box:hover::before {
+            left: 0;
         }
 
         .course-box img {
@@ -48,6 +69,12 @@ include "include/header.php";
             height: auto;
             opacity: 0.8;
             float: left;
+            transition: transform 1s; /* Smooth transition */
+
+        }
+        
+        .course-box:hover img {
+            transform: rotate(360deg);
         }
 
         .course-box h2 {

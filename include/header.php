@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        
         .top-bar {
             background-color: #529f37; /* Change to your desired color */
             color: #fff; /* Text color */
@@ -107,7 +109,6 @@
                 <li><a href="index.php">Home</a></li>
                 <li><a href="course.php">Courses</a></li>
                 <li><a href="enroll.php">Enroll Now!</a></li>
-                <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="login.php">Log in</a></li>
             </ul>
