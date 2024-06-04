@@ -47,13 +47,15 @@ include "include/header.php";
     
 
     .info-container {
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-        margin-left: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
+    float: left;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-right: 20px; /* Adjust spacing between the containers */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 
     .contact-info {
         font-size: 20px; 
@@ -64,6 +66,28 @@ include "include/header.php";
 
 <div class="container">
     <div class="row">
+        <div class="col-md-6">
+            <div class="info-container">
+                <!-- Your content for the container goes here -->
+                <h2>Send us a message</h2>
+                <p>This is additional information that can be displayed beside the contact form.</p>
+
+                <div class="contact-info">
+                    <i class="fa-solid fa-phone"></i>
+                    +1 (123) 456-7890
+                </div>
+                <br>
+                <div class="contact-info">
+                    <i class="fa-solid fa-envelope"></i>
+                    enrollmentsystem@gmail.com
+                </div>
+                <br>
+                <div class="contact-info">
+                    <i class="fa-brands fa-facebook"></i>
+                    facebooknimelvin.com
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <div class="contact-form">
                 <h2>Contact Us</h2>
@@ -79,29 +103,6 @@ include "include/header.php";
                     
                     <input type="submit" value="Submit">
                 </form>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="info-container">
-                <!-- Your content for the container goes here -->
-                <h2>Send us a message</h2>
-                <p>This is additional information that can be displayed beside the contact form.</p>
-
-                <div class="contact-info">
-                    <i class="fa-solid fa-phone"></i>
-                    +1 (123) 456-7890
-                </div>
-                <br>
-                <div class="contact-info">
-                <i class="fa-solid fa-envelope"></i>
-                    enrollmentsystem@gmail.com
-            </div>
-            <br>
-            <div class="contact-info">
-                <i class="fa-brands fa-facebook"></i>
-                    facebooknimelvin.com
-            </div>
-                </div>
             </div>
         </div>
     </div>
