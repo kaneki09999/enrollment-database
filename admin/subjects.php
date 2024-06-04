@@ -101,15 +101,15 @@
                             <div class="row">
                                 <div class="mb-3">
                                     <label for="subjectcode" class="col-form-label">Subject Code:</label>
-                                    <input type="text" class="form-control" name="subjectcode" id="subjectcode">
+                                    <input type="text" class="form-control" name="subjectcode" id="subjectcode" placeholder="Subject Code">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="col-form-label">Description:</label>
-                                    <input type="text" class="form-control" name="description" id="description">
+                                    <input type="text" class="form-control" name="description" id="description" placeholder="Description">
                                 </div>
                                 <div class="mb-3">
                                     <label for="unit" class="col-form-label">Units:</label>
-                                    <input type="text" class="form-control" name="unit" id="unit">
+                                    <input type="text" class="form-control" name="unit" id="unit" placeholder="Units">
                                 </div>
                             </div>
                         </div>

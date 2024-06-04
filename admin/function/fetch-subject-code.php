@@ -1,7 +1,7 @@
 <?php
 include '../../connect/connection.php';
 
-$sql = "SELECT subject_code, description, units FROM subjects";
+$sql = "CALL get_subjects()";
 $result = $conn->query($sql);
 
 $subjects = array();

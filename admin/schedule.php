@@ -81,7 +81,7 @@
                             <form action="function/add_schedule.php" method="POST">
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <label for="yearLevel" class="col-form-label">Year Level:</label>
                                             <select class="form-control" id="yearLevel" name="yearLevel" required>
                                                 <option value="" disabled selected>Year Level</option>
@@ -91,33 +91,44 @@
                                                 <option value="4">4th Year</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="section" class="col-form-label">Section:</label>
+                                            <select class="form-control" id="section" name="section" required>
+                                                <option value="" disabled selected>Select Section</option>
+                                                <option value="1">A</option>
+                                                <option value="2">B</option>
+                                                <option value="3">C</option>
+                                            </select>
+                                        </div>
+                                        </div>
 
-                                        <?php 
-                                        $sql = "CALL GetCourses()";
-                                        if ($result = $conn->query($sql)) {
-                                            if ($result->num_rows > 0) {
-                                                echo '<div class="col-md-9">';
-                                                echo '<label for="program" class="col-form-label">Program:</label>';
-                                                echo '<select class="form-control" id="program" name="program" required>';
-                                                echo '<option value="" disabled selected>Select Program</option>';
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo '<option value="' . $row["id"] . '">' . $row["program"] . '</option>';
+                                        <div class="row">
+                                            <?php 
+                                            $sql = "CALL GetCourses()";
+                                            if ($result = $conn->query($sql)) {
+                                                if ($result->num_rows > 0) {
+                                                    echo '<div class="mb-3">';
+                                                    echo '<label for="program" class="col-form-label">Program:</label>';
+                                                    echo '<select class="form-control" id="program" name="program" required>';
+                                                    echo '<option value="" disabled selected>Select Program</option>';
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<option value="' . $row["id"] . '">' . $row["program"] . '</option>';
+                                                    }
+                                                    echo '</select>';
+                                                    echo '</div>';
+                                                } else {
+                                                    echo "No programs available";
                                                 }
-                                                echo '</select>';
-                                                echo '</div>';
-                                            } else {
-                                                echo "No programs available";
-                                            }
-                                            $result->close();
+                                                $result->close();
 
-                                            while ($conn->more_results() && $conn->next_result()) {
-                                                ;
+                                                while ($conn->more_results() && $conn->next_result()) {
+                                                    ;
+                                                }
+                                            } else {
+                                                echo "Error: " . $conn->error;
                                             }
-                                        } else {
-                                            echo "Error: " . $conn->error;
-                                        }
-                                        ?>
-                                    </div>
+                                            ?>
+                                        </div>
                     
                                     <div class="mb-3">
                                     <label for="subjectcode" class="col-form-label">Subject Code:</label>
@@ -134,13 +145,16 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="unit" class="col-form-label">Unit:</label>
                                         <select class="form-control" name="unit" id="unit" required>
                                             <option value="" disabled selected>Select Unit</option>
                                         </select>
                                     </div>
-                                  
+                                    <div class="col-md-6">
+                                        <label for="room" class="col-form-label">Room:</label>
+                                        <input type="text" class="form-control" name="room" id="room" placeholder="Room" required>
+                                    </div>
                                 </div>
                                 
 
@@ -210,11 +224,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                       
                                     </div>
                                     <div class="mb-3">
                                         <label for="professor" class="col-form-label">Professor:</label>
-                                        <input type="text" class="form-control" name="professor" id="professor" required>
+                                        <input type="text" class="form-control" name="professor" id="professor" placeholder="Professor" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -241,6 +254,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                            <th>Section</th>
                             <th>Subject Code</th>
                             <th>Description</th>
                             <th>Unit</th>
@@ -248,6 +262,7 @@
                             <th>Year/Section</th>
                             <th>Day</th>
                             <th>Time</th>
+                            <th>Room</th>
                             <th>Professor</th>
                             <th>Action</th>
                   </tr>
@@ -262,6 +277,7 @@
                         while ($details = $result->fetch_assoc()) {
                     ?>
                             <tr>
+                                <td><?php echo $details['section']; ?></td>
                                 <td><?php echo $details['subject_code']; ?></td>
                                 <td><?php echo $details['description']; ?></td>
                                 <td><?php echo $details['unit']; ?></td>
@@ -269,6 +285,7 @@
                                 <td><?php echo $details['year_level']; ?></td>
                                 <td><?php echo $details['day']; ?></td>
                                 <td><?php echo $details['time']; ?></td>
+                                <td><?php echo $details['room']; ?></td>
                                 <td><?php echo $details['professor']; ?></td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_<?php echo $details['subject_id']; ?>">
@@ -290,7 +307,7 @@
                                             <input type="hidden" class="form-control" name="subject_id" id="subject_id" value="<?php echo $details['subject_id']; ?>">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-6">
                                                             <label for="yearLevel" class="col-form-label">Year Level:</label>
                                                             <select class="form-control" id="yearLevel" name="yearLevel">
                                                                 <option value="1" <?php if ($details['year_level'] == '1') echo 'selected="selected"'; ?>>1st Year</option>
@@ -299,7 +316,18 @@
                                                                 <option value="4" <?php if ($details['year_level'] == '4') echo 'selected="selected"'; ?>>4th Year</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-6">
+                                                            <label for="section" class="col-form-label">Section:</label>
+                                                            <select class="form-control" id="section" name="section">
+                                                                <option value="1" <?php if ($details['section'] == 'A') echo 'selected="selected"'; ?>>A</option>
+                                                                <option value="2" <?php if ($details['section'] == 'B') echo 'selected="selected"'; ?>>B</option>
+                                                                <option value="3" <?php if ($details['section'] == 'C') echo 'selected="selected"'; ?>>C</option>
+                                                            </select>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <div class="row">
+                                                    <div class="md-3">
                                                             <label for="program" class="col-form-label">Program:</label>
                                                             <select class="form-control" id="program" name="program">
                                                                 <option value="1" <?php if ($details['program'] == 'Bachelor of Science Information System') echo 'selected="selected"'; ?>>Bachelor of Science Information System</option>
@@ -319,9 +347,13 @@
                                                         <input type="text" class="form-control" name="description" id="description" value="<?php echo $details['description']; ?>">
                                                     </div>
                                                     <div class="row"> 
-                                                        <div class="col-md-5">
+                                                        <div class="col-md-6">
                                                             <label for="unit" class="col-form-label">Unit:</label>
                                                             <input type="text" class="form-control" name="unit" id="unit" value="<?php echo $details['unit']; ?>">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="room" class="col-form-label">Room:</label>
+                                                            <input type="text" class="form-control" name="room" id="room" value="<?php echo $details['room']; ?>">
                                                         </div>
                                                     </div>
                                                     <div class="row">  
@@ -396,6 +428,7 @@
 
                   <tfoot>
                     <tr>
+                            <th>Section</th>
                             <th>Subject Code</th>
                             <th>Description</th>
                             <th>Unit</th>
@@ -403,6 +436,7 @@
                             <th>Year/Section</th>
                             <th>Day</th>
                             <th>Time</th>
+                            <th>Room</th>
                             <th>Professor</th>
                             <th>Action</th>
                     </tr>
@@ -488,7 +522,7 @@
       "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "order": [], // empty array means no initial ordering
-      "pageLength": 7 // set default number of rows to 8
+      "pageLength": 8 // set default number of rows to 8
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     $('#example2').DataTable({

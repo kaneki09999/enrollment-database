@@ -27,7 +27,6 @@
         <p class="contact-info">
             <span class="enrollment-text">Enrollment System</span>
         </p>
-        <button class="logout-btn" onclick="location.href='logout.php'"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 </div>
 <div class="sidebar">
@@ -35,12 +34,12 @@
     <ul>
         <li><a href="home.php"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="new-enrollees.php"><i class="fas fa-user-plus"></i> New Enrollees</a></li>
-        <li><a href="schedule.php"><i class="fas fa-book"></i> Schedule</a></li>
+        <li><a href="schedule.php"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
         <li><a href="courses.php"><i class="fas fa-graduation-cap"></i> Courses</a></li>
-        <li><a href="subjects.php"><i class="fas fa-calendar-alt"></i> Subjects</a></li>
+        <li><a href="subjects.php"><i class="fas fa-book"></i> Subjects</a></li>
         <li><a href="students.php"><i class="fas fa-users"></i> Students</a></li>
         <li><a href="professor.php"><i class="fas fa-chalkboard-teacher"></i> Professor</a></li>
-        <li><a href="set-semester.php"><i class="fas fa-cogs"></i> Set Semester</a></li>
+        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
     </ul>
 </div>
 

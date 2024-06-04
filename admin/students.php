@@ -44,17 +44,14 @@
         .search-bar .btn {
             color: #000;
         }
-        .table td, .table th {
-            font-size: 12px; /* Adjust the font size here */
-        }
     </style>
 </head>
 <body>
     <?php include "include/sidebar.php"; ?>
 
     <main>
-        <div class="container">
-            <ul class="breadcrumb">
+<section class="content">
+    <ul class="breadcrumb">
                 <li class="nav-item">
                     <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
@@ -62,103 +59,96 @@
                     <i class='fas fa-chevron-right'></i>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">List of Students</a>
+                    <a href="#">List of Enrollees</a>
                 </li>
             </ul>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+        
 
-            <!-- Table Header with Search Bar -->
-            <div class="table-header">
-                <div></div> <!-- Placeholder for breadcrumb spacing -->
-                <div class="search-bar">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="searchButton">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover mt-3">
-                    <thead class="thead-dark">
-                        <tr>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">New Enrollees</h3>
+              </div>
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                            <th>Section</th>
                             <th>Student ID</th>
                             <th>Name</th>
                             <th>Gender</th>
-                            <th>Address</th>
                             <th>Contact No.</th>
                             <th>Course</th>
+                            <th>Year Level</th>
+                            <th>Status</th>
                             <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>202001</td>
-                            <td>John Doe</td>
-                            <td>Male</td>
-                            <td>123 Main St.</td>
-                            <td>09123456789</td>
-                            <td>BS Information System</td>
-                            <td>
-                            <a href="students-view.php" class="btn btn-primary btn-sm btn-view"><i class="fas fa-eye"></i> View</a>
-                            <a href="grade.php" class="btn btn-info btn-sm btn-grades"><i class="fas fa-graduation-cap"></i> Grades</a>
-                            </td>
+                  </tr>
+                  </thead>
+                  
+                  <tbody>
+                        <?php
+                        $sql = "SELECT * FROM confirmed_students";
+                        $result = $conn->query($sql);
 
-                        </tr>
-                        <tr>
-                            <td>202002</td>
-                            <td>Jane Smith</td>
-                            <td>Female</td>
-                            <td>456 Elm St.</td>
-                            <td>09123456789</td>
-                            <td>BS Computer Science</td>
-                            <td>
-                            <a href="students-view.php" class="btn btn-primary btn-sm btn-view"><i class="fas fa-eye"></i> View</a>
-                            <a href="grade.php" class="btn btn-info btn-sm btn-grades"><i class="fas fa-graduation-cap"></i> Grades</a>
-                            </td>
+                        if ($result && $result->num_rows > 0) {
+                            while ($details = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                <td><?php echo $details['section']; ?></td>
+                                <td><?php echo $details['student_id']; ?></td>
+                                <td><?php echo $details['firstname']; ?> <?php echo $details['lastname']; ?></td>
+                                <td><?php echo $details['gender']; ?></td>
+                                <td><?php echo $details['contact']; ?></td>
+                                <td><?php echo $details['program']; ?></td>
+                                <td><?php echo $details['year_level']; ?></td>
+                                <td><?php echo $details['status']; ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
+                                        Update
+                                    </button>
+                                </td>
+                                </tr>
 
-                        </tr>
-                        <tr>
-                            <td>202003</td>
-                            <td>Mark Lee</td>
-                            <td>Male</td>
-                            <td>789 Maple St.</td>
-                            <td>09123456789</td>
-                            <td>BS Information Technology</td>
-                            <td>
-                            <a href="students-view.php" class="btn btn-primary btn-sm btn-view"><i class="fas fa-eye"></i> View</a>
-                            <a href="grade.php" class="btn btn-info btn-sm btn-grades"><i class="fas fa-graduation-cap"></i> Grades</a>
-                            </td>
+                            
 
-                        </tr>
-                        <!-- Additional rows as needed -->
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='10'>No records found</td></tr>";
+                        }
+                        ?>
                     </tbody>
+
+
+
+                  <tfoot>
+                    <tr>
+                            <th>Section</th>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Contact No.</th>
+                            <th>Course</th>
+                            <th>Year Level</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                    </tr>
+                  </tfoot>
                 </table>
-                
-                <!-- Pagination -->
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </section>
     </main>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<?php include "include/footer-extension.php"; ?>  
 </body>
 </html>

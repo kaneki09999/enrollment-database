@@ -9,12 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $unit = $_POST['unit'];
     $day = $_POST['day'];
     $time = $_POST['time'];
+    $section = $_POST['section'];
+    $room = $_POST['room'];
     $professor = $_POST['professor'];
 
-    $sql = "CALL update_subject_by_course(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "CALL update_subject_by_course(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("isssssssi", $yearLevel, $program, $subjectCode, $description, $unit, $day, $time, $professor, $subject_id);
+        $stmt->bind_param("isssssssssi", $yearLevel, $program, $subjectCode, $description, $unit, $day, $time, $section, $room, $professor, $subject_id);
     
         if ($stmt->execute()) {
             $_SESSION['success'] = "Schedule updated successfully!";
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $conn->close();
 
-    header("Location: ../subject.php");
+    header("Location: ../schedule.php");
     exit;
 }
 ?>

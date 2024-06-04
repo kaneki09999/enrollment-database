@@ -9,12 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $unit = $_POST['unit'];
     $day = $_POST['day'];
     $time = $_POST['time'];
+    $section = $_POST['section'];
+    $room = $_POST['room'];
     $professor = $_POST['professor'];
 
-    $sql = "CALL AddSubjectByCourse(?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "CALL AddSubjectByCourse(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("isssisss", $yearLevel, $program, $subjectCode, $description, $unit, $day, $time, $professor);
+        $stmt->bind_param("isssisssss", $yearLevel, $program, $subjectCode, $description, $unit, $day, $time, $section, $room, $professor);
         
         if ($stmt->execute()) {
             echo '<script>
