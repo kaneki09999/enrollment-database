@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2024 at 08:58 AM
+-- Generation Time: Jun 04, 2024 at 05:28 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -25,6 +25,11 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddSubject` (IN `p_subject_code` VARCHAR(255), IN `p_description` VARCHAR(255), IN `p_units` VARCHAR(255))   BEGIN
+    INSERT INTO subjects (subject_code, description, units)
+    VALUES (p_subject_code, p_description, p_units);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddSubjectByCourse` (IN `p_year_lvl` INT, IN `p_program` VARCHAR(255), IN `p_subject_code` VARCHAR(50), IN `p_description` TEXT, IN `p_unit` INT, IN `p_day` VARCHAR(50), IN `p_time` VARCHAR(50), IN `p_professor` VARCHAR(255))   BEGIN
     INSERT INTO subjects_by_course (year_lvl, program, subject_code, description, unit, day, time, professor)
     VALUES (p_year_lvl, p_program, p_subject_code, p_description, p_unit, p_day, p_time, p_professor);
@@ -32,6 +37,11 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCourses` ()   BEGIN
     SELECT id, program FROM courses;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSubjects` ()   BEGIN
+    SELECT id, subject_code, description, units
+    FROM subjects;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertStudent` (IN `p_student_id` INT, IN `p_program_id` INT, IN `p_year_level` INT, IN `p_firstname` VARCHAR(255), IN `p_middlename` VARCHAR(255), IN `p_lastname` VARCHAR(255), IN `p_birthdate` DATE, IN `p_gender` VARCHAR(255), IN `p_address` TEXT, IN `p_birthplace` VARCHAR(255), IN `p_contact` BIGINT, IN `p_documents` TEXT, IN `p_status` VARCHAR(255), IN `p_registration_date` VARCHAR(255))   BEGIN
@@ -276,6 +286,37 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `units` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `subject_code`, `description`, `units`) VALUES
+(2, 'CCS 101', 'Introduction to Computing', '3'),
+(3, 'CCS 102', 'Computer Programming 1', '5'),
+(4, 'CCS 109', 'Business Application Software', '3'),
+(5, 'PATHFit 1', 'Movement Competency Training', '3'),
+(6, 'NSTP 111', 'NSTP (CWTS) 1', '3'),
+(7, 'GEC 001', 'Understanding the Self', '3'),
+(8, 'GEC 002', 'Readings in the Philippine History', '3'),
+(9, 'GEC 003', 'Contemporary World', '3'),
+(10, 'GEC 004', 'Mathematics of the modern world', '3'),
+(11, 'CSS 102', 'Fundamentals of Programming', '5'),
+(12, 'GEC 005', 'Purposive Communication', '3'),
+(13, 'EMC 101', 'Drafting', '3');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subjects_by_course`
 --
 
@@ -296,14 +337,9 @@ CREATE TABLE `subjects_by_course` (
 --
 
 INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `program`, `subject_code`, `description`, `unit`, `day`, `time`, `professor`) VALUES
-(1, 1, '1', 'CSS 101', 'Introduction to Computing', 3, 'Tuesday', '7:00 AM - 10:00 AM', 'Prof. Bernal'),
-(1, 2, '1', 'CCS 102', 'Computer Programming 1', 5, 'Tuesday', '10:00 AM - 1:00 PM', ''),
-(1, 4, '1', 'CCS 109', 'Business Application Software', 3, 'Tuesday', '1:00 PM - 4:00 PM', ''),
-(1, 5, '1', 'NSTP 111', 'NSTP - CTWTS1', 3, '', '', ''),
-(1, 6, '1', 'GEC 001', 'Understanding the Self', 3, 'Friday', '4:00 PM - 7:00 PM', ''),
-(1, 7, '1', 'GEC 002', 'Reading in the Philippine History', 3, 'Saturday', '10:00 AM - 1:00 PM', ''),
-(1, 8, '1', 'GEC 003', 'Contemporary World', 3, 'Sunday', '7:00 AM - 10:00 AM', ''),
-(1, 14, '4', 'CCS 1102', 'English', 3, 'Friday', '1:00 PM - 4:00 PM', 'Prof. Ajhay');
+(1, 16, '1', 'CCS 101', 'Introduction to Computing', 3, 'Monday', '4:00 PM - 7:00 PM', 'Prof. Bernal'),
+(1, 17, '1', 'CCS 102', 'Computer Programming 1', 5, 'Monday', '10:00 AM - 1:00 PM', 'Prof. Bernal'),
+(1, 18, '1', 'CCS 109', 'Business Application Software', 3, 'Wednesday', '1:00 PM - 4:00 PM', 'Prof. Melvin');
 
 -- --------------------------------------------------------
 
@@ -405,6 +441,12 @@ ALTER TABLE `student_login`
   ADD PRIMARY KEY (`student_id`);
 
 --
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
@@ -445,10 +487,16 @@ ALTER TABLE `students`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbladmin`
