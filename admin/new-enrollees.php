@@ -104,6 +104,9 @@
                                 <td><?php echo $details['year_level']; ?></td>
                                 <td><?php echo $details['status']; ?></td>
                                 <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
+                                      <i class="fa-solid fa-eye"></i>
+                                    </button>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
                                         Confirm
                                     </button>
@@ -125,7 +128,7 @@
                                             <div class="row">
                                               <div class="col-md-6">
                                                   <label for="year_level">Year Level:</label>
-                                                  <select class="form-control" id="year_level" name="year_level" disabled>
+                                                  <select class="form-control" id="year_level" name="year_level" required>
                                                     <option value="1" <?php if ($details['year_level'] == '1st Year') echo 'selected="selected"'; ?>>1st Year</option>
                                                     <option value="2" <?php if ($details['year_level'] == '2nd Year') echo 'selected="selected"'; ?>>2nd Year</option>
                                                     <option value="3" <?php if ($details['year_level'] == '3rd Year') echo 'selected="selected"'; ?>>3rd Year</option>

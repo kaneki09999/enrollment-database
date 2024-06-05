@@ -9,30 +9,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->begin_transaction();
 
     try {
-        $sql_insert = "INSERT INTO `section_student` (`student_id`, `section`, `year_level`) VALUES (?, ?, ?)";
-        if ($stmt_insert = $conn->prepare($sql_insert)) {
-            $stmt_insert->bind_param("sss", $student_id, $section, $yearLevel);
-            $stmt_insert->execute();
-            $stmt_insert->close();
+        $sql_call = "CALL insert_section_student(?, ?, ?)";
+        if ($stmt_call = $conn->prepare($sql_call)) {
+            $stmt_call->bind_param("sss", $student_id, $section, $yearLevel);
+            $stmt_call->execute();
+            $stmt_call->close();
         } else {
             throw new Exception($conn->error);
         }
-
-        $sql_update = "UPDATE `students` SET `status` = 'Confirmed' WHERE `student_id` = ?";
-        if ($stmt_update = $conn->prepare($sql_update)) {
-            $stmt_update->bind_param("s", $student_id);
-            $stmt_update->execute();
-            $stmt_update->close();
+        
+        $sql_call = "CALL update_student_status(?)";
+        if ($stmt_call = $conn->prepare($sql_call)) {
+            $stmt_call->bind_param("s", $student_id);
+            $stmt_call->execute();
+            $stmt_call->close();
         } else {
             throw new Exception($conn->error);
         }
-
+        
         $conn->commit();
-        echo "Section assigned and status updated successfully.";
-
         echo '<script>
                     alert("Section assigneds successfully!");
-                    window.location.href = "http://localhost/enrollment/admin/new-enrollees.php";
+                    window.location.href = "../new-enrollees.php";
                  </script>';
     } catch (Exception $e) {
         $conn->rollback();

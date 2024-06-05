@@ -107,10 +107,13 @@
                                 <td><?php echo $details['status']; ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
-                                        <i class="fa-solid fa-eye"></i>
+                                        <i class="fa-solid fa-eye"></i> <!-- VIEW -->
                                     </button>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
-                                        Update
+                                        <i class="fa-solid fa-pen-to-square"></i> <!-- UPDATE -->
+                                    </button>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
+                                        <i class="fa-solid fa-book"></i> <!-- GRADING -->
                                     </button>
                                 </td>
                                 </tr>

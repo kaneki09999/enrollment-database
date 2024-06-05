@@ -247,7 +247,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3 class="card-title">Schedule</h3>
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Add
+                    <i class="fa-solid fa-circle-plus"></i> <!-- ADD -->
                 </button>
             </div>
               <div class="card-body">

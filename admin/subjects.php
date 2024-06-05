@@ -70,6 +70,7 @@
         
 
             <div class="card">
+
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3 class="card-title">Subjects</h3>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -125,13 +126,18 @@
                 </div>
             </div>
               <div class="card-body">
+                <style>
+                    .actions-column {
+                        width: 80px;
+                    }
+                </style>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                             <th>Subject Code</th>
                             <th>Description</th>
                             <th>Units</th>
-                            <th>Action</th>
+                            <th class="actions-column">Action</th>
                   </tr>
                   </thead>
                   

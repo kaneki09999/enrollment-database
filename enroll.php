@@ -136,16 +136,32 @@ if ($registration_success) {
             </div>
         </div>
         <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="course">Course:</label>
-            <select class="form-control" id="course" name="course" required>
-                <option value="">Select Course</option>
-                <option value="1">Bachelor of Science Information System</option>
-                <option value="2">Bachelor of Science Information Technology</option>
-                <option value="3">Bachelor of Science Computer Science</option>
-                <option value="4">Bachelor of Science Entertainment and Multimedia Computing</option>
-            </select>
-            </div>
+     
+        <?php 
+            $sql = "CALL GetCourses()";
+                if ($result = $conn->query($sql)) {
+                    if ($result->num_rows > 0) {
+                        echo '<div class="form-group col-md-6">';
+                        echo '<label for="course" class="col-form-label">course:</label>';
+                        echo '<select class="form-control" id="course" name="course" required>';
+                        echo '<option value="" disabled selected>Select Program</option>';
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<option value="' . $row["id"] . '">' . $row["program"] . '</option>';
+                                }
+                            echo '</select>';
+                        echo '</div>';
+                            } else {
+                                echo "No programs available";
+                            }
+
+                            while ($conn->more_results() && $conn->next_result()) {
+                                                    ;
+                            }
+                    } else {
+                        echo "Error: " . $conn->error;
+                }
+            ?>
+            
 
             <div class="form-group col-md-6">
                     <label for="year_level">Year Level:</label>

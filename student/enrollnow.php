@@ -15,7 +15,7 @@
             <div class="row invoice-info">
                 <?php
                 $sql = "CALL SelectAllStudents()";
-                $result = $conn->query($sql)->fetch_assoc();
+                $result = $conn->query($sql)->fetch_assoc();    
                 ?>
                 <div class="col-sm-8 invoice-col">
                         <b>Name:</b> <?php echo $result['firstname']; ?> <?php echo $result['lastname']; ?><br>

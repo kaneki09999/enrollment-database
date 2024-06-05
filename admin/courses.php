@@ -44,17 +44,15 @@
         .search-bar .btn {
             color: #000;
         }
-        .table td, .table th {
-            font-size: 12px; /* Adjust the font size here */
-        }
+
     </style>
 </head>
 <body>
     <?php include "include/sidebar.php"; ?>
 
     <main>
-        <div class="container">
-            <ul class="breadcrumb">
+    <section class="content">
+    <ul class="breadcrumb">
                 <li class="nav-item">
                     <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
@@ -62,147 +60,127 @@
                     <i class='fas fa-chevron-right'></i>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">List of Courses</a>
+                    <a href="#">List of Enrollees</a>
                 </li>
             </ul>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+        
 
-            <!-- Table Header with Search Bar -->
-            <div class="table-header">
-                <div></div> <!-- Placeholder for breadcrumb spacing -->
-                <div class="search-bar">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="searchButton">
-                                <i class="fas fa-search"></i>
-                            </button>
+            <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="card-title">Courses</h3>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="fa-solid fa-circle-plus"></i> <!-- ADD -->
+                </button>
+                <!-- Add Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Program</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="function/add-course.php" method="post">
+                        <div class="mb-3">
+                            <label for="program" class="col-form-label">Name of Program:</label>
+                            <input type="text" class="form-control" name="program" id="program" placeholder="Program" value="Bachelor of Science" required>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                    </div>
                     </div>
                 </div>
+                </div>
             </div>
+              <div class="card-body">
+                <style>
+                    .actions-column {
+                        width: 80px;
+                    }
+                </style>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                            <th>No.</th>
+                            <th>Course Name</th>
+                            <th class="actions-column">Actions</th>
+                  </tr>
+                  </thead>
+                  
+                  <tbody>
+                        <?php
+                        $counter = 1;
+                        $sql = "CALL GetCourses()";
+                        $result = $conn->query($sql);
 
-            <!-- Table displaying ID and Courses -->
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover mt-3">
-                    <thead class="thead-dark">
-                        <tr>
+                        if ($result && $result->num_rows > 0) {
+                            while ($details = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                <td><?php echo $counter++; ?></td>
+                                <td><?php echo $details['program']; ?></td>
+                                <td>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['id']; ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i> <!-- UPDATE -->
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="deleteCourse(<?php echo $details['id']; ?>)">
+                                    <i class="fa-solid fa-trash-can"></i> <!-- DELETE -->
+                                </button>
+                                <script>
+                                function deleteCourse(courseId) {
+                                    if (confirm("Are you sure you want to delete this course?")) {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open("POST", "function/delete_course.php", true);
+                                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                alert(xhr.responseText);
+                                                window.location.reload();
+                                            }
+                                        };
+                                        xhr.send("id=" + courseId);
+                                    }
+                                }
+                                </script>
+
+
+                                   
+                                </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='10'>No records found</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+
+
+
+                  <tfoot>
+                    <tr>
                             <th>Course ID</th>
                             <th>Course Name</th>
                             <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bachelor of Science Information System</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Bachelor of Science Computer Science</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bachelor of Science in Information Technology</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Bachelor of Science in Entertainment and Multimedia Computing</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <!-- More rows as needed -->
-                    </tbody>
+                    </tr>
+                  </tfoot>
                 </table>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </section>
     </main>
 
-    <!-- Modal for Edit Course -->
-    <div class="modal fade" id="editCourseModal" tabindex="-1" role="dialog" aria-labelledby="editCourseModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editCourseModalLabel">Edit Course</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form for editing course details -->
-                    <form id="editCourseForm">
-                        <div class="form-group">
-                            <label for="editCourseID">Course ID</label>
-                            <input type="text" class="form-control" id="editCourseID" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="editCourseName">Course Name</label>
-                            <input type="text" class="form-control" id="editCourseName">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="saveCourseChangesBtn">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php include "include/footer-extension.php"; ?>  
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Edit button click handler
-            $('.btn-edit').click(function() {
-                // Get the row data
-                var row = $(this).closest('tr');
-                var courseID = row.find('td:nth-child(1)').text().trim();
-                var courseName = row.find('td:nth-child(2)').text().trim();
-
-                // Set modal values
-                $('#editCourseID').val(courseID);
-                $('#editCourseName').val(courseName);
-
-                // Show modal
-                $('#editCourseModal').modal('show');
-            });
-
-            // Save changes button handler
-            $('#saveCourseChangesBtn').click(function() {
-                // Retrieve edited values
-                var editedCourseID = $('#editCourseID').val();
-                var editedCourseName = $('#editCourseName').val();
-
-                // Find the row to update
-                var row = $('td').filter(function() {
-                    return $(this).text().trim() === editedCourseID;
-                }).closest('tr');
-
-                // Update the row with new values
-                row.find('td:nth-child(2)').text(editedCourseName);
-
-                // Implement your save logic here (e.g., update the data in the database)
-
-                // Close modal
-                $('#editCourseModal').modal('hide');
-            });
-        });
-    </script>
 </body>
 </html>
