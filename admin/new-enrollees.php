@@ -139,9 +139,9 @@
                                                 <label for="section">Set section:</label>
                                                   <select class="form-control" id="section" name="section" required>
                                                     <option value="" disabled selected>Section</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
+                                                    <option value="1">A</option>
+                                                    <option value="2">B</option>
+                                                    <option value="3">C</option>
                                                   </select>
                                               </div>
                                             </div>
