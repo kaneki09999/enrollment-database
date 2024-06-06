@@ -1,13 +1,11 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 require "../connect/connection.php";
-// Check if the user is logged in
 if (!isset($_SESSION['student_id'])) {
     echo "<script>window.location.href = '../login.php';</script>";
     exit();
 }
 
-// Use the student_id session variable as needed
 $student_id = $_SESSION['student_id'];
 ?>
 
@@ -18,11 +16,8 @@ $student_id = $_SESSION['student_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enrollment</title>
-    <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Custom CSS -->
     <style>
   body {
     font-family: Arial, sans-serif;
@@ -36,7 +31,6 @@ $student_id = $_SESSION['student_id'];
     padding: 0 20px;
 }
 
-/* Navbar styles */
 .navbar {
     background-color: #fff;
     color: #000;

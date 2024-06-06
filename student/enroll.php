@@ -10,7 +10,7 @@
             </div>
             <div class="row invoice-info">
                 <?php
-                $sql = "CALL SelectAllStudents()";
+                $sql = "CALL GetStudentDetails($student_id);";
                 $result = $conn->query($sql)->fetch_assoc();
                 ?>
                 <div class="col-sm-8 invoice-col">
