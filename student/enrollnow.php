@@ -70,7 +70,36 @@ WHERE
     s.student_id = 20241278;
  -->
          <?php 
-            $sql = "";
+            $sql = " SELECT 
+            ss.student_id, 
+            s.firstname, 
+            s.lastname, 
+            st.section, 
+            yl.year_level, 
+            c.program, 
+            sbc.subject_code, 
+            sbc.description, 
+            sbc.unit, 
+            sbc.day, 
+            sbc.time, 
+            sbc.room, 
+            p.name 
+        FROM 
+            subjects_by_course sbc
+        JOIN 
+            section_tbl st ON sbc.section = st.id
+        JOIN 
+            courses c ON sbc.program = c.id 
+        JOIN 
+            year_level yl ON sbc.year_lvl = yl.id
+        JOIN 
+            section_student ss ON st.id = ss.section
+        JOIN 
+            students s ON ss.student_id = s.student_id
+        JOIN 
+            professor p ON sbc.professor = p.id 
+        WHERE 
+            s.student_id = $student_id;";
             
 
          ?>

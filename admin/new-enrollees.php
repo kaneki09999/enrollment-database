@@ -105,7 +105,9 @@
                                 <td><?php echo $details['status']; ?></td>
                                 <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_<?php $details['student_id']; ?>">
+                                <a href="studprofile.php">
                                       <i class="fa-solid fa-eye"></i> <!-- VIEW -->
+                                      </a>
                                     </button>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
                                        <i class="fa-solid fa-check"></i> <!-- Confirm -->
