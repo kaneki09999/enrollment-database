@@ -64,7 +64,7 @@
             </ul>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12"> 
+        <div class="col-12"> 
    
 
 <!-- DAGDAG NG ROOM NUMBER AND SECTION -->
@@ -225,10 +225,36 @@
                                         </div>
                                     </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="professor" class="col-form-label">Professor:</label>
-                                        <input type="text" class="form-control" name="professor" id="professor" placeholder="Professor" required>
-                                    </div>
+                                    
+                                    <?php 
+                                    $sql = "CALL SelectAllProfessors()";
+
+                                    if ($result = $conn->query($sql)) {
+                                        if ($result->num_rows > 0) {
+                                            echo '<div class="mb-3">';
+                                            echo '<label for="professor" class="col-form-label">Professor:</label>';
+                                            echo '<select class="form-control" id="professor" name="professor" required>';
+                                            echo '<option value="" disabled selected>Select Professor</option>';
+
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<option value="' . htmlspecialchars($row["id"], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8') . '</option>';
+                                            }
+
+                                            echo '</select>';
+                                            echo '</div>';
+                                        } else {
+                                            echo "No professors available";
+                                        }
+
+                                        $result->free();
+
+                                        while ($conn->more_results() && $conn->next_result()) {
+                                        }
+                                    } else {
+                                        echo "Error: " . $conn->error;
+                                    }
+                                ?>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -270,7 +296,7 @@
                   
                   <tbody>
                   <?php
-                    $sql = "SELECT * FROM subjects_program";
+                    $sql = "SELECT * FROM schedules";
                     $result = $conn->query($sql);
 
                     if ($result && $result->num_rows > 0) {
@@ -286,7 +312,7 @@
                                 <td><?php echo $details['day']; ?></td>
                                 <td><?php echo $details['time']; ?></td>
                                 <td><?php echo $details['room']; ?></td>
-                                <td><?php echo $details['professor']; ?></td>
+                                <td><?php echo $details['name']; ?></td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_<?php echo $details['subject_id']; ?>">
                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -299,7 +325,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Schedule</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -381,8 +407,12 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="professor" class="col-form-label">Professor:</label>
-                                                        <input type="text" class="form-control" name="professor" id="professor" value="<?php echo $details['professor']; ?>">
+                                                        <input type="text" class="form-control" name="professor" id="professor" value="<?php echo $details['name']; ?>">
                                                     </div>
+
+                                                    
+
+                                                  
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

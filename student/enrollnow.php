@@ -21,6 +21,7 @@
                         <b>Name:</b> <?php echo $result['firstname']; ?> <?php echo $result['lastname']; ?><br>
                         <b>Address:</b> <?php echo $result['address']; ?><br>
                         <b>Contact No.:</b> <?php echo $result['contact']; ?><br>
+                        
                     
                 </div>
                 <div class="col-sm-4 invoice-col">
@@ -37,8 +38,42 @@
                     </h3>
                 </div>
             </div>
-            <!-- NOTE: HINDI MUNA DAPAT LALABAS YUNG MGA SUBJECTS.. AANTAYIN MUNA DAPAT YUNG ADMIN NA ICONFIRM YUNG STUDENTS AFTER THAT 
-                       MAGSESELECT NG SUBJECTS YUNG ADMIN BASE SA KUNG ANONG YEAR ITO  -->
+                <!-- SELECT 
+    ss.student_id, 
+    s.firstname, 
+    s.lastname, 
+    st.section, 
+    yl.year_level, 
+    c.program, 
+    sbc.subject_code, 
+    sbc.description, 
+    sbc.unit, 
+    sbc.day, 
+    sbc.time, 
+    sbc.room, 
+    p.name 
+FROM 
+    subjects_by_course sbc
+JOIN 
+    section_tbl st ON sbc.section = st.id
+JOIN 
+    courses c ON sbc.program = c.id 
+JOIN 
+    year_level yl ON sbc.year_lvl = yl.id
+JOIN 
+    section_student ss ON st.id = ss.section
+JOIN 
+    students s ON ss.student_id = s.student_id
+JOIN 
+    professor p ON sbc.professor = p.id 
+WHERE 
+    s.student_id = 20241278;
+ -->
+         <?php 
+            $sql = "";
+            
+
+         ?>
             <div class="row">
                 <div class="col-12 table-responsive">
                     <table class="table">
@@ -95,11 +130,7 @@
                     </table>
                 </div>
             </div>
-            <div class="row no-print">
-                <div class="col-12">
-                    <a href="#" class="btn btn-success float-right"><i class="fa fa-check"></i> Enroll</a>
-                </div>
-            </div>
+            
         </section>
     </div>
 

@@ -60,7 +60,7 @@
                     <i class='fas fa-chevron-right'></i>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">List of Enrollees</a>
+                    <a href="#">List of Courses</a>
                 </li>
             </ul>
       <div class="container-fluid">
@@ -87,7 +87,7 @@
                     <form action="function/add-course.php" method="post">
                         <div class="mb-3">
                             <label for="program" class="col-form-label">Name of Program:</label>
-                            <input type="text" class="form-control" name="program" id="program" placeholder="Program" value="Bachelor of Science" required>
+                            <input type="text" class="form-control" name="program" id="program" placeholder="Program" value="Bachelor of Science " required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

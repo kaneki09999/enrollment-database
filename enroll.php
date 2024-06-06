@@ -46,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->close();
 
-        $conn->close();
         $registration_success = true;
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() == 1062) {

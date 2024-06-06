@@ -104,11 +104,11 @@
                                 <td><?php echo $details['year_level']; ?></td>
                                 <td><?php echo $details['status']; ?></td>
                                 <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
-                                      <i class="fa-solid fa-eye"></i>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_<?php $details['student_id']; ?>">
+                                      <i class="fa-solid fa-eye"></i> <!-- VIEW -->
                                     </button>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
-                                        Confirm
+                                       <i class="fa-solid fa-check"></i> <!-- Confirm -->
                                     </button>
                                 </td>
                                 </tr>
@@ -139,9 +139,9 @@
                                                 <label for="section">Set section:</label>
                                                   <select class="form-control" id="section" name="section" required>
                                                     <option value="" disabled selected>Section</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
+                                                    <option value="1">A</option>
+                                                    <option value="2">B</option>
+                                                    <option value="3">C</option>
                                                   </select>
                                               </div>
                                             </div>
