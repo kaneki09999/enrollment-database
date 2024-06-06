@@ -11,12 +11,16 @@ include "include/header.php";
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
        body {
-            background-color: white;
-            background-size: cover; 
-            background-repeat: no-repeat;
-            background-attachment: fixed; 
-            overflow-x: hidden;
-            }
+            position: relative;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('./Course Logo/uccbackground.png');
+            background-size: cover;
+            background-repeat: no-repeat; 
+            background-position: center; 
+            background-attachment: fixed;
+            height: 100vh; 
+            margin: 0; 
+        }
+
 
         .image-container {
             float: left;
@@ -72,7 +76,7 @@ include "include/header.php";
 
         h3, h4 {
             text-align: center;
-            color: #529f37;
+            color: #61FF00;
             font-weight: bold;
             opacity: 0;
             transform: translateY(100px);
@@ -90,7 +94,7 @@ include "include/header.php";
         h5 {
             font-weight: bold;
             font-size: 30px;
-            color: #529f37;
+            color: #61FF00;
             margin-left: 60px;
             margin-top: 20px;
         }
@@ -143,7 +147,7 @@ include "include/header.php";
         }
 
         .description-container h2 {
-            color: #333;
+            color: #FF6400;
             font-size: 24px;
             margin-bottom: 10px;
             text-align: justify;
@@ -157,9 +161,28 @@ include "include/header.php";
         }
 
         .custom-hr {
-            height: 15px;
+            height: 8px;
             border: none;
             background-color: #FF6400;
+            margin: 0px;
+            
+        }
+
+        .animated-hr {
+            width: 0;
+            border: none;
+            background-color: #FF6400;
+            margin: 0;
+            animation: expandHR 1s forwards;
+        }
+
+        @keyframes expandHR {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
         }
 
         .gallery2 {
@@ -287,9 +310,6 @@ include "include/header.php";
         margin-left: 65px;
     }
 
-    .description-container {
-    /* Add styling for the description container */
-}
 
 .animated {
     animation-name: slideFromLeft;
@@ -306,6 +326,46 @@ include "include/header.php";
         opacity: 1;
     }
 }
+
+  /* RESPONSIVE */
+@media (max-width: 768px) {
+  
+    .image-container, .description-container {
+        width: 100%;
+        margin: 10px auto;
+        float: none;
+    }
+
+    .containercsd {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .center-image {
+        margin: 0;
+    }
+
+ 
+    h3 {
+        font-size: 24px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    h5 {
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .carousel-item {
+        height: 300px;
+    }
+}
+
+
+
     </style>
 </head>
 <body>
@@ -360,7 +420,7 @@ include "include/header.php";
 
 <br><br><br><br>
 <hr class="custom-hr">
-<h3>School Activities</h3>
+<h3 style="background-color: black; margin: 0px; padding: 20px;">School Activities</h3>
 <hr class="custom-hr">
 
 
@@ -388,7 +448,7 @@ include "include/header.php";
     <img src="./Course Logo/image3.jpg" alt="Image 3">
     <img src="./Course Logo/iamge.jpg" alt="Image 1">
     <img src="./Course Logo/image 2.jpg" alt="Image 2">
-    <img src="./Course Logo/image3.jpg" alt="Image 3">
+
 </div>
 
 <br><br>
@@ -411,7 +471,7 @@ include "include/header.php";
 
 <br><br><br><br>
 <hr class="custom-hr">
-<h3>School Facilities</h3>
+<h3 style="background-color: black; margin: 0px; padding: 20px;">School Facilities</h3>
 <hr class="custom-hr">
 
 <br>    
@@ -458,51 +518,29 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('gallery')) {
-                    entry.target.classList.add('gallery-visible');
-                } else {
-                    entry.target.classList.add('visible');
-                }
-            } else {
-                if (entry.target.classList.contains('gallery')) {
-                    entry.target.classList.remove('gallery-visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            }
-        });
-    }, options);
-
-    const elements = document.querySelectorAll('.description-container, .image-container, h3, h4, .gallery');
-    elements.forEach(element => {
-        observer.observe(element);
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const options = {
-        threshold: 0.1
-    };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
             if (entry.intersectionRatio > 0) {
                 if (entry.target.classList.contains('gallery')) {
                     entry.target.classList.add('gallery-visible');
                 } else {
                     entry.target.classList.add('visible');
                 }
+                if (entry.target.tagName === 'HR') {
+                    entry.target.classList.add('animated-hr'); // Add the animation class
+                }
             } else {
                 if (entry.target.classList.contains('gallery')) {
                     entry.target.classList.remove('gallery-visible');
                 } else {
                     entry.target.classList.remove('visible');
                 }
+                if (entry.target.tagName === 'HR') {
+                    entry.target.classList.remove('animated-hr'); // Remove the animation class when not in view
+                }
             }
         });
     }, options);
 
-    const elements = document.querySelectorAll('.description-container, .image-container, h3, h4, .gallery');
+    const elements = document.querySelectorAll('.description-container, .image-container, h3, h4, .gallery, hr');
     elements.forEach(element => {
         observer.observe(element);
     });

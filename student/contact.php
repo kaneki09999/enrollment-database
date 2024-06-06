@@ -64,11 +64,14 @@ include "include/header.php";
 
 <br>
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="info-container">
-            
+           
                 <h2>Send us a message</h2>
                 <p>This is additional information that can be displayed beside the contact form.</p>
 
