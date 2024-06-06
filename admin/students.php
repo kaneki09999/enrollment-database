@@ -35,15 +35,7 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        .search-bar {
-            max-width: 300px; /* Adjust width as needed */
-        }
-        .search-bar .form-control {
-            color: #000;
-        }
-        .search-bar .btn {
-            color: #000;
-        }
+
     </style>
 </head>
 <body>
@@ -59,7 +51,7 @@
                     <i class='fas fa-chevron-right'></i>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">List of Enrollees</a>
+                    <a href="#">List of Students</a>
                 </li>
             </ul>
       <div class="container-fluid">
@@ -70,7 +62,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">New Enrollees</h3>
+                <h3 class="card-title">Students</h3>
               </div>
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">

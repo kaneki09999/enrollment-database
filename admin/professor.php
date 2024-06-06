@@ -59,7 +59,7 @@
                     <i class='fas fa-chevron-right'></i>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">List of Enrollees</a>
+                    <a href="#">List of Professors</a>
                 </li>
             </ul>
       <div class="container-fluid">
@@ -70,7 +70,7 @@
 
             <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">Courses</h3>
+                <h3 class="card-title">Professors</h3>
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <i class="fa-solid fa-circle-plus"></i> <!-- ADD -->
                 </button>

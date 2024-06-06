@@ -104,11 +104,11 @@
                                 <td><?php echo $details['year_level']; ?></td>
                                 <td><?php echo $details['status']; ?></td>
                                 <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
-                                      <i class="fa-solid fa-eye"></i>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_<?php $details['student_id']; ?>">
+                                      <i class="fa-solid fa-eye"></i> <!-- VIEW -->
                                     </button>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
-                                        Confirm
+                                       <i class="fa-solid fa-check"></i> <!-- Confirm -->
                                     </button>
                                 </td>
                                 </tr>
