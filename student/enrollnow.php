@@ -24,6 +24,9 @@
             <b>Name:</b> <?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?><br>
             <b>Address:</b> <?php echo $row['address']; ?><br>
             <b>Contact No.:</b> <?php echo $row['contact']; ?><br>
+            <?php if($row['section'] != null) : ?>
+            <b>Section:</b> <?php echo $row['section']; ?><br>
+            <?php endif; ?>
         </div>
         <div class="col-sm-4 invoice-col">
             <b>Course/Year:</b> <?php echo $row['program']; ?> / <?php echo $row['year_level']; ?><br>

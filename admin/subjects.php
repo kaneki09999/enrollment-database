@@ -82,35 +82,24 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Subject</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     <form action="function/add-subject.php" method="POST">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <label for="yearLevel" class="col-form-label">Year Level:</label>
-                                    <select class="form-control" id="yearLevel" name="yearLevel">
-                                        <option value="1">1st Year</option>
-                                        <option value="2">2nd Year</option>
-                                        <option value="3">3rd Year</option>
-                                        <option value="4">4th Year</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3">
                                     <label for="subjectcode" class="col-form-label">Subject Code:</label>
-                                    <input type="text" class="form-control" name="subjectcode" id="subjectcode" placeholder="Subject Code">
+                                    <input type="text" class="form-control" name="subjectcode" id="subjectcode" placeholder="Enter subject Code">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="col-form-label">Description:</label>
-                                    <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+                                    <input type="text" class="form-control" name="description" id="description" placeholder="Enter description">
                                 </div>
                                 <div class="mb-3">
                                     <label for="unit" class="col-form-label">Units:</label>
-                                    <input type="text" class="form-control" name="unit" id="unit" placeholder="Units">
+                                    <input type="text" class="form-control" name="unit" id="unit" placeholder="Enter units">
                                 </div>
                             </div>
                         </div>
@@ -156,11 +145,28 @@
                                 
                                 <td>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['id']; ?>">
-                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        <i class="fa-solid fa-pen-to-square"></i> <!-- EDIT -->
                                     </button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['id']; ?>">
-                                        <i class="fa-solid fa-trash-can"></i>
+                                    <button type="button" class="btn btn-danger" onclick="deleteSubject(<?php echo $details['id']; ?>)">
+                                        <i class="fa-solid fa-trash-can"></i> <!-- DELETE -->
                                     </button>
+
+                                <script>
+                                function deleteSubject(sched_id) {
+                                    if (confirm("Are you sure you want to delete this subject?")) {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open("POST", "function/delete_subjects.php", true);
+                                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                alert(xhr.responseText);
+                                                window.location.reload();
+                                            }
+                                        };
+                                        xhr.send("id=" + sched_id);
+                                    }
+                                }
+                                </script>
                                 </td>
                                 </tr>
                                   </form>

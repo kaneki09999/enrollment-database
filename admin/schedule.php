@@ -317,6 +317,26 @@
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_<?php echo $details['subject_id']; ?>">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
+                                    <button type="button" class="btn btn-danger" onclick="deleteSubject(<?php echo $details['subject_id']; ?>)">
+                                        <i class="fa-solid fa-trash-can"></i> <!-- DELETE -->
+                                    </button>
+
+                                <script>
+                                function deleteSubject(subj_id) {
+                                    if (confirm("Are you sure you want to delete this schedule?")) {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open("POST", "function/delete_schedules.php", true);
+                                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                alert(xhr.responseText);
+                                                window.location.reload();
+                                            }
+                                        };
+                                        xhr.send("id=" + subj_id);
+                                    }
+                                }
+                                </script>
                                 </td>
                             </tr>
 

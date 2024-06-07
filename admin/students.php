@@ -96,7 +96,7 @@
                                 <td><?php echo $details['contact']; ?></td>
                                 <td><?php echo $details['program']; ?></td>
                                 <td><?php echo $details['year_level']; ?></td>
-                                <td><?php echo $details['status']; ?></td>
+                                <td>Enrolled</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
                                         <i class="fa-solid fa-eye"></i> <!-- VIEW -->

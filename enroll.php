@@ -141,7 +141,7 @@ if ($registration_success) {
                 if ($result = $conn->query($sql)) {
                     if ($result->num_rows > 0) {
                         echo '<div class="form-group col-md-6">';
-                        echo '<label for="course" class="col-form-label">course:</label>';
+                        echo '<label for="course">Course:</label>';
                         echo '<select class="form-control" id="course" name="course" required>';
                         echo '<option value="" disabled selected>Select Program</option>';
                             while ($row = $result->fetch_assoc()) {
