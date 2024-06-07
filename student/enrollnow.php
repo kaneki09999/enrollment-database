@@ -17,6 +17,8 @@
         $sql = "CALL GetStudentDetails($student_id);";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
+        $program = $row['program_id'];
+        $year_level = $row['year_id'];
         ?>
         <div class="col-sm-8 invoice-col">
             <b>Name:</b> <?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?><br>
@@ -44,13 +46,95 @@
     </div>
     
     <?php
-    $sql = "CALL GetStudentSchedule($student_id);";
-    $results = $conn->query($sql);
-    $res = $results->fetch_assoc();
-    ?>
-    
-    <?php if($res['status'] != 'Confirmed') { ?>
-    <div class="row">
+$sql = "
+    SELECT 
+        ss.student_id, 
+        s.firstname, 
+        s.lastname, 
+        st.section, 
+        yl.year_level, 
+        c.program, 
+        sbc.subject_code, 
+        sbc.description, 
+        sbc.unit, 
+        sbc.day, 
+        sbc.time, 
+        sbc.room, 
+        p.name,
+        s.status
+    FROM 
+        subjects_by_course sbc
+    JOIN 
+        section_tbl st ON sbc.section = st.id
+    JOIN 
+        courses c ON sbc.program = c.id 
+    JOIN 
+        year_level yl ON sbc.year_lvl = yl.id
+    JOIN 
+        section_student ss ON st.id = ss.section
+    JOIN 
+        students s ON ss.student_id = s.student_id
+    JOIN 
+        professor p ON sbc.professor = p.id 
+    WHERE 
+        s.student_id = ? AND sbc.program = ? AND sbc.year_lvl = ?
+";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iii", $student_id, $program, $year_level);
+$stmt->execute();
+$results = $stmt->get_result();
+
+  if ($results->num_rows > 0) {
+      $res = $results->fetch_assoc();
+      if ($res['status'] == 'Confirmed') {
+          echo '<div class="row">
+                  <div class="col-12 table-responsive">
+                      <table class="table">
+                          <thead class="thead-dark">
+                              <tr>
+                                  <th>#</th>
+                                  <th>Subject Code</th>
+                                  <th>Description</th>
+                                  <th>Unit</th>
+                                  <th>Day</th>
+                                  <th>Time</th>
+                                  <th>Room</th>
+                                  <th>Professor</th>
+                              </tr>
+                          </thead>
+                          <tbody>';
+          
+          $total_units = 0;
+          $row_number = 1;
+          do {
+              echo '<tr>
+                      <td>' . $row_number++ . '</td>
+                      <td>' . htmlspecialchars($res['subject_code']) . '</td>
+                      <td>' . htmlspecialchars($res['description']) . '</td>
+                      <td>' . htmlspecialchars($res['unit']) . '</td>
+                      <td>' . htmlspecialchars($res['day']) . '</td>
+                      <td>' . htmlspecialchars($res['time']) . '</td>
+                      <td>' . htmlspecialchars($res['room']) . '</td>
+                      <td>' . htmlspecialchars($res['name']) . '</td>
+                    </tr>';
+              $total_units += $res['unit'];
+          } while ($res = $results->fetch_assoc());
+  
+          echo '<tr>
+                  <td colspan="3" align="right"><b>Total Units</b></td>
+                  <td><b>' . $total_units . '</b></td>
+                  <td colspan="4"></td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+                </div>';
+      } else {
+          echo "The schedule is confirmed.";
+      }
+  } else {
+      ?>
+        <div class="row">
         <div class="col-12 table-responsive">
             <table class="table">
                 <thead class="thead-dark">
@@ -106,17 +190,10 @@
             </table>
         </div>
     </div>
-    <?php 
-        } else {
-
-
-
-
-        }
-    
-    
-    
-    ?>
+      <?php
+  }
+  $stmt->close();
+  ?>
 
 
     
