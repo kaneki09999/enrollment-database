@@ -572,7 +572,7 @@
       "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "order": [], // empty array means no initial ordering
-      "pageLength": 8 // set default number of rows to 8
+
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     $('#example2').DataTable({
@@ -584,7 +584,7 @@
       "autoWidth": false,
       "responsive": true,
       "order": [], // empty array means no initial ordering
-      "pageLength": 8 // set default number of rows to 8
+
     });
   });
 </script>

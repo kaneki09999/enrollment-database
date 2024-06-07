@@ -1,4 +1,14 @@
-<?php include "../connect/connection.php" ?>
+<?php 
+session_start(); 
+require "../connect/connection.php";
+
+if (!isset($_SESSION['id'])) {
+    echo "<script>window.location.href = 'index.php';</script>";
+    exit();
+}
+
+$admin = $_SESSION['id'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
