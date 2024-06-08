@@ -153,7 +153,7 @@ footer {
                 <li><a href="grade.php">Grades</a></li>
                 <li><a href="professor.php">Professors</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="profile.php">Profile</a></li>
                 <li><a href="../logout.php">Logout</a></li>
             </ul>
         </div>

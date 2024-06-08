@@ -13,6 +13,7 @@
     </div>
     <hr>
     <div class="row invoice-info">
+        
         <?php
         $sql = "CALL GetStudentDetails($student_id);";
         $result = $conn->query($sql);
@@ -34,11 +35,11 @@
             <b>Academic Year:</b> 2024-2025
         </div>
         <?php
-        // Free the result set from the first query
         $result->free();
         $conn->next_result();
         ?>
     </div>
+    
     <br>
     <div class="row">
         <div class="col-12">
@@ -49,39 +50,7 @@
     </div>
     
     <?php
-$sql = "
-    SELECT 
-        ss.student_id, 
-        s.firstname, 
-        s.lastname, 
-        st.section, 
-        yl.year_level, 
-        c.program, 
-        sbc.subject_code, 
-        sbc.description, 
-        sbc.unit, 
-        sbc.day, 
-        sbc.time, 
-        sbc.room, 
-        p.name,
-        s.status
-    FROM 
-        subjects_by_course sbc
-    JOIN 
-        section_tbl st ON sbc.section = st.id
-    JOIN 
-        courses c ON sbc.program = c.id 
-    JOIN 
-        year_level yl ON sbc.year_lvl = yl.id
-    JOIN 
-        section_student ss ON st.id = ss.section
-    JOIN 
-        students s ON ss.student_id = s.student_id
-    JOIN 
-        professor p ON sbc.professor = p.id 
-    WHERE 
-        s.student_id = ? AND sbc.program = ? AND sbc.year_lvl = ?
-";
+$sql = "CALL GetStudentSchedule(?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $student_id, $program, $year_level);
 $stmt->execute();
@@ -124,7 +93,7 @@ $results = $stmt->get_result();
           } while ($res = $results->fetch_assoc());
   
           echo '<tr>
-                  <td colspan="3" align="right"><b>Total Units</b></td>
+                  <td colspan="3" align="right"><b>Total Units:</b></td>
                   <td><b>' . $total_units . '</b></td>
                   <td colspan="4"></td>
                 </tr>

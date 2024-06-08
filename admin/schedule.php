@@ -67,7 +67,6 @@
         <div class="col-12"> 
    
 
-<!-- DAGDAG NG ROOM NUMBER AND SECTION -->
             <!-- ADD MODAL here -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -277,6 +276,11 @@
                 </button>
             </div>
               <div class="card-body">
+              <style>
+                    .actions-column {
+                        width: 80px;
+                    }
+                </style>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -290,7 +294,7 @@
                             <th>Time</th>
                             <th>Room</th>
                             <th>Professor</th>
-                            <th>Action</th>
+                            <th class="actions-column">Action</th>
                   </tr>
                   </thead>
                   
