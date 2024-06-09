@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2024 at 06:59 AM
+-- Generation Time: Jun 09, 2024 at 03:38 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -291,6 +291,23 @@ INSERT INTO `courses` (`id`, `program`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `grading`
+--
+
+CREATE TABLE `grading` (
+  `id` int(11) NOT NULL,
+  `subject_id` int(25) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `midterm` varchar(25) NOT NULL,
+  `finalterm` varchar(25) NOT NULL,
+  `final_grades` varchar(25) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `date` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `pending_students`
 -- (See below for the actual view)
 --
@@ -380,7 +397,9 @@ INSERT INTO `section_student` (`id`, `student_id`, `section`, `year_level`) VALU
 (11, '20241836', '2', '1'),
 (12, '20245266', '1', '2'),
 (13, '20241478', '1', '1'),
-(14, '20246483', '2', '1');
+(14, '20246483', '2', '1'),
+(15, '20246139', '1', '1'),
+(16, '20247369', '1', '3');
 
 -- --------------------------------------------------------
 
@@ -438,8 +457,10 @@ INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `firstname`
 (25, 20241478, 4, 1, 'Christian Dave', '', 'Bernal', '2024-05-22', 'Male', '925 ilang ilang st. bo. concepcion tala', 'sadsadsad', 9123456789, 'uploads/registration_form_praticum_vin.pdf;uploads/Enrollment Admin (1).pdf;uploads/ARENDAYEN-REGFORM-PRACTICUM1.pdf;', 'Confirmed', '2024-06-07 07:42:15'),
 (23, 20241836, 2, 1, 'Melvin', 'M.', 'Custodio', '2024-05-28', 'Male', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/registration_form_praticum_vin.pdf;', 'Confirmed', '2024-06-07 04:00:21'),
 (24, 20245266, 3, 2, 'Ricky James', '', 'Molina', '2024-05-28', 'Male', 'Ph12, BLK20 LOT2', 'Caloocan City', 0, 'uploads/Enrollment Admin.pdf;uploads/OJT-DOCUMENTS-VIN.docx;', 'Confirmed', '2024-06-07 05:04:26'),
+(28, 20246139, 1, 1, 'Jan Jan', '', 'Santiago', '2024-06-04', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/QUESTIONNAIRES WITH ANSWERS.pdf;', 'Confirmed', '2024-06-09 09:31:03'),
 (26, 20246483, 2, 1, 'brian', 'Q', 'bucio', '2024-05-29', 'Female', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/Enrollment Admin.pdf;', 'Confirmed', '2024-06-07 08:11:33'),
-(21, 20246553, 1, 1, 'Ajhay', 'R', 'Arendayen', '2024-05-15', 'Male', 'Ph9, Bagong Silang, Caloocan City', 'Caloocan City', 9123456789, 'uploads/ARENDAYEN-REGFORM-PRACTICUM1.pdf;', 'Confirmed', '2024-06-07 03:06:10');
+(21, 20246553, 1, 1, 'Ajhay', 'R', 'Arendayen', '2024-05-15', 'Male', 'Ph9, Bagong Silang, Caloocan City', 'Caloocan City', 9123456789, 'uploads/ARENDAYEN-REGFORM-PRACTICUM1.pdf;', 'Confirmed', '2024-06-07 03:06:10'),
+(29, 20247369, 1, 3, 'asdsadas', '', 'dasdsadasdsadasd', '2024-06-04', 'Male', 'sadsadsadasdad', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-09 09:50:03');
 
 -- --------------------------------------------------------
 
@@ -462,8 +483,10 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 (20241478, 'bernal@gmail.com', 'berns', '$2y$10$w1OBOQaQbMpWQWLTPV97Lu5ivG7X797C7Qd8OeZUzCIEeAoDT7ls2'),
 (20241836, 'cstd09@gmail.com', 'vin', '$2y$10$Lcmi20sSmQ714N1N0i4mg.3183.2ItKnUG.vZtl.4HYPNNd.BiJK2'),
 (20245266, 'rickyjames@gmail.com', 'ricky', '$2y$10$rDxd1WYL4j7pa.GiHoWC4.nzmBoXbCwRAbdLcmYMA2JM0j8LxQh5C'),
+(20246139, 'asdsadsadn@gmail.com', 'janjan', '$2y$10$Fwr7Z0iGT2qM8d64KLQbkeeqtqYGv/Gk5stgkUQOftNZivezP8vb6'),
 (20246483, 'brian@gmail.com', 'brian', '$2y$10$P3NrQPQL40ZCaw60fjBAvez/LHlotfjfZPQPZpA2/NKcuFSNP4Boe'),
-(20246553, 'ajhayarendayen@gmail.com', 'ajhay', '$2y$10$v9C1dLx5cPh709j6NQGBauGH1d8l.zJo0vTWRsj56EwYb.orJH9ZK');
+(20246553, 'ajhayarendayen@gmail.com', 'ajhay', '$2y$10$v9C1dLx5cPh709j6NQGBauGH1d8l.zJo0vTWRsj56EwYb.orJH9ZK'),
+(20247369, 'ajhayarendayen@gmail.com', 'ajhay111', '$2y$10$cWx8T7j6Bq0GAcOr.CLVL.RIW6tVKqwCzUbFjRdPHab6VFJ6zAklm');
 
 -- --------------------------------------------------------
 
@@ -538,7 +561,8 @@ INSERT INTO `subjects_by_course` (`year_lvl`, `id`, `program`, `subject_code`, `
 (1, 43, '2', 'GEC 001', 'Understanding the Self', 3, 'Tuesday', '1:00 PM - 4:00 PM', '2', '302', '6'),
 (1, 44, '2', 'CCS 102', 'Computer Programming 1', 5, 'Thursday', '10:00 AM - 1:00 PM', '1', '304', '5'),
 (1, 45, '2', 'CCS 102', 'Computer Programming 1', 5, 'Wednesday', '1:00 PM - 4:00 PM', '1', '303', '6'),
-(1, 46, '2', 'CCS 102', 'Computer Programming 1', 5, 'Saturday', '7:00 AM - 10:00 AM', '2', '304', '5');
+(1, 46, '2', 'CCS 102', 'Computer Programming 1', 5, 'Saturday', '7:00 AM - 10:00 AM', '2', '304', '5'),
+(3, 48, '1', 'CCS 109', 'Business Application Software', 3, 'Monday', '10:00 AM - 1:00 PM', '1', '302', '7');
 
 -- --------------------------------------------------------
 
@@ -648,6 +672,12 @@ ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `grading`
+--
+ALTER TABLE `grading`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `professor`
 --
 ALTER TABLE `professor`
@@ -713,6 +743,12 @@ ALTER TABLE `courses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `grading`
+--
+ALTER TABLE `grading`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `professor`
 --
 ALTER TABLE `professor`
@@ -722,7 +758,7 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT for table `section_student`
 --
 ALTER TABLE `section_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `section_tbl`
@@ -734,7 +770,7 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -746,7 +782,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `subjects_by_course`
 --
 ALTER TABLE `subjects_by_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tbladmin`

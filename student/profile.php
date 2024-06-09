@@ -49,108 +49,117 @@
         </div>
     </div>
 <div class="container">
-<form action="student/controller.php?action=edit" method="post" >
-		<table class="table">
-			<tr>
-				<td><label>Student Number</label></td>
-				<td >
-					<input class="form-control input-md" readonly id="student_id" name="student_id" placeholder="Student Id" type="text" value="<?php echo $row['student_id']; ?>">
-				</td>
-				<td colspan="4"></td>
+<form action="student/controller.php?action=edit" method="post">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9"> <!-- Adjust the column width as needed -->
+                <table class="table">
+                    <tr>
+                        <td><label>Student Number</label></td>
+                        <td>
+                            <input class="form-control input-md" readonly id="student_id" name="student_id" placeholder="Student Id" type="text" value="<?php echo $row['student_id']; ?>">
+                        </td>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1">
+                            <label>Firstname</label>
+                            <input required="true" class="form-control input-md" id="firstname" name="firstname" placeholder="First Name" type="text" value="<?php echo $row['firstname']; ?>">
+                        </td>
+                        <td colspan="3">
+                            <label>Lastname</label>
+                            <input required="true" class="form-control input-md" id="lastname" name="lastname" placeholder="Last Name" type="text" value="<?php echo $row['lastname']; ?>">
+                        </td>
+                        <td>
+                            <label>Middlename</label>
+                            <input class="form-control input-md" id="middlename" name="middlename" placeholder="Middle Name" type="text" value="<?php echo $row['middlename']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Address</label>
+                            <input required="true" class="form-control input-md" id="address" name="address" placeholder="Permanent Address" type="text" value="<?php echo $row['address']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Sex</label></td>
+                        <td colspan="2">
+                            <label>
+                                <input id="optionsRadios1" name="optionsRadios" type="radio" value="Female" <?php echo ($row['gender'] == 'Female') ? 'checked' : ''; ?>> Female
+                                <input id="optionsRadios2" name="optionsRadios" type="radio" value="Male" <?php echo ($row['gender'] == 'Male') ? 'checked' : ''; ?>> Male
+                            </label>
+                        </td>
+                        <td><label>Date of Birth</label></td>
+                        <td colspan="2">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input required="true" name="birthdate" id="birthdate" type="text" class="form-control input-md" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask value="<?php echo $row['birthdate']; ?>">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Place of Birth</label></td>
+                        <td colspan="5">
+                            <input required="true" class="form-control input-md" id="birthplace" name="birthplace" placeholder="Place of Birth" type="text" value="<?php echo $row['birthplace']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Nationality</label></td>
+                        <td colspan="2">
+                            <input required="true" class="form-control input-md" id="NATIONALITY" name="NATIONALITY" placeholder="Nationality" type="text" value="">
+                        </td>
+                        <td><label>Religion</label></td>
+                        <td colspan="2">
+                            <input required="true" class="form-control input-md" id="RELIGION" name="RELIGION" placeholder="Religion" type="text" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Contact No.</label></td>
+                        <td colspan="3">
+                            <input required="true" class="form-control input-md" id="contact" name="contact" placeholder="Contact Number" type="text" value="<?php echo $row['contact']; ?>">
+                        </td>
+                        <td><label for="civil-status">Civil Status</label></td>
+                        <td colspan="2">
+                            <select id="civil-status" name="civil_status">
+                                <option value="">Select Civil Status</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </td>
 
-			</tr>
-			<tr>
-				<td><label>Firstname</label></td>
-				<td>
-					<input required="true"   class="form-control input-md" id="firstname" name="firstname" placeholder="First Name" type="text" value="<?php echo $row['firstname']; ?>">
- 				</td>
-				<td><label>Lastname</label></td>
-				<td colspan="2">
-					<input required="true"  class="form-control input-md" id="lastname" name="lastname" placeholder="Last Name" type="text" value="<?php echo $row['lastname']; ?>">
-				</td> 
-				<td>
-					<input class="form-control input-md" id="middlename" name="middlename" placeholder="Middle Name" type="text" value="<?php echo $row['middlename']; ?>">
-				</td>
-			</tr>
-			<tr>
-				<td><label>Address</label></td>
-				<td colspan="5"  >
-				<input required="true"  class="form-control input-md" id="address" name="address" placeholder="Permanent Address" type="text" value="<?php echo $row['address']; ?>">
-				</td> 
-			</tr>
-			<tr>
-				<td ><label>Sex </label></td> 
-				<td colspan="2">
-					<label>
-
-					<input checked id="optionsRadios1" checked="true"  name="optionsRadios" type="radio" value="Female">Female 
-						 <input id="optionsRadios2"  name="optionsRadios" type="radio" value="Male"> Male';
-				
-					 		<input checked id="optionsRadios1" name="optionsRadios" type="radio" value="Female">Female 
-						 <input id="optionsRadios2"  checked="true"  name="optionsRadios" type="radio" value="Male"> Male';
-					</label>
-				</td>
-				<td><label>Date of birth</label></td>
-				<td colspan="2"> 
-				<div class="input-group" >
-                  <div class="input-group-addon"> 
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input  required="true" name="birthdate"  id="birthdate"  type="text" class="form-control input-md"   
-                  data-inputmask="'alias': 'mm/dd/yyyy'" data-mask value="<?php echo $row['birthdate']; ?>">
-				   </div>             
-				</td>
-				 
-			</tr>
-			<tr><td><label>Place of Birth</label></td>
-				<td colspan="5">
-				<input required="true"  class="form-control input-md" id="birthplace" name="birthplace" placeholder="Place of Birth" type="text" value="<?php echo $row['birthplace']; ?>">
-			   </td>
-			</tr>
-			<tr>
-				<td><label>Nationality</label></td>
-				<td colspan="2"><input required="true"  class="form-control input-md" id="NATIONALITY" name="NATIONALITY" placeholder="Nationality" type="text">
-							</td>
-				<td><label>Religion</label></td>
-				<td colspan="2"><input  required="true" class="form-control input-md" id="RELIGION" name="RELIGION" placeholder="Religion" type="text">
-				</td>
-				
-			</tr>
-			<tr>
-			<td><label>Contact No.</label></td>
-				<td colspan="3">
-				  <input required="true"  class="form-control input-md" id="contact" name="contact" placeholder="Contact Number" type="text" value="<?php echo $row['contact']; ?>">
-			</td>
-				  
-				<td><label>Civil Status</label></td>
-				<td colspan="2"> 
-		
-				
-				</td>
-			</tr>
-			<tr>
-				<td><label>Username</label></td>
-				<td colspan="6">
-				  <input required="true"  class="form-control input-md" id="USER_NAME" name="USER_NAME" placeholder="Username" type="text"value="<?php echo $row['username']; ?>">
-				</td>
-		 
-			</tr>
-			<tr>
-				<td><label>Gaurdian</label></td>
-				<td colspan="2">
-					<input required="true"  class="form-control input-md" id="GUARDIAN" name="GUARDIAN" placeholder="Parents/Guardian Name" type="text"value="">
-				</td>
-				<td><label>Contact No.</label></td>
-				<td colspan="2"><input  required="true" class="form-control input-md" id="GCONTACT" name="GCONTACT" placeholder="Contact Number" type="text"value=""></td>
-			</tr>
-			<tr>
-			<td></td>
-				<td colspan="5">	
-					<button class="btn btn-success btn-lg" name="save" type="submit">Save</button>
-				</td>
-			</tr>
-		</table>
+                    </tr>
+                    <tr>
+                        <td><label>Username</label></td>
+                        <td colspan="6">
+                            <input required="true" class="form-control input-md" id="USER_NAME" name="USER_NAME" placeholder="Username" type="text" value="<?php echo $row['username']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Guardian</label></td>
+                        <td colspan="2">
+                            <input required="true" class="form-control input-md" id="GUARDIAN" name="GUARDIAN" placeholder="Parents/Guardian Name" type="text" value="">
+                        </td>
+                        <td><label>Contact No.</label></td>
+                        <td colspan="2">
+                            <input required="true" class="form-control input-md" id="GCONTACT" name="GCONTACT" placeholder="Contact Number" type="text" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="5">
+                            <button class="btn btn-success" name="save" type="submit">Save</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </form>
+
+
 </div>
 </section>
 </div>

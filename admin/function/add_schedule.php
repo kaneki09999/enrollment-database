@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             echo '<script>
                     alert("New subject added successfully!");
-                    window.location.href = "http://localhost/enrollment/admin/schedule.php";
+                    window.location.href = "../schedule.php";
                  </script>';
         } else {
             echo "Error: " . $stmt->error;

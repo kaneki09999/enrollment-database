@@ -7,9 +7,10 @@ body {
 }
 
 .top-bar {
-    background-color: #529f37; /* Change to your desired color */
-    color: #fff; /* Text color */
-    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #529f37; 
+    color: #fff;
+    padding: 10px 20px;
+    z-index: 1;
 }
 
 .top-bar .container {
