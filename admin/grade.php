@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,9 +45,6 @@
         .search-bar .btn {
             color: #000;
         }
-        .table td, .table th {
-            font-size: 12px; /* Adjust the font size here */
-        }
         .student-info {
             margin-bottom: 20px;
         }
@@ -63,9 +61,24 @@
 </head>
 <body>
     <?php include "include/sidebar.php"; ?>
+<?php 
+$student_id = $_GET['student_id'];
+
+// Fetch student details
+$sql = "CALL GetStudentDetails(?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $student_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$program = $row['program_id'];
+$year_level = $row['year_id'];
+?>
+
 
     <main>
-        <div class="container">
+<section class="content">
+    
             <ul class="breadcrumb">
                 <li class="nav-item">
                     <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
@@ -77,29 +90,33 @@
                     <a href="#">Student Grades</a>
                 </li>
             </ul>
-            <div class="student-info">
-                <h4>Melvin Custodio</h4>
-                <h8>BS Information System - 3rd Year</h8>
-            </div>
-            <!-- Table Header with Search Bar -->
-            <div class="table-header">
-                <div></div> <!-- Placeholder for breadcrumb spacing -->
-                <div class="search-bar">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="searchButton">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover mt-3">
-                    <thead class="thead-dark">
-                        <tr>
+        <div class="container">
+            <div class="student-info">
+                <h4><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></h4>
+                <h4>Student No: <?php echo $student_id ?></h4>
+                <h8><?php echo $row['program']; ?> - <?php echo $row['year_level']; ?></h8>
+            </div>
+        </div>
+
+        <?php
+        $result->free();
+        $conn->next_result();
+        ?>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+        
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Subjects</h3>
+              </div>
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
                             <th>#</th>
                             <th>Subject Code</th>
                             <th>Description</th>
@@ -109,72 +126,100 @@
                             <th>Final Grade</th>
                             <th>Remarks</th>
                             <th>Year Level</th>
-                            <th>Semester</th>
                             <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Sample row -->
-                        <tr>
-                            <td>1</td>
-                            <td>CSC101</td>
-                            <td>Introduction to Computer Science</td>
-                            <td>3</td>
-                            <td>1.00</td>
-                            <td>1.00</td>
-                            <td>1.00</td>
-                            <td>Passed</td>
-                            <td>1st Year</td>
-                            <td>1st Semester</td>
-                            <td>
-                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addGradesModal">Add Grades</button>
-                            </td>
-                        </tr>
-                        <!-- Additional rows as needed -->
-                    </tbody>
+                  </tr>
+                  </thead>
+                  
+                  <tbody>
+                                    <?php
+                                    $sql = "CALL GetStudentScheduleGrading(?, ?, ?)";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->bind_param("iii", $student_id, $program, $year_level);
+                                    $stmt->execute();
+                                    $results = $stmt->get_result();
+
+                                    if ($results->num_rows > 0) {
+                                        $row_number = 1;
+                                        while ($res = $results->fetch_assoc()) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $row_number++; ?></td>  
+                                                <td><?php echo $res['subject_code']; ?></td>
+                                                <td><?php echo $res['description']; ?></td>
+                                                <td><?php echo $res['unit']; ?></td>
+                                                <td><?php echo $res['midterm']; ?></td>
+                                                <td><?php echo $res['finalterm']; ?></td>
+                                                <td><?php echo $res['final_grades']; ?></td>
+                                                <td><?php echo $res['remarks']; ?></td>
+                                                <td><?php echo $res['year_level']; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MODAL_<?php echo $res['id']; ?>">
+                                                            <i class="fa-solid fa-plus"></i> <!-- ADD GRADES -->
+                                                        </button>
+                                                </td>
+
+                                                <div class="modal fade" id="MODAL_<?php echo $res['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Section</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <form action="function/set-section.php" method="POST">
+                                                        
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </form>
+                                                        </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+
+                                            </tr>
+                                            <?php
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='11'>No records found</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+
+
+
+                  <tfoot>
+                    <tr>
+                            <th>#</th>
+                            <th>Subject Code</th>
+                            <th>Description</th>
+                            <th>Unit</th>
+                            <th>Midterm</th>
+                            <th>Final</th>
+                            <th>Final Grade</th>
+                            <th>Remarks</th>
+                            <th>Year Level</th>
+                            <th>Action</th>
+                    </tr>
+                  </tfoot>
                 </table>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      </div>
+</section>
     </main>
+    <?php
+$stmt->close();
+$conn->close();
+?>
 
-    <!-- Add Grades Modal -->
-    <div class="modal fade" id="addGradesModal" tabindex="-1" role="dialog" aria-labelledby="addGradesModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addGradesModalLabel">Add Grades</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="subject">Subject:</label>
-                            <input type="text" class="form-control" id="subject" placeholder="Enter Subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="midterm">Midterm:</label>
-                            <input type="text" class="form-control" id="midterm" placeholder="Enter Midterm Grade">
-                        </div>
-                        <div class="form-group">
-                            <label for="final">Final:</label>
-                            <input type="text" class="form-control" id="final" placeholder="Enter Final Grade">
-                        </div>
-                        <div class="form-group">
-                            <label for="finalGrade">Final Grade:</label>
-                            <input type="text" class="form-control" id="finalGrade" placeholder="Enter Final Grade">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include "include/footer-extension.php"; ?>  
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </body>
 </html>

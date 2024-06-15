@@ -104,9 +104,10 @@
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
                                         <i class="fa-solid fa-pen-to-square"></i> <!-- UPDATE -->
                                     </button>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['student_id']; ?>">
+                                    <a href="grade.php?student_id=<?php echo $details['student_id']; ?>"><button type="button" class="btn btn-success">
                                         <i class="fa-solid fa-book"></i> <!-- GRADING -->
                                     </button>
+                                    </a>
                                 </td>
                                 </tr>
 

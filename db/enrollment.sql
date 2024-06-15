@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2024 at 03:38 PM
+-- Generation Time: Jun 15, 2024 at 04:00 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -112,6 +112,47 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `GetStudentSchedule` (IN `student_id
         students s ON ss.student_id = s.student_id
     JOIN 
         professor p ON sbc.professor = p.id 
+    WHERE 
+        s.student_id = student_id AND sbc.program = program_id AND sbc.year_lvl = year_lvl_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetStudentScheduleGrading` (IN `student_id` INT, IN `program_id` INT, IN `year_lvl_id` INT)   BEGIN
+ SELECT 
+  		sbc.id,
+        ss.student_id, 
+        s.firstname, 
+        s.lastname, 
+        st.section, 
+        yl.year_level, 
+        c.program, 
+        sbc.subject_code, 
+        sbc.description, 
+        sbc.unit, 
+        sbc.day, 
+        sbc.time, 
+        sbc.room, 
+        p.name,
+        s.status,
+        g.midterm,
+        g.finalterm,
+        g.final_grades,
+        g.remarks
+    FROM 
+        subjects_by_course sbc
+    JOIN 
+        section_tbl st ON sbc.section = st.id
+    JOIN 
+        courses c ON sbc.program = c.id 
+    JOIN 
+        year_level yl ON sbc.year_lvl = yl.id
+    JOIN 
+        section_student ss ON st.id = ss.section
+    JOIN 
+        students s ON ss.student_id = s.student_id
+    JOIN 
+        professor p ON sbc.professor = p.id 
+    LEFT JOIN 
+    	grading g ON sbc.id = g.subject_id
     WHERE 
         s.student_id = student_id AND sbc.program = program_id AND sbc.year_lvl = year_lvl_id;
 END$$
