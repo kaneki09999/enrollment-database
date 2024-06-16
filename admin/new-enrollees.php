@@ -131,7 +131,7 @@
                                             <div class="row">
                                               <div class="col-md-6">
                                                   <label for="year_level">Year Level:</label>
-                                                  <select class="form-control" id="year_level" name="year_level" required>
+                                                  <select class="form-control" id="year_level" name="year_level" required readonly>
                                                     <option value="1" <?php if ($details['year_level'] == '1st Year') echo 'selected="selected"'; ?>>1st Year</option>
                                                     <option value="2" <?php if ($details['year_level'] == '2nd Year') echo 'selected="selected"'; ?>>2nd Year</option>
                                                     <option value="3" <?php if ($details['year_level'] == '3rd Year') echo 'selected="selected"'; ?>>3rd Year</option>
