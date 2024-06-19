@@ -50,71 +50,39 @@
           <th>Final Grade</th>
           <th>Remarks</th>
           <th>Year Level</th>
-          <th>Semester</th>
         </tr>
       </thead>
       <tbody>
+
+<?php
+$sql = "CALL GetStudentScheduleGrading(?, ?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iii", $student_id, $program, $year_level);
+$stmt->execute();
+$results = $stmt->get_result();
+
+if ($results->num_rows > 0) {
+    $row_number = 1;
+    while ($res = $results->fetch_assoc()) {
+        ?>
         <tr>
-          <td>1</td>
-          <td>CS101</td>
-          <td>Introduction to Programming</td>
-          <td>3</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>Passed</td>
-          <td>Third Year</td>
-          <td>2nd</td>
+            <td><?php echo $row_number++; ?></td>  
+            <td><?php echo $res['subject_code']; ?></td>
+            <td><?php echo $res['description']; ?></td>
+            <td><?php echo $res['unit']; ?></td>
+            <td><?php echo $res['midterm']; ?></td>
+            <td><?php echo $res['finalterm']; ?></td>
+            <td><?php echo $res['final_grades']; ?></td>
+            <td><?php echo $res['remarks']; ?></td>
+            <td><?php echo $res['year_level']; ?></td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>CS102</td>
-          <td>Data Structures</td>
-          <td>3</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>Passed</td>
-          <td>Third Year</td>
-          <td>2nd</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>CS103</td>
-          <td>Database Systems</td>
-          <td>3</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>Passed</td>
-          <td>Third Year</td>
-          <td>2nd</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>CS104</td>
-          <td>Computer Networks</td>
-          <td>3</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>Passed</td>
-          <td>Third Year</td>
-          <td>2nd</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>CS105</td>
-          <td>Software Engineering</td>
-          <td>3</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>1.00</td>
-          <td>Passed</td>
-          <td>Third Year</td>
-          <td>2nd</td>
-        </tr>
-      </tbody>
+        <?php
+    }
+} else {
+    echo "<tr><td colspan='11'>You are not enrolled yet</td></tr>";
+}
+?>
+</tbody>
     </table>
   </div>
 

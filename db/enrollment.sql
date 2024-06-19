@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 06:21 AM
+-- Generation Time: Jun 19, 2024 at 01:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -264,6 +264,28 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `student_login_proc` (IN `p_username
     END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_counts` ()   BEGIN
+    DECLARE p_professor_count INT;
+    DECLARE p_student_count INT;
+    DECLARE p_pending_student_count INT;
+    DECLARE p_schedule_count INT;
+    DECLARE p_course_count INT;
+    DECLARE p_subject_count INT;
+
+    -- Fetch counts
+    SELECT COUNT(*) INTO p_professor_count FROM professor;
+    SELECT COUNT(*) INTO p_student_count FROM confirmed_students;
+    SELECT COUNT(*) INTO p_pending_student_count FROM pending_students;
+    SELECT COUNT(*) INTO p_schedule_count FROM schedules;
+    SELECT COUNT(*) INTO p_course_count FROM courses;
+    SELECT COUNT(*) INTO p_subject_count FROM subjects;
+
+    -- Insert or update counts in the counts table
+    REPLACE INTO counts (id, professor_count, student_count, pending_student_count, schedule_count, course_count, subject_count)
+    VALUES (1, p_professor_count, p_student_count, p_pending_student_count, p_schedule_count, p_course_count, p_subject_count);
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_student_status` (IN `student_id_param` VARCHAR(255))   BEGIN
     UPDATE students SET status = 'Confirmed' WHERE student_id = student_id_param;
 END$$
@@ -316,6 +338,30 @@ CREATE TABLE `confirmed_students` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `counts`
+--
+
+CREATE TABLE `counts` (
+  `id` int(11) NOT NULL,
+  `professor_count` int(11) DEFAULT NULL,
+  `student_count` int(11) DEFAULT NULL,
+  `pending_student_count` int(11) DEFAULT NULL,
+  `schedule_count` int(11) DEFAULT NULL,
+  `course_count` int(11) DEFAULT NULL,
+  `subject_count` int(11) DEFAULT NULL,
+  `last_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `counts`
+--
+
+INSERT INTO `counts` (`id`, `professor_count`, `student_count`, `pending_student_count`, `schedule_count`, `course_count`, `subject_count`, `last_updated`) VALUES
+(1, 3, 9, 0, 19, 4, 12, '2024-06-19 11:36:20');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `courses`
 --
 
@@ -357,16 +403,25 @@ CREATE TABLE `grading` (
 
 INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `midterm`, `finalterm`, `final_grades`, `remarks`, `date`) VALUES
 (3, 28, 20246553, '1.25', '1.00', '1.00', 'Passed', '2024-06-16 04:35:57'),
-(5, 28, 20246139, '1.25', '1', '1.00', 'Passed', '2024-06-16 04:43:44'),
+(5, 28, 20246139, '1.25', '2.00', '1.75', 'Passed', '2024-06-16 04:43:44'),
 (7, 29, 20246139, '1.25', '1.75', '1.50', 'Passed', '2024-06-16 06:01:24'),
 (8, 43, 20241836, '2.25', '1', '1.50', 'Passed', '2024-06-16 06:02:36'),
 (9, 46, 20241836, '2.25', '2.75', '2.50', 'Passed', '2024-06-16 06:03:16'),
 (10, 31, 20246139, '1.25', '1.75', '1.50', 'Passed', '2024-06-16 06:04:45'),
-(11, 34, 20246139, '2.25', '2', '2.00', 'Passed', '2024-06-16 06:05:01'),
-(12, 30, 20246139, '1.25', '1', '1.00', 'Passed', '2024-06-16 06:11:13'),
-(13, 32, 20246139, '1.5', '1', '1.25', 'Passed', '2024-06-16 06:11:40'),
+(11, 34, 20246139, '2.25', '2.00', '2.00', 'Passed', '2024-06-16 06:05:01'),
+(12, 30, 20246139, '1.25', '1.00', '1.00', 'Passed', '2024-06-16 06:11:13'),
+(13, 32, 20246139, '1.5', '1.75', '1.75', 'Passed', '2024-06-16 06:11:40'),
 (14, 48, 20247369, '1.25', '2.75', '2.25', 'Passed', '2024-06-16 06:12:22'),
-(15, 40, 20245266, '2.25', '1.00', '1.50', 'Passed', '2024-06-16 06:15:13');
+(15, 40, 20245266, '2.25', '1.00', '1.50', 'Passed', '2024-06-16 06:15:13'),
+(16, 29, 20246553, '1.25', '1.75', '1.50', 'Passed', '2024-06-19 13:03:18'),
+(17, 30, 20246553, '2.25', '1.00', '1.50', 'Passed', '2024-06-19 13:03:41'),
+(18, 34, 20246553, '1.25', '1.00', '1.00', 'Passed', '2024-06-19 13:03:58'),
+(19, 31, 20246553, '2.25', '1.75', '2.00', 'Passed', '2024-06-19 13:04:53'),
+(20, 32, 20246553, '2.25', '1.00', '1.50', 'Passed', '2024-06-19 13:05:10'),
+(21, 35, 20246553, '1.25', '1.00', '1.00', 'Passed', '2024-06-19 13:05:22'),
+(22, 33, 20246553, '2.25', '1.00', '1.50', 'Passed', '2024-06-19 13:05:39'),
+(23, 33, 20246139, '1.25', '4.00', '3.00', 'Passed', '2024-06-19 13:27:36'),
+(24, 35, 20246139, '1.25', '4.00', '3.00', 'Passed', '2024-06-19 13:28:02');
 
 -- --------------------------------------------------------
 
@@ -462,7 +517,9 @@ INSERT INTO `section_student` (`id`, `student_id`, `section`, `year_level`) VALU
 (13, '20241478', '1', '1'),
 (14, '20246483', '2', '1'),
 (15, '20246139', '1', '1'),
-(16, '20247369', '1', '3');
+(16, '20247369', '1', '3'),
+(17, '20246808', '1', '1'),
+(18, '20243959', '1', '4');
 
 -- --------------------------------------------------------
 
@@ -519,11 +576,12 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
 (25, 20241478, 4, 1, 'Christian Dave', '', 'Bernal', '2024-05-22', 'Male', '925 ilang ilang st. bo. concepcion tala', 'sadsadsad', 9123456789, 'uploads/registration_form_praticum_vin.pdf;uploads/Enrollment Admin (1).pdf;uploads/ARENDAYEN-REGFORM-PRACTICUM1.pdf;', 'Confirmed', '2024-06-07 07:42:15'),
 (23, 20241836, 2, 1, 'Melvin', 'M.', 'Custodio', '2024-05-28', 'Male', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/registration_form_praticum_vin.pdf;', 'Confirmed', '2024-06-07 04:00:21'),
-(30, 20243959, 2, 4, 'asdsdsd', 'dasdasdsadasd', 'asdsadsa', '2024-06-14', 'Female', 'Ph9, Pkg6, Blk10, Lot4 Bagong Silang Caloocan City', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Pending', '2024-06-16 04:05:25'),
+(30, 20243959, 2, 4, 'asdsdsd', 'dasdasdsadasd', 'asdsadsa', '2024-06-14', 'Female', 'Ph9, Pkg6, Blk10, Lot4 Bagong Silang Caloocan City', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-16 04:05:25'),
 (24, 20245266, 3, 2, 'Ricky James', '', 'Molina', '2024-05-28', 'Male', 'Ph12, BLK20 LOT2', 'Caloocan City', 0, 'uploads/Enrollment Admin.pdf;uploads/OJT-DOCUMENTS-VIN.docx;', 'Confirmed', '2024-06-07 05:04:26'),
 (28, 20246139, 1, 1, 'Jan Jan', '', 'Santiago', '2024-06-04', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/QUESTIONNAIRES WITH ANSWERS.pdf;', 'Confirmed', '2024-06-09 09:31:03'),
 (26, 20246483, 2, 1, 'brian', 'Q', 'bucio', '2024-05-29', 'Female', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/Enrollment Admin.pdf;', 'Confirmed', '2024-06-07 08:11:33'),
 (21, 20246553, 1, 1, 'Ajhay', 'R', 'Arendayen', '2024-05-15', 'Male', 'Ph9, Bagong Silang, Caloocan City', 'Caloocan City', 9123456789, 'uploads/ARENDAYEN-REGFORM-PRACTICUM1.pdf;', 'Confirmed', '2024-06-07 03:06:10'),
+(31, 20246808, 1, 1, 'asdasd', 'sdsadasdsd', 'asdasd', '2024-06-02', 'Male', 'asdasd', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-19 13:30:36'),
 (29, 20247369, 1, 3, 'asdsadas', '', 'dasdsadasdsadasd', '2024-06-04', 'Male', 'sadsadsadasdad', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-09 09:50:03');
 
 -- --------------------------------------------------------
@@ -551,6 +609,7 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 (20246139, 'asdsadsadn@gmail.com', 'janjan', '$2y$10$Fwr7Z0iGT2qM8d64KLQbkeeqtqYGv/Gk5stgkUQOftNZivezP8vb6'),
 (20246483, 'brian@gmail.com', 'brian', '$2y$10$P3NrQPQL40ZCaw60fjBAvez/LHlotfjfZPQPZpA2/NKcuFSNP4Boe'),
 (20246553, 'ajhayarendayen@gmail.com', 'ajhay', '$2y$10$v9C1dLx5cPh709j6NQGBauGH1d8l.zJo0vTWRsj56EwYb.orJH9ZK'),
+(20246808, 'tanjirowkamado@gmail.com', 'admin123', '$2y$10$9bD7GDk5xunN4KoZMaMKKObGXIU9S6149WMcRofB9qVyIp3hpjC..'),
 (20247369, 'ajhayarendayen@gmail.com', 'ajhay111', '$2y$10$cWx8T7j6Bq0GAcOr.CLVL.RIW6tVKqwCzUbFjRdPHab6VFJ6zAklm');
 
 -- --------------------------------------------------------
@@ -702,6 +761,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `counts`
+--
+ALTER TABLE `counts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
@@ -773,6 +838,12 @@ ALTER TABLE `year_level`
 --
 
 --
+-- AUTO_INCREMENT for table `counts`
+--
+ALTER TABLE `counts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
@@ -782,7 +853,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `professor`
@@ -794,7 +865,7 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT for table `section_student`
 --
 ALTER TABLE `section_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `section_tbl`
@@ -806,7 +877,7 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -841,6 +912,16 @@ ALTER TABLE `year_level`
 --
 ALTER TABLE `student_login`
   ADD CONSTRAINT `fk_student_login_student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `update_counts_event` ON SCHEDULE EVERY 1 SECOND STARTS '2024-06-19 18:51:01' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    CALL update_counts();
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

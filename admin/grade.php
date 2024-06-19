@@ -130,7 +130,7 @@ $year_level = $row['year_id'];
                   </tr>
                   </thead>
                   
-                  <tbody>
+                    <tbody>
 
                                     <?php
                                     $sql = "CALL GetStudentScheduleGrading(?, ?, ?)";
@@ -157,10 +157,60 @@ $year_level = $row['year_id'];
                                                     if($res['remarks'] != null) :
                                                 ?>
                                                 <td style="text-align: center; vertical-align: middle;">
-                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $res['id']; ?>">
+                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php echo $res['id']; ?>">
                                                         <i class="fa-solid fa-pen-to-square"></i> <!-- UPDATE -->
                                                     </button>
                                                 </td>
+                                                    <!-- UPDATE MODAL -->
+                                                <div class="modal fade" id="MODAL_ID_<?php echo $res['id']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Grading</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <form action="function/update_grades.php" method="POST">
+                                                            <div class="row">
+                                                            <input type="hidden" name="subject_id" value="<?php echo $res['id']; ?>">
+                                                            <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">          
+                                                            <div class="col-md-3">
+                                                                <label for="midterm" class="col-form-label">Midterm:</label>
+                                                                <input type="text" class="form-control" name="midterm" id="midterm_<?php echo $res['id']; ?>" required placeholder="0.00" oninput="calculateFinalGrade(<?php echo $res['id']; ?>)" value="<?php echo $res['midterm']; ?>">
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <label for="finalterm" class="col-form-label">Finalterm:</label>
+                                                                <input type="text" class="form-control" name="finalterm" id="finalterm_<?php echo $res['id']; ?>" required placeholder="0.00" oninput="calculateFinalGrade(<?php echo $res['id']; ?>)" value="<?php echo $res['finalterm']; ?>">
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <label for="final_grade" class="col-form-label">Final Grades:</label>
+                                                                <input type="text" class="form-control" name="final_grade" id="final_grade_<?php echo $res['id']; ?>" required placeholder="0.00" readonly value="<?php echo $res['final_grades']; ?>">
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <label for="remarks" class="col-form-label">Remarks:</label>
+                                                                <input type="text" class="form-control" name="remarks" id="remarks_<?php echo $res['id']; ?>" required placeholder="Remarks" readonly value="<?php echo $res['remarks']; ?>">
+                                                            </div>
+
+
+
+
+                                                            </div>  
+                                                            <br>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-success">Save</button>
+                                                            </div>
+                                                        </form>
+                                                        </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+
                                                 <?php
                                                     else:
                                                 ?>
@@ -230,7 +280,7 @@ $year_level = $row['year_id'];
                                         echo "<tr><td colspan='11'>No records found</td></tr>";
                                     }
                                     ?>
-                                </tbody>
+                    </tbody>
 
                              
 
