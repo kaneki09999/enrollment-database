@@ -38,7 +38,8 @@
         ?>
     </div>
    <h2 class="mb-4 text-center">Student Grades</h2>
-    <table class="table table-bordered">
+   <div class="col-12 table-responsive">
+    <table class="table" style="border: none;">
       <thead class="thead-dark">
         <tr>
           <th>#</th>
@@ -61,29 +62,49 @@ $stmt->bind_param("iii", $student_id, $program, $year_level);
 $stmt->execute();
 $results = $stmt->get_result();
 
+$total_units = 0;
+$total_weighted_grades = 0;
+
 if ($results->num_rows > 0) {
     $row_number = 1;
     while ($res = $results->fetch_assoc()) {
+        $unit = $res['unit'];
+        $final_grade = $res['final_grades'];
+
+        // Compute total units and weighted grades
+        $total_units += $unit;
+        $total_weighted_grades += ($final_grade * $unit);
+
         ?>
         <tr>
             <td><?php echo $row_number++; ?></td>  
             <td><?php echo $res['subject_code']; ?></td>
             <td><?php echo $res['description']; ?></td>
-            <td><?php echo $res['unit']; ?></td>
+            <td><?php echo $unit; ?></td>
             <td><?php echo $res['midterm']; ?></td>
             <td><?php echo $res['finalterm']; ?></td>
-            <td><?php echo $res['final_grades']; ?></td>
+            <td><?php echo $final_grade; ?></td>
             <td><?php echo $res['remarks']; ?></td>
             <td><?php echo $res['year_level']; ?></td>
         </tr>
         <?php
     }
+
+    // Compute GPA
+    $gpa = ($total_units > 0) ? $total_weighted_grades / $total_units : 0;
 } else {
     echo "<tr><td colspan='11'>You are not enrolled yet</td></tr>";
 }
 ?>
-</tbody>
+        <tr>
+            <td colspan="6" align="right"><b>GPA:</b></td>
+            <td><b><?php echo number_format($gpa, 2); ?></b></td>
+            <td colspan="4"></td>
+        </tr>
+        </tbody>
+
     </table>
+    </div>
   </div>
 
   <br><br><br><br>

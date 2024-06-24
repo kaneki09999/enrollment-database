@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2024 at 02:57 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Jun 24, 2024 at 01:58 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,6 +53,13 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_subject` (IN `subject_id` INT)   BEGIN
     DELETE FROM subjects WHERE id = subject_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllStudentLogs` ()   BEGIN
+SELECT students_log.operation, students_log.changed_at, `students`.`id` AS `id`, `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`middlename` AS `middlename`, `students`.`lastname` AS `lastname`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`status` AS `status`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) join `student_login` on(`students`.`student_id` = `student_login`.`student_id`))
+JOIN students_log ON students.student_id = students_log.student_id;
+
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCourses` ()   BEGIN
@@ -357,7 +364,7 @@ CREATE TABLE `counts` (
 --
 
 INSERT INTO `counts` (`id`, `professor_count`, `student_count`, `pending_student_count`, `schedule_count`, `course_count`, `subject_count`, `last_updated`) VALUES
-(1, 3, 9, 0, 19, 4, 12, '2024-06-20 05:49:03');
+(1, 3, 10, 0, 19, 4, 12, '2024-06-24 11:58:14');
 
 -- --------------------------------------------------------
 
@@ -421,7 +428,8 @@ INSERT INTO `grading` (`id`, `subject_id`, `student_id`, `midterm`, `finalterm`,
 (21, 35, 20246553, '1.25', '1.00', '1.00', 'Passed', '2024-06-19 13:05:22'),
 (22, 33, 20246553, '2.25', '1.00', '1.50', 'Passed', '2024-06-19 13:05:39'),
 (23, 33, 20246139, '1.25', '4.00', '3.00', 'Passed', '2024-06-19 13:27:36'),
-(24, 35, 20246139, '1.25', '4.00', '3.00', 'Passed', '2024-06-19 13:28:02');
+(24, 35, 20246139, '1.25', '4.00', '3.00', 'Passed', '2024-06-19 13:28:02'),
+(25, 28, 20247484, '1.25', '1.00', '1.00', 'Passed', '2024-06-24 13:06:41');
 
 --
 -- Triggers `grading`
@@ -488,7 +496,30 @@ CREATE TABLE `grading_log` (
 --
 
 INSERT INTO `grading_log` (`log_id`, `operation`, `changed_at`, `id`, `subject_id`, `student_id`, `midterm`, `finalterm`, `final_grades`, `remarks`, `date`) VALUES
-(1, 'UPDATE', '2024-06-24 08:56:22', 16, 29, 20246553, '1.25', '2.00', '1.75', 'Passed', '2024-06-19 13:03:18');
+(1, 'UPDATE', '2024-06-24 08:56:22', 16, 29, 20246553, '1.25', '2.00', '1.75', 'Passed', '2024-06-19 13:03:18'),
+(3, 'INSERT', '2024-06-24 19:06:41', 25, 28, 20247484, '1.25', '1.00', '1.00', 'Passed', '2024-06-24 13:06:41');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `grading_logs`
+-- (See below for the actual view)
+--
+CREATE TABLE `grading_logs` (
+`firstname` varchar(255)
+,`lastname` varchar(255)
+,`log_id` int(11)
+,`operation` varchar(10)
+,`changed_at` datetime
+,`id` int(11)
+,`subject_id` int(25)
+,`student_id` int(255)
+,`midterm` varchar(25)
+,`finalterm` varchar(25)
+,`final_grades` varchar(25)
+,`remarks` varchar(255)
+,`date` text
+);
 
 -- --------------------------------------------------------
 
@@ -586,7 +617,8 @@ INSERT INTO `section_student` (`id`, `student_id`, `section`, `year_level`) VALU
 (15, '20246139', '1', '1'),
 (16, '20247369', '1', '3'),
 (17, '20246808', '1', '1'),
-(18, '20243959', '1', '4');
+(18, '20243959', '1', '4'),
+(19, '20247484', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -649,7 +681,8 @@ INSERT INTO `students` (`id`, `student_id`, `program_id`, `year_id`, `firstname`
 (26, 20246483, 2, 1, 'brian', 'Q', 'bucio', '2024-05-29', 'Female', '925 ilang ilang st. bo. concepcion tala', 'Caloocan City', 9123456789, 'uploads/Enrollment Admin.pdf;', 'Confirmed', '2024-06-07 08:11:33'),
 (21, 20246553, 1, 1, 'Ajhay', 'R', 'Arendayen', '2024-05-15', 'Male', 'Ph9, Bagong Silang, Caloocan City', 'Caloocan City', 9123456789, 'uploads/ARENDAYEN-REGFORM-PRACTICUM1.pdf;', 'Confirmed', '2024-06-07 03:06:10'),
 (31, 20246808, 1, 1, 'asdasd', 'sdsadasdsd', 'asdasd', '2024-06-02', 'Male', 'asdasd', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-19 13:30:36'),
-(29, 20247369, 1, 3, 'asdsadas', '', 'dasdsadasdsadasd', '2024-06-04', 'Male', 'sadsadsadasdad', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-09 09:50:03');
+(29, 20247369, 1, 3, 'asdsadas', '', 'dasdsadasdsadasd', '2024-06-04', 'Male', 'sadsadsadasdad', 'Bagong Silang', 9123456789, 'uploads/MOA-UNDERGRAD-EDITED-2.docx-1.docx;', 'Confirmed', '2024-06-09 09:50:03'),
+(32, 20247484, 1, 1, 'Mark', '', 'Tonio', '2020-02-24', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Anser-key.pdf;', 'Confirmed', '2024-06-24 13:03:53');
 
 --
 -- Triggers `students`
@@ -724,6 +757,14 @@ CREATE TABLE `students_log` (
   `registration_date` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `students_log`
+--
+
+INSERT INTO `students_log` (`log_id`, `operation`, `changed_at`, `id`, `student_id`, `program_id`, `year_id`, `firstname`, `middlename`, `lastname`, `birthdate`, `gender`, `address`, `birthplace`, `contact`, `documents`, `status`, `registration_date`) VALUES
+(1, 'INSERT', '2024-06-24 19:03:53', 32, 20247484, 1, 1, 'Mark', '', 'Tonio', '2020-02-24', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Anser-key.pdf;', 'Pending', '2024-06-24 13:03:53'),
+(2, 'UPDATE', '2024-06-24 19:06:08', 32, 20247484, 1, 1, 'Mark', '', 'Tonio', '2020-02-24', 'Male', 'Ph9, Pkg6, Blk10, Lot4', 'Bagong Silang', 9123456789, 'uploads/Anser-key.pdf;', 'Pending', '2024-06-24 13:03:53');
+
 -- --------------------------------------------------------
 
 --
@@ -750,7 +791,8 @@ INSERT INTO `student_login` (`student_id`, `email`, `username`, `password`) VALU
 (20246483, 'brian@gmail.com', 'brian', '$2y$10$P3NrQPQL40ZCaw60fjBAvez/LHlotfjfZPQPZpA2/NKcuFSNP4Boe'),
 (20246553, 'ajhayarendayen@gmail.com', 'ajhay', '$2y$10$v9C1dLx5cPh709j6NQGBauGH1d8l.zJo0vTWRsj56EwYb.orJH9ZK'),
 (20246808, 'tanjirowkamado@gmail.com', 'admin123', '$2y$10$9bD7GDk5xunN4KoZMaMKKObGXIU9S6149WMcRofB9qVyIp3hpjC..'),
-(20247369, 'ajhayarendayen@gmail.com', 'ajhay111', '$2y$10$cWx8T7j6Bq0GAcOr.CLVL.RIW6tVKqwCzUbFjRdPHab6VFJ6zAklm');
+(20247369, 'ajhayarendayen@gmail.com', 'ajhay111', '$2y$10$cWx8T7j6Bq0GAcOr.CLVL.RIW6tVKqwCzUbFjRdPHab6VFJ6zAklm'),
+(20247484, 'asdsadasdsadn@gmail.com', 'mark', '$2y$10$fIHs4IhhTc0KkuoljXq./uuqb06nUY3U9Mjr60pjIeNW6BPQVSamO');
 
 -- --------------------------------------------------------
 
@@ -939,7 +981,16 @@ INSERT INTO `year_level` (`id`, `year_level`) VALUES
 --
 DROP TABLE IF EXISTS `confirmed_students`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `confirmed_students`  AS SELECT `section_student`.`section` AS `section`, `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`middlename` AS `middlename`, `students`.`lastname` AS `lastname`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`status` AS `status`, `students`.`registration_date` AS `registration_date`, `students`.`program_id` AS `program_id`, `students`.`year_id` AS `year_id` FROM ((((`students` join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `section_student` on(`students`.`student_id` = `section_student`.`student_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `confirmed_students`  AS SELECT `section_student`.`section` AS `section`, `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`middlename` AS `middlename`, `students`.`lastname` AS `lastname`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`status` AS `status`, `students`.`registration_date` AS `registration_date`, `students`.`program_id` AS `program_id`, `students`.`year_id` AS `year_id` FROM ((((`students` join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) join `section_student` on(`students`.`student_id` = `section_student`.`student_id`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `grading_logs`
+--
+DROP TABLE IF EXISTS `grading_logs`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grading_logs`  AS SELECT `students`.`firstname` AS `firstname`, `students`.`lastname` AS `lastname`, `grading_log`.`log_id` AS `log_id`, `grading_log`.`operation` AS `operation`, `grading_log`.`changed_at` AS `changed_at`, `grading_log`.`id` AS `id`, `grading_log`.`subject_id` AS `subject_id`, `grading_log`.`student_id` AS `student_id`, `grading_log`.`midterm` AS `midterm`, `grading_log`.`finalterm` AS `finalterm`, `grading_log`.`final_grades` AS `final_grades`, `grading_log`.`remarks` AS `remarks`, `grading_log`.`date` AS `date` FROM (`grading_log` join `students` on(`grading_log`.`student_id` = `students`.`student_id`))  ;
 
 -- --------------------------------------------------------
 
@@ -948,7 +999,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `pending_students`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pending_students`  AS SELECT `students`.`id` AS `id`, `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`middlename` AS `middlename`, `students`.`lastname` AS `lastname`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`status` AS `status`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) WHERE `students`.`status` = 'Pending\'Pending' ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pending_students`  AS SELECT `students`.`id` AS `id`, `students`.`student_id` AS `student_id`, `students`.`firstname` AS `firstname`, `students`.`middlename` AS `middlename`, `students`.`lastname` AS `lastname`, `students`.`birthdate` AS `birthdate`, `students`.`birthplace` AS `birthplace`, `students`.`gender` AS `gender`, `students`.`address` AS `address`, `students`.`contact` AS `contact`, `students`.`documents` AS `documents`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `student_login`.`email` AS `email`, `student_login`.`username` AS `username`, `students`.`status` AS `status`, `students`.`registration_date` AS `registration_date` FROM (((`students` join `courses` on(`students`.`program_id` = `courses`.`id`)) join `year_level` on(`students`.`year_id` = `year_level`.`id`)) join `student_login` on(`students`.`student_id` = `student_login`.`student_id`)) WHERE `students`.`status` = 'Pending''Pending'  ;
 
 -- --------------------------------------------------------
 
@@ -957,7 +1008,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `schedules`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `schedules`  AS SELECT `subjects_by_course`.`id` AS `subject_id`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `subjects_by_course`.`subject_code` AS `subject_code`, `subjects_by_course`.`description` AS `description`, `subjects_by_course`.`unit` AS `unit`, `subjects_by_course`.`day` AS `day`, `subjects_by_course`.`time` AS `time`, `section_tbl`.`section` AS `section`, `subjects_by_course`.`room` AS `room`, `professor`.`name` AS `name` FROM ((((`subjects_by_course` join `section_tbl` on(`subjects_by_course`.`section` = `section_tbl`.`id`)) join `courses` on(`subjects_by_course`.`program` = `courses`.`id`)) join `year_level` on(`subjects_by_course`.`year_lvl` = `year_level`.`id`)) join `professor` on(`subjects_by_course`.`professor` = `professor`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `schedules`  AS SELECT `subjects_by_course`.`id` AS `subject_id`, `courses`.`program` AS `program`, `year_level`.`year_level` AS `year_level`, `subjects_by_course`.`subject_code` AS `subject_code`, `subjects_by_course`.`description` AS `description`, `subjects_by_course`.`unit` AS `unit`, `subjects_by_course`.`day` AS `day`, `subjects_by_course`.`time` AS `time`, `section_tbl`.`section` AS `section`, `subjects_by_course`.`room` AS `room`, `professor`.`name` AS `name` FROM ((((`subjects_by_course` join `section_tbl` on(`subjects_by_course`.`section` = `section_tbl`.`id`)) join `courses` on(`subjects_by_course`.`program` = `courses`.`id`)) join `year_level` on(`subjects_by_course`.`year_lvl` = `year_level`.`id`)) join `professor` on(`subjects_by_course`.`professor` = `professor`.`id`))  ;
 
 --
 -- Indexes for dumped tables
@@ -1074,13 +1125,13 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `grading_log`
 --
 ALTER TABLE `grading_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `professor`
@@ -1092,7 +1143,7 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT for table `section_student`
 --
 ALTER TABLE `section_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `section_tbl`
@@ -1104,13 +1155,13 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `students_log`
 --
 ALTER TABLE `students_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subjects`

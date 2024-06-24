@@ -41,15 +41,24 @@ $admin = $_SESSION['id'];
 </div>
 <div class="sidebar">
     <h2>Admin</h2>
-    <ul>
-        <li><a href="home.php"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="new-enrollees.php"><i class="fas fa-user-plus"></i> New Enrollees</a></li>
-        <li><a href="schedule.php"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
-        <li><a href="courses.php"><i class="fas fa-graduation-cap"></i> Courses</a></li>
-        <li><a href="subjects.php"><i class="fas fa-book"></i> Subjects</a></li>
-        <li><a href="students.php"><i class="fas fa-users"></i> Students</a></li>
-        <li><a href="professor.php"><i class="fas fa-chalkboard-teacher"></i> Professor</a></li>
-        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="home.php"><i class="fas fa-home"></i> Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="new-enrollees.php"><i class="fas fa-user-plus"></i> New Enrollees</a></li>
+        <li class="nav-item"><a class="nav-link" href="schedule.php"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+        <li class="nav-item"><a class="nav-link" href="courses.php"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="subjects.php"><i class="fas fa-book"></i> Subjects</a></li>
+        <li class="nav-item"><a class="nav-link" href="students.php"><i class="fas fa-users"></i> Students</a></li>
+        <li class="nav-item"><a class="nav-link" href="professor.php"><i class="fas fa-chalkboard-teacher"></i> Professor</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="logsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-gear"></i> Logs
+            </a>
+            <div class="dropdown-menu" aria-labelledby="logsDropdown">
+                <a class="dropdown-item" href="grading-log.php">Grading Log</a>
+                <a class="dropdown-item" href="student-log.php">Student Log</a>
+            </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
     </ul>
 </div>
 

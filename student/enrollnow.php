@@ -59,7 +59,10 @@ $results = $stmt->get_result();
   if ($results->num_rows > 0) {
       $res = $results->fetch_assoc();
       if ($res['status'] == 'Confirmed') {
-          echo '<div class="row">
+        
+          echo '
+          <h2 class="mb-4 text-center" style="color: red;">You are now officially enrolled!</h2>
+          <div class="row">
                   <div class="col-12 table-responsive">
                       <table class="table">
                           <thead class="thead-dark">
