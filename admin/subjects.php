@@ -144,12 +144,49 @@
                                 <td><?php echo $details['units']; ?></td>
                                 
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php $details['id']; ?>">
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#MODAL_ID_<?php echo $details['id']; ?>">
                                         <i class="fa-solid fa-pen-to-square"></i> <!-- EDIT -->
                                     </button>
                                     <button type="button" class="btn btn-danger" onclick="deleteSubject(<?php echo $details['id']; ?>)">
                                         <i class="fa-solid fa-trash-can"></i> <!-- DELETE -->
                                     </button>
+                                            <!-- UPDATE MODAL -->
+                            <div class="modal fade" id="MODAL_ID_<?php echo $details['id']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Subject</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form action="function/update-subject.php" method="POST">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <input type="hidden" name="id" value="<?php echo $details['id']; ?>">
+                                                <div class="mb-3">
+                                                    <label for="subjectcode" class="col-form-label">Subject Code:</label>
+                                                    <input type="text" class="form-control" name="subjectcode" id="subjectcode" value="<?php echo $details['subject_code']; ?>" placeholder="Enter subject Code">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="description" class="col-form-label">Description:</label>
+                                                    <input type="text" class="form-control" name="description" id="description" value="<?php echo $details['description']; ?>" placeholder="Enter description">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="unit" class="col-form-label">Units:</label>
+                                                    <input type="text" class="form-control" name="unit" id="unit" value="<?php echo $details['units']; ?>" placeholder="Enter units">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-warning">Update</button>
+                                        </div>
+                                    </form>
+                                    </div>
+
+                                    </div>
+                                </div>
+                            </div>
 
                                 <script>
                                 function deleteSubject(sched_id) {

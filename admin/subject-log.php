@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enrollment Admin</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             padding-top: 56px; /* Adjust based on your top bar's height */
@@ -42,13 +44,14 @@
         .search-bar .btn {
             color: #000;
         }
+
     </style>
 </head>
 <body>
     <?php include "include/sidebar.php"; ?>
 
     <main>
-<section class="content">
+    <section class="content">
     <ul class="breadcrumb">
                 <li class="nav-item">
                     <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
@@ -57,7 +60,7 @@
                     <i class='fas fa-chevron-right'></i>
                 </li>
                 <li class="nav-item active">
-                    <a href="#">List of Enrollees</a>
+                    <a href="#">List of Subjects</a>
                 </li>
             </ul>
       <div class="container-fluid">
@@ -67,46 +70,49 @@
         
 
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Students Logs</h3>
-              </div>
+
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="card-title">Subjects Log</h3>
+            </div>
               <div class="card-body">
+                <style>
+                    .actions-column {
+                        width: 80px;
+                    }
+                </style>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                            <th>Student ID</th>
-                            <th>Name</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                            <th>Contact No.</th>
-                            <th>Course</th>
-                            <th>Year Level</th>
-                            <th>Status</th>
+                            <th>Subject Code</th>
+                            <th>Description</th>
+                            <th>Units</th>
                             <th>Operation</th>
-                            <th>Change At</th>
+                            <th>Changed At</th>
                   </tr>
                   </thead>
                   
                   <tbody>
                         <?php
-                        $sql = "CALL GetAllStudentLogs()";
+                        $sql = "CALL SelectAllSubjectsLog()";
                         $result = $conn->query($sql);
 
                         if ($result && $result->num_rows > 0) {
                             while ($details = $result->fetch_assoc()) {
                                 ?>
                                 <tr>
-                                <td><?php echo $details['student_id']; ?></td>
-                                <td><?php echo $details['firstname']; ?> <?php echo $details['lastname']; ?></td>
-                                <td><?php echo $details['gender']; ?></td>
-                                <td><?php echo $details['address']; ?></td>
-                                <td><?php echo $details['contact']; ?></td>
-                                <td><?php echo $details['program']; ?></td>
-                                <td><?php echo $details['year_level']; ?></td>
-                                <td><?php echo $details['status']; ?></td>
+                                <td><?php echo $details['subject_code']; ?></td>
+                                <td><?php echo $details['description']; ?></td>
+                                <td><?php echo $details['units']; ?></td>
                                 <td><?php echo $details['operation']; ?></td>
                                 <td><?php echo $details['changed_at']; ?></td>
                                 </tr>
+                                  </form>
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <?php
                             }
                         } else {
@@ -119,16 +125,11 @@
 
                   <tfoot>
                     <tr>
-                            <th>Student ID</th>
-                            <th>Name</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                            <th>Contact No.</th>
-                            <th>Course</th>
-                            <th>Year Level</th>
-                            <th>Status</th>
+                            <th>Subject Code</th>
+                            <th>Description</th>
+                            <th>Units</th>
                             <th>Operation</th>
-                            <th>Change At</th>
+                            <th>Changed At</th>
                     </tr>
                   </tfoot>
                 </table>
@@ -137,11 +138,9 @@
           </div>
         </div>
       </div>
-      </div
     </section>
     </main>
 
-<?php include "include/footer-extension.php"; ?>  
-
+    <?php include "include/footer-extension.php"; ?>
 </body>
 </html>

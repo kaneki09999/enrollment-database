@@ -56,6 +56,8 @@ $admin = $_SESSION['id'];
             <div class="dropdown-menu" aria-labelledby="logsDropdown">
                 <a class="dropdown-item" href="grading-log.php">Grading Log</a>
                 <a class="dropdown-item" href="student-log.php">Student Log</a>
+                <a class="dropdown-item" href="schedule-log.php">Schedule Log</a>
+                <a class="dropdown-item" href="subject-log.php">Subject Log</a>
             </div>
         </li>
         <li class="nav-item"><a class="nav-link" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>

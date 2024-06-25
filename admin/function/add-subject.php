@@ -15,7 +15,7 @@ if ($stmt = $conn->prepare($sql)) {
     if ($stmt->execute()) {
         echo '<script>
                 alert("New subject added successfully!");
-                window.location.href = "http://localhost/enrollment/admin/subjects.php";
+                window.location.href = "../subjects.php";
              </script>';
     } else {
         echo "Error: " . $stmt->error;
