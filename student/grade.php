@@ -86,21 +86,26 @@ if ($results->num_rows > 0) {
             <td><?php echo $final_grade; ?></td>
             <td><?php echo $res['remarks']; ?></td>
             <td><?php echo $res['year_level']; ?></td>
-        </tr>
+        </tr> 
         <?php
-    }
-
-    // Compute GPA
-    $gpa = ($total_units > 0) ? $total_weighted_grades / $total_units : 0;
-} else {
-    echo "<tr><td colspan='11'>You are not enrolled yet</td></tr>";
-}
-?>
+        $gpa = ($total_units > 0) ? $total_weighted_grades / $total_units : 0;
+        ?>
         <tr>
             <td colspan="6" align="right"><b>GPA:</b></td>
             <td><b><?php echo number_format($gpa, 2); ?></b></td>
             <td colspan="4"></td>
         </tr>
+
+        <?php
+       
+    }
+
+
+} else {
+    echo "<tr><td colspan='11'>You are not enrolled yet</td></tr>";
+}
+?>
+        
         </tbody>
 
     </table>
